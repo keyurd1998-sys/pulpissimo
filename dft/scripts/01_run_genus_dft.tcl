@@ -21,9 +21,12 @@ set SDC_FILE     "$DFT_ROOT/constraints/cv32e40p_core.sdc"
 
 # Locate Target Standard Cell Library:
 # Priority 1: Environment variable CADENCE_DFT_LIB
-# Priority 2: Standard RAK library location in user home
+# Priority 2: Remote server path /home/admin/DFT/Library
+# Priority 3: Standard RAK library location in user home
 if {[info exists env(CADENCE_DFT_LIB)] && [file isdirectory $env(CADENCE_DFT_LIB)]} {
     set LIB_DIR $env(CADENCE_DFT_LIB)
+} elseif {[file isdirectory "/home/admin/DFT/Library"]} {
+    set LIB_DIR "/home/admin/DFT/Library"
 } else {
     set LIB_DIR "$env(HOME)/keyurd1998-sys/LAB/GENUS_LABS/Normal_runs/Basic_Digital_Test_RAK_21.1/LIBS"
 }
@@ -71,16 +74,36 @@ set_db root: .syn_map_effort     high
 set_db root: .syn_opt_effort     high
 
 # Search paths
-set_db root: .init_lib_search_path [list . "$LIB_DIR/timing" "$LIB_DIR/lef"]
+set_db root: .init_lib_search_path [list . "$LIB_DIR" "$LIB_DIR/timing" "$LIB_DIR/lef"]
 
 #-------------------------------------------------------------------------------
 # Step 3: Load Target Libraries
 #-------------------------------------------------------------------------------
 puts "INFO: Reading timing libraries..."
-read_libs slow.lib
+set timing_lib ""
+if {[file exists "$LIB_DIR/timing/slow.lib"]} {
+    set timing_lib "$LIB_DIR/timing/slow.lib"
+} elseif {[file exists "$LIB_DIR/slow.lib"]} {
+    set timing_lib "$LIB_DIR/slow.lib"
+} else {
+    set candidate_libs [glob -nocomplain "$LIB_DIR/timing/*.lib" "$LIB_DIR/*.lib"]
+    if {[llength $candidate_libs] > 0} {
+        set timing_lib [lindex $candidate_libs 0]
+    }
+}
+
+if {$timing_lib ne ""} {
+    puts "INFO: Found timing library: $timing_lib"
+    read_libs $timing_lib
+} else {
+    puts "ERROR: No .lib file found under $LIB_DIR!"
+    exit 1
+}
 
 if {[file exists "$LIB_DIR/lef/all.lef"]} {
     read_physical -lef "$LIB_DIR/lef/all.lef"
+} elseif {[file exists "$LIB_DIR/all.lef"]} {
+    read_physical -lef "$LIB_DIR/all.lef"
 }
 
 #-------------------------------------------------------------------------------
@@ -221,10 +244,34 @@ write_db -all_root_attributes  -to_file "$RESULTS_DIR/dbs/${DESIGN}_final_scan.d
 
 # Write out complete Modus ATPG workspace
 puts "INFO: Generating Modus ATPG workspace..."
-write_dft_atpg -tcl \
-               -library "$LIB_DIR/atpg/include_libraries.v" \
-               -directory "$RESULTS_DIR/modus_atpg" \
-               $DESIGN
+set atpg_lib ""
+if {[file exists "$LIB_DIR/atpg/include_libraries.v"]} {
+    set atpg_lib "$LIB_DIR/atpg/include_libraries.v"
+} elseif {[file exists "$LIB_DIR/include_libraries.v"]} {
+    set atpg_lib "$LIB_DIR/include_libraries.v"
+} elseif {[file exists "$LIB_DIR/atpg/stdcell.v"]} {
+    set atpg_lib "$LIB_DIR/atpg/stdcell.v"
+} elseif {[file exists "$LIB_DIR/stdcell.v"]} {
+    set atpg_lib "$LIB_DIR/stdcell.v"
+} else {
+    set cand_atpg [glob -nocomplain "$LIB_DIR/atpg/*.v" "$LIB_DIR/*.v"]
+    if {[llength $cand_atpg] > 0} {
+        set atpg_lib [lindex $cand_atpg 0]
+    }
+}
+
+if {$atpg_lib ne ""} {
+    puts "INFO: Found ATPG library: $atpg_lib"
+    write_dft_atpg -tcl \
+                   -library $atpg_lib \
+                   -directory "$RESULTS_DIR/modus_atpg" \
+                   $DESIGN
+} else {
+    puts "WARNING: No ATPG Verilog model found under $LIB_DIR; generating ATPG template without -library"
+    write_dft_atpg -tcl \
+                   -directory "$RESULTS_DIR/modus_atpg" \
+                   $DESIGN
+}
 
 puts "=========================================================================="
 puts "  GENUS DFT INSERTION COMPLETED SUCCESSFULLY!                           "

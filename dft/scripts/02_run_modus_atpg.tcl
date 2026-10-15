@@ -19,9 +19,12 @@ set MODUS_DIR    "$RESULTS_DIR/modus_atpg"
 
 if {[info exists env(CADENCE_DFT_LIB)] && [file isdirectory $env(CADENCE_DFT_LIB)]} {
     set LIB_DIR $env(CADENCE_DFT_LIB)
+} elseif {[file isdirectory "/home/admin/DFT/Library"]} {
+    set LIB_DIR "/home/admin/DFT/Library"
 } else {
     set LIB_DIR "$env(HOME)/keyurd1998-sys/LAB/GENUS_LABS/Normal_runs/Basic_Digital_Test_RAK_21.1/LIBS"
 }
+puts "INFO: Using Library Directory: $LIB_DIR"
 
 set_db workdir $MODUS_DIR
 set WORKDIR [get_db workdir]
@@ -34,13 +37,30 @@ set_db stop_on_severity error
 file delete -force "$WORKDIR/tbdata"
 file delete -force "$WORKDIR/testresults"
 
+# Locate ATPG techlib model
+set atpg_lib ""
+if {[file exists "$LIB_DIR/atpg/include_libraries.v"]} {
+    set atpg_lib "$LIB_DIR/atpg/include_libraries.v"
+} elseif {[file exists "$LIB_DIR/include_libraries.v"]} {
+    set atpg_lib "$LIB_DIR/include_libraries.v"
+} elseif {[file exists "$LIB_DIR/atpg/stdcell.v"]} {
+    set atpg_lib "$LIB_DIR/atpg/stdcell.v"
+} elseif {[file exists "$LIB_DIR/stdcell.v"]} {
+    set atpg_lib "$LIB_DIR/stdcell.v"
+} else {
+    set cand_atpg [glob -nocomplain "$LIB_DIR/atpg/*.v" "$LIB_DIR/*.v"]
+    if {[llength $cand_atpg] > 0} {
+        set atpg_lib [lindex $cand_atpg 0]
+    }
+}
+
 #-------------------------------------------------------------------------------
 # Step 2: Build Logic Model
 #-------------------------------------------------------------------------------
-puts "INFO: Building Modus Logic Model..."
+puts "INFO: Building Modus Logic Model with techlib: $atpg_lib"
 build_model \
     -cell                $DESIGN \
-    -techlib             "$LIB_DIR/atpg/include_libraries.v" \
+    -techlib             $atpg_lib \
     -designsource        "$WORKDIR/${DESIGN}.test_netlist.v" \
     -allowmissingmodules yes \
     -messagecounteach    100
