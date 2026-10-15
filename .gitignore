@@ -10,3 +10,12 @@ working_dir/
 /utils/bin/padrick
 /Bender.local
 /build
+
+# Cadence DFT & Synthesis Outputs
+dft/results/
+fv/
+genus.cmd*
+genus.log*
+modus.cmd*
+modus.log*
+
