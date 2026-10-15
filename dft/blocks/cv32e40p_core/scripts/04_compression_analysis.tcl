@@ -31,31 +31,17 @@ redirect "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt" report_scan_chains
 set asc_dir "$STEP_RPT_DIR/asc_1channel"
 set asc_rpt "$STEP_RPT_DIR/${DESIGN}_compressibility.rpt"
 
-if {[catch {
-    analyze_scan_compressibility \
-        -library $ATPG_LIB \
-        -compression_method compress_scan_chains \
-        -compressor xor \
-        -decompressor broadcast \
-        -mask wide1 \
-        -ratios "50 60 70 80" \
-        -directory $asc_dir \
-        -verbose
-    redirect -tee $asc_rpt "report_scan_compressibility -directory $asc_dir"
-} msg]} {
-    puts "NOTE: Background ATPG failed ($msg). Running with -dont_run_atpg fallback..."
-    analyze_scan_compressibility \
-        -library $ATPG_LIB \
-        -compression_method compress_scan_chains \
-        -compressor xor \
-        -decompressor broadcast \
-        -mask wide1 \
-        -ratios "50 60 70 80" \
-        -directory $asc_dir \
-        -dont_run_atpg \
-        -verbose
-    redirect -tee $asc_rpt "report_scan_compressibility -directory $asc_dir"
-}
+analyze_scan_compressibility \
+    -library $ATPG_LIB \
+    -compression_method compress_scan_chains \
+    -compressor xor \
+    -decompressor broadcast \
+    -mask wide1 \
+    -ratios "50 60 70 80" \
+    -directory $asc_dir \
+    -verbose
+
+redirect -tee $asc_rpt "report_scan_compressibility -directory $asc_dir"
 
 # Save checkpoint database
 set DB_FILE "$DBS_DIR/04_stitched.db"
