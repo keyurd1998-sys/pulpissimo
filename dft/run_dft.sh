@@ -13,8 +13,8 @@ echo " Cadence DFT & ATPG Flow for CV32E40P Core"
 echo " Working Directory: $SCRIPT_DIR"
 echo "=================================================================="
 
-# Set library path (defaults to server location /home/admin/DFT/Library)
-export CADENCE_DFT_LIB="${CADENCE_DFT_LIB:-/home/admin/DFT/Library}"
+# Direct library path on server
+export CADENCE_DFT_LIB="/home/admin/DFT/Library"
 echo " Using Target Library: $CADENCE_DFT_LIB"
 
 
