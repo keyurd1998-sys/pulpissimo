@@ -1,0 +1,91 @@
+Detected 15 DFT rule violation(s)
+	Summary of check_dft_rules
+	**************************
+	Number of usable scan cells: 36
+Clock Rule Violations:
+---------------------
+	  Internally driven clock net: 0
+	      Tied constant clock net: 0
+	           Undriven clock net: 0
+	Conflicting async & clock net: 0
+	              Misc. clock net: 0
+
+Async. set/reset Rule Violations:
+--------------------------------
+	Internally driven async net: 0
+	      Tied active async net: 15
+	         Undriven async net: 0
+	            Misc. async net: 0
+
+   Total number of DFT violations: 15
+
+Async Violation
+# 6 <vid_6_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_register_file_ADDR_WIDTH6_DATA_WIDTH32_FPU0_PULP_ZFINX0', net 'n_1444', inst/pin 'id_stage_i/register_file_i/mem_reg[0][0]/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 9 <vid_9_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1', net 'n_1260', inst/pin 'id_stage_i/branch_in_ex_o_reg/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 14 <vid_14_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_cs_registers_APU0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_N_PMP_ENTRIES16_NUM_MHPMCOUNTERS1_PULP_XPULP0_PULP_CLUSTER0_DEBUG_TRIGGER_EN1', net 'n_5387', inst/pin 'cs_registers_i/mepc_q_reg[0]/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 10 <vid_10_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_alu_div', net 'n_195', inst/pin 'ex_stage_i/alu_i/alu_div_i/ResReg_DP_reg[0]/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 4 <vid_4_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_aligner', net 'n_135', inst/pin 'if_stage_i/aligner_i/state_reg[0]/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 3 <vid_3_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_obi_interface_TRANS_STABLE0', net 'n_83', inst/pin 'if_stage_i/prefetch_buffer_i/instruction_obi_i/state_q_reg/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 5 <vid_5_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_if_stage_PULP_XPULP0_PULP_OBI0_PULP_SECURE0_FPU0', net 'n_101', inst/pin 'if_stage_i/instr_valid_id_o_reg/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 2 <vid_2_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_fifo_FALL_THROUGH0_DATA_WIDTH32_DEPTH2', net 'n_91', inst/pin 'if_stage_i/prefetch_buffer_i/fifo_i/read_pointer_q_reg[0]/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 13 <vid_13_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_load_store_unit_PULP_OBI0', net 'n_458', inst/pin 'load_store_unit_i/data_type_q_reg[0]/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 1 <vid_1_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_prefetch_controller_PULP_OBI0_PULP_XPULP0_DEPTH2', net 'n_61', inst/pin 'if_stage_i/prefetch_buffer_i/prefetch_controller_i/state_q_reg/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 8 <vid_8_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_int_controller_PULP_SECURE0', net 'n_232', inst/pin 'id_stage_i/int_controller_i/irq_q_reg[0]/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 7 <vid_7_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0', net 'n_1250', inst/pin 'id_stage_i/controller_i/ctrl_fsm_cs_reg[0]/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 12 <vid_12_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_ex_stage_FPU0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5', net 'n_158', inst/pin 'ex_stage_i/regfile_we_lsu_reg/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 11 <vid_11_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_mult', net 'n_173', inst/pin 'ex_stage_i/mult_i/mulh_carry_q_reg/aclr'   [ASYNC-02]
+ 
+Async Violation
+# 0 <vid_0_async>: async signal driven to a constant active value, possibly due to a polarity conflict in module 'cv32e40p_sleep_unit_PULP_CLUSTER0', net 'n_5', inst/pin 'sleep_unit_i/fetch_enable_q_reg/aclr'   [ASYNC-02]
+ 
+Violations sorted by type and number of affected registers
+Note - a register may be violating multiple DFT rules.
+	Violation #6 <vid_6_async> affects 1024 registers
+	Violation #9 <vid_9_async> affects 537 registers
+	Violation #14 <vid_14_async> affects 507 registers
+	Violation #10 <vid_10_async> affects 107 registers
+	Violation #4 <vid_4_async> affects 85 registers
+	Violation #3 <vid_3_async> affects 76 registers
+	Violation #5 <vid_5_async> affects 68 registers
+	Violation #2 <vid_2_async> affects 68 registers
+	Violation #13 <vid_13_async> affects 42 registers
+	Violation #1 <vid_1_async> affects 37 registers
+	Violation #8 <vid_8_async> affects 33 registers
+	Violation #7 <vid_7_async> affects 15 registers
+	Violation #12 <vid_12_async> affects  7 registers
+	Violation #11 <vid_11_async> affects  4 registers
+	Violation #0 <vid_0_async> affects  2 registers
+ 
+Total number of Test Clock Domains: 1
+  DFT Test Clock Domain: scan_clk
+Number of user specified non-Scan registers:   0
+    Number of registers that fail DFT rules: 2612
+    Number of registers that pass DFT rules:   0
+Percentage of total registers that are scannable:  0%
+
