@@ -70,6 +70,22 @@ case "$STEP" in
             head -n 28 reports/03_mapping/cv32e40p_core_dft_rules_post_map.rpt
         fi
         ;;
+    4)
+        echo "=================================================================="
+        echo " Running Step 4: Scan Chain Architecture & Stitching"
+        echo " Output Log: logs/04_scan_stitching.log"
+        echo "=================================================================="
+        rm -f logs/04_scan_stitching.log* logs/04_scan_stitching.cmd*
+        genus -overwrite -f scripts/04_scan_stitching.tcl -log logs/04_scan_stitching.log
+        echo ""
+        echo ">>> Step 4 Complete!"
+        echo ">>> Checkpoint Saved: dbs/04_stitched.db"
+        echo ">>> Reports:          reports/04_scan_chains/"
+        echo ">>> Scan Chain Summary:"
+        if [ -f reports/04_scan_chains/cv32e40p_core_scan_chains.rpt ]; then
+            cat reports/04_scan_chains/cv32e40p_core_scan_chains.rpt
+        fi
+        ;;
     help|*)
         echo "=================================================================="
         echo " Interactive Step Runner for CV32E40P Core"
