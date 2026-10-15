@@ -27,7 +27,9 @@ fi
 
 echo ""
 echo "[Step 1/2] Running Genus Synthesis and DFT Scan Insertion..."
-genus -f scripts/01_run_genus_dft.tcl -log results/genus.log
+# Clean previous logs to guarantee only a single genus.log file
+rm -f results/genus.log* results/genus.cmd* genus.log* genus.cmd*
+genus -overwrite -f scripts/01_run_genus_dft.tcl -log results/genus.log
 
 echo ""
 echo "Genus run completed. Checking for Modus..."
@@ -43,6 +45,7 @@ fi
 
 echo ""
 echo "[Step 2/2] Running Modus ATPG & Fault Coverage Analysis..."
+rm -f results/modus.log* results/modus.cmd* modus.log* modus.cmd*
 modus -f scripts/02_run_modus_atpg.tcl -log results/modus.log
 
 echo ""
