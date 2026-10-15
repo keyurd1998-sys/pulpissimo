@@ -14,27 +14,35 @@ if {![file exists $PREV_DB]} {
 read_db $PREV_DB
 
 # Configure scan chain attributes
-set_db [current_design] .dft_min_number_of_scan_chains 4
 set_db [current_design] .dft_mix_clock_edges_in_scan_chains true
 set_db [current_design] .dft_lockup_element_type preferred_level_sensitive
 
-# Define 4 scan chains with dedicated top-level ports
-define_scan_chain -name chain0 -sdi scan_in_0 -sdo scan_out_0 -create_ports -shift_enable scan_en
-define_scan_chain -name chain1 -sdi scan_in_1 -sdo scan_out_1 -create_ports -shift_enable scan_en
-define_scan_chain -name chain2 -sdi scan_in_2 -sdo scan_out_2 -create_ports -shift_enable scan_en
-define_scan_chain -name chain3 -sdi scan_in_3 -sdo scan_out_3 -create_ports -shift_enable scan_en
+# Define 1 base scan chain with 1 scan-in and 1 scan-out port
+define_scan_chain -name chain0 -sdi scan_in -sdo scan_out -create_ports -shift_enable scan_en
 
-# Stitch scan chains
+# Stitch base scan chain
 connect_scan_chains -auto_create_chains
 
-# Post-stitching DRC and reports
-check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_post_scan.rpt"
-report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains.rpt"
-report_scan_setup  > "$STEP_RPT_DIR/${DESIGN}_scan_setup.rpt"
+# Base scan chain reports
+check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"
+report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
+
+# Compression Analysis: Preview ratios 8, 16, 20, 32
+compress_scan_chains -ratio 8  -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_8.rpt"
+compress_scan_chains -ratio 16 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_16.rpt"
+compress_scan_chains -ratio 20 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_20.rpt"
+compress_scan_chains -ratio 32 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_32.rpt"
+
+# Compressibility analysis with ATPG library
+if {[catch {
+    analyze_scan_compressibility -library $ATPG_LIB -ratios {8 16 20 32} > "$STEP_RPT_DIR/${DESIGN}_compressibility_analysis.rpt"
+} msg]} {
+    puts "NOTE: analyze_scan_compressibility: $msg"
+}
 
 # Save checkpoint database
 set DB_FILE "$DBS_DIR/04_stitched.db"
 write_db -all_root_attributes -to_file $DB_FILE
 
-puts "INFO: Step 4 completed successfully. Checkpoint saved: $DB_FILE"
+puts "INFO: Step 4 compression analysis completed. Checkpoint saved: $DB_FILE"
 exit

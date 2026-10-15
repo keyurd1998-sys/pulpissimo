@@ -72,7 +72,7 @@ run_single_step() {
             ;;
         4)
             echo "=================================================================="
-            echo " Running Step 4: Scan Chain Architecture & Stitching"
+            echo " Running Step 4: 1-Channel Scan Stitching & Compression Analysis"
             echo " Output Log: logs/04_scan_stitching.log"
             echo "=================================================================="
             rm -f logs/04_scan_stitching.log* logs/04_scan_stitching.cmd*
@@ -81,10 +81,15 @@ run_single_step() {
             echo ">>> Step 4 Complete!"
             echo ">>> Checkpoint Saved: dbs/04_stitched.db"
             echo ">>> Reports:          reports/04_scan_chains/"
-            echo ">>> Scan Chain Summary:"
-            if [ -f reports/04_scan_chains/cv32e40p_core_scan_chains.rpt ]; then
-                cat reports/04_scan_chains/cv32e40p_core_scan_chains.rpt
-            fi
+            echo ">>> Compression Previews:"
+            for rpt in reports/04_scan_chains/cv32e40p_core_preview_ratio_*.rpt; do
+                if [ -f "$rpt" ]; then
+                    echo "------------------------------------------------------------------"
+                    echo " $(basename "$rpt")"
+                    echo "------------------------------------------------------------------"
+                    cat "$rpt"
+                fi
+            done
             ;;
         help|*)
             echo "=================================================================="
