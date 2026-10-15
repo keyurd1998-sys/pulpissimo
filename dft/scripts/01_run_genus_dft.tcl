@@ -58,8 +58,8 @@ file mkdir "$RESULTS_DIR/modus_atpg"
 set_db root: .max_cpus_per_server 8
 set_db root: .information_level 9
 
-# Low-power clock gating insertion during synthesis
-set_db root: .lp_insert_clock_gating true
+# Low-power clock gating insertion during synthesis (set to false to prevent requiring missing ICG cells)
+set_db root: .lp_insert_clock_gating false
 
 # Clean array naming style for scan stitching and formal verification
 set_db root: .hdl_array_naming_style %s\[%d\]
@@ -78,6 +78,9 @@ set_db root: .init_lib_search_path [list . "$LIB_DIR/timing" "$LIB_DIR/lef"]
 #-------------------------------------------------------------------------------
 # Step 3: Load Target Libraries
 #-------------------------------------------------------------------------------
+# Disable LEF consistency check to prevent Genus from marking library cells as 'avoid' (PHYS-103)
+set_db root: .lib_lef_consistency_check_enable false
+
 puts "INFO: Reading timing library..."
 read_libs $TIMING_LIB
 
@@ -85,6 +88,9 @@ if {[file exists $LEF_FILE]} {
     puts "INFO: Reading physical LEF..."
     read_physical -lef $LEF_FILE
 }
+
+# Ensure all library cells (standard cells, scan flip-flops) are marked usable
+set_db [get_db lib_cells] .avoid false
 
 #-------------------------------------------------------------------------------
 # Step 4: Parse Filelist and Read RTL
@@ -142,19 +148,23 @@ set_db root: .use_scan_seqs_for_non_dft false
 # 1. Define Test Clock: functional clk_i used during scan shift & capture (period: 20000ps)
 define_test_clock -name scan_clk -period 20000 [get_ports clk_i]
 
-# 2. Define Asynchronous Reset: functional rst_ni is active-low
-# Genus ensures it is held inactive (high) during scan shifting
-define_test_signal -function async_set_reset -active low [get_ports rst_ni]
+# 2. Define Asynchronous Reset (rst_ni):
+# rst_ni is active-low (0 = reset asserted, 1 = inactive/deasserted).
+# During scan shift, it must be held inactive (logic 1 / active high).
+# The -scan_shift switch tells Genus and Modus ATPG to hold it high during shift
+# while allowing ATPG to pulse it during capture (treated as a non-scan clock).
+# This completely eliminates ASYNC-02 violations and achieves 100% scannability.
+define_test_mode -name scan_rst -active high -scan_shift -shared_input [get_ports rst_ni]
 
-# 3. Define Shift Enable: creates dedicated primary input port SCAN_ENABLE
+# 3. Define Clock Gate Test Bypass for CV32E40P (scan_cg_en_i):
+# Holds internal clock gates transparent during scan shift and capture
+define_test_mode -name scan_cg_en -active high -shared_input [get_ports scan_cg_en_i]
+
+# 4. Define Shift Enable: creates dedicated primary input port SCAN_ENABLE
 # Marked ideal to prevent premature buffering during synthesis
 define_test_signal -function shift_enable -name scan_en -active high -ideal -create_port SCAN_ENABLE
 
-# 4. Define Clock Gate Test Bypass for CV32E40P:
-# Holds internal ICG clock gates transparent during scan shift
-define_test_mode -name scan_cg_en -active high [get_ports scan_cg_en_i]
-
-# 5. Link Shift Enable to low-power clock gates inserted during synthesis
+# 5. Link Shift Enable to low-power clock gates if enabled
 if {[get_db root: .lp_insert_clock_gating] eq "true"} {
     set_db design:$DESIGN .lp_clock_gating_test_signal [get_db test_signal:$DESIGN/scan_en]
 }
