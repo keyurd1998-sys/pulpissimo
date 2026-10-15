@@ -1,0 +1,683 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2025 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[15:33:49.455625] Configured Lic search path (25.01-s002): 5280@pine-server
+
+Version: 25.10-p002_1, built Thu Apr 17 03:05:38 PDT 2025
+Options: -files scripts/01_run_genus_dft.tcl -log results/genus.log 
+Date:    Thu Oct 15 15:33:49 2026
+Host:    Pine-06 (x86_64 w/Linux 5.14.0-611.30.1.el9_7.x86_64) (6cores*6cpus*1physical cpu*Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz 9216KB) (7671680KB)
+PID:     2925229
+OS:      Red Hat Enterprise Linux 9.7 (Plow)
+
+Checking out license: Genus_Synthesis
+[15:33:49.479673] Periodic Lic check successful
+[15:33:49.479680] Feature usage summary:
+[15:33:49.479681] Genus_Synthesis  
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Finished executable startup (3 seconds elapsed).
+
+Loading tool scripts...
+Finished loading tool scripts (16 seconds elapsed).
+
+#@ Processing -files option
+@genus:root: 1> source scripts/01_run_genus_dft.tcl
+#@ Begin verbose source ./scripts/01_run_genus_dft.tcl
+@file(01_run_genus_dft.tcl) 7: puts "=========================================================================="
+==========================================================================
+@file(01_run_genus_dft.tcl) 8: puts "  STARTING GENUS SYNTHESIS & DFT INSERTION FOR CV32E40P CORE             "
+  STARTING GENUS SYNTHESIS & DFT INSERTION FOR CV32E40P CORE             
+@file(01_run_genus_dft.tcl) 9: puts "=========================================================================="
+==========================================================================
+@file(01_run_genus_dft.tcl) 14: set DESIGN       "cv32e40p_core"
+@file(01_run_genus_dft.tcl) 15: set SCRIPT_DIR   [file dirname [file normalize [info script]]]
+@file(01_run_genus_dft.tcl) 16: set DFT_ROOT     [file normalize "$SCRIPT_DIR/.."]
+@file(01_run_genus_dft.tcl) 17: set REPO_ROOT    [file normalize "$DFT_ROOT/.."]
+@file(01_run_genus_dft.tcl) 18: set RESULTS_DIR  "$DFT_ROOT/results"
+@file(01_run_genus_dft.tcl) 19: set FLIST        "$DFT_ROOT/filelists/cv32e40p_core.flist"
+@file(01_run_genus_dft.tcl) 20: set SDC_FILE     "$DFT_ROOT/constraints/cv32e40p_core.sdc"
+@file(01_run_genus_dft.tcl) 23: set LIB_DIR "/home/admin/DFT/Library"
+@file(01_run_genus_dft.tcl) 24: puts "INFO: Using Library Directory: $LIB_DIR"
+INFO: Using Library Directory: /home/admin/DFT/Library
+@file(01_run_genus_dft.tcl) 27: if {[info exists env(CV32E40P_DIR)] && [file isdirectory $env(CV32E40P_DIR)]} {
+    set CV32E40P_DIR $env(CV32E40P_DIR)
+} else {
+    set cv_dirs [glob -nocomplain "$REPO_ROOT/.bender/git/checkouts/cv32e40p-*"]
+    if {[llength $cv_dirs] > 0} {
+        set CV32E40P_DIR [lindex $cv_dirs 0]
+    } else {
+        puts "ERROR: Cannot find cv32e40p checkout under $REPO_ROOT/.bender/git/checkouts/!"
+        puts "Please run 'make checkout' at repository root first."
+        exit 1
+    }
+}
+@file(01_run_genus_dft.tcl) 39: puts "INFO: Using CV32E40P RTL Directory: $CV32E40P_DIR"
+INFO: Using CV32E40P RTL Directory: /home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974
+@file(01_run_genus_dft.tcl) 42: file mkdir "$RESULTS_DIR/reports"
+@file(01_run_genus_dft.tcl) 43: file mkdir "$RESULTS_DIR/netlists"
+@file(01_run_genus_dft.tcl) 44: file mkdir "$RESULTS_DIR/dbs"
+@file(01_run_genus_dft.tcl) 45: file mkdir "$RESULTS_DIR/modus_atpg"
+@file(01_run_genus_dft.tcl) 50: set_db root: .max_cpus_per_server 8
+  Setting attribute of root '/': 'max_cpus_per_server' = 8
+@file(01_run_genus_dft.tcl) 51: set_db root: .information_level 9
+  Setting attribute of root '/': 'information_level' = 9
+@file(01_run_genus_dft.tcl) 54: set_db root: .lp_insert_clock_gating true
+  Setting attribute of root '/': 'lp_insert_clock_gating' = true
+@file(01_run_genus_dft.tcl) 57: set_db root: .hdl_array_naming_style %s\[%d\]
+  Setting attribute of root '/': 'hdl_array_naming_style' = %s[%d]
+@file(01_run_genus_dft.tcl) 58: set_db root: .hdl_unconnected_input_port_value none
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_unconnected_input_port" value 'none' to set the attribute "hdl_unconnected_value".
+        : To revert to old behaviour set the value of the attribute "hdl_use_new_undriven_handling" to 0.
+  Setting attribute of root '/': 'hdl_unconnected_input_port_value' = none
+@file(01_run_genus_dft.tcl) 59: set_db root: .hdl_undriven_output_port_value   none
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_undriven_output_port" value 'none' to set the attribute "hdl_unconnected_value".
+  Setting attribute of root '/': 'hdl_undriven_output_port_value' = none
+@file(01_run_genus_dft.tcl) 60: set_db root: .hdl_undriven_signal_value        none
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_undriven_signal_value" value 'none' to set the attribute "hdl_unconnected_value".
+  Setting attribute of root '/': 'hdl_undriven_signal_value' = none
+@file(01_run_genus_dft.tcl) 63: set_db root: .syn_generic_effort medium
+  Setting attribute of root '/': 'syn_generic_effort' = medium
+@file(01_run_genus_dft.tcl) 64: set_db root: .syn_map_effort     high
+  Setting attribute of root '/': 'syn_map_effort' = high
+@file(01_run_genus_dft.tcl) 65: set_db root: .syn_opt_effort     high
+  Setting attribute of root '/': 'syn_opt_effort' = high
+@file(01_run_genus_dft.tcl) 68: set_db root: .init_lib_search_path [list . "$LIB_DIR/timing" "$LIB_DIR/lef"]
+  Setting attribute of root '/': 'init_lib_search_path' = . /home/admin/DFT/Library/timing /home/admin/DFT/Library/lef
+@file(01_run_genus_dft.tcl) 73: puts "INFO: Reading timing library: $LIB_DIR/timing/slow.lib"
+INFO: Reading timing library: /home/admin/DFT/Library/timing/slow.lib
+@file(01_run_genus_dft.tcl) 74: read_libs "$LIB_DIR/timing/slow.lib"
+Info    : Missing library level attribute. [LBR-516]
+        : slew_derate_from_library not specified in the library, using .lib default of 1. (File /home/admin/DFT/Library/timing/slow.lib, Line 8)
+Info    : Missing a function attribute in the output pin definition. [LBR-518]
+        : Functionality is missing at pin 'Y' for the cell 'HOLDX1'. (File /home/admin/DFT/Library/timing/slow.lib, Line 32486)
+
+  Message Summary for Library slow.lib:
+  *************************************
+  Missing a function attribute in the output pin definition. [LBR-518]: 1
+  Missing library level attribute. [LBR-516]: 1
+  *************************************
+ 
+            Reading file '/home/admin/DFT/Library/timing/slow.lib'
+Info    : Created nominal operating condition. [LBR-412]
+        : Operating condition '_nominal_' was created for the PVT values (1.000000, 1.080000, 125.000000) in library 'slow.lib'.
+        : The nominal operating condition is represented, either by the nominal PVT values specified in the library source (via nom_process,nom_voltage and nom_temperature respectively), or by the default PVT values (1.0,1.0,1.0).
+Info    : An output library pin lacks a function attribute. [LBR-41]
+        : Output pin 'HOLDX1/Y' has no function.
+        : If the remainder of this library cell's semantic checks are successful, it will be considered as a timing-model (because one of its outputs does not have a valid function.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX2'.  Ignoring the test_cell.
+        : Review the definition of the test_cell's function or its parent library-cell's function.  An inconsistency between the two may exist.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRXL'.  Ignoring the test_cell.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX4' has invalid (or complex) clock function.
+        : The sequential cell cannot be inferred because its clock function is unknown.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRXL' has invalid (or complex) clock function.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX1'.  Ignoring the test_cell.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX4'.  Ignoring the test_cell.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX1' has invalid (or complex) clock function.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX2' is assumed to be ' CKN'.
+        : The tool derives the clock polarity from the sequential timing arcs specified through the Liberty 'timing_type' attribute. For the positive-edge triggered cells a positive value is expected for the 'clocked_on' or 'enable' attribute while an inverted value is expected for the negative-edge triggered sequential cells.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRXL' is assumed to be ' CKN'.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX4/Q' is ignored.
+        : Timing sense should never be set with 'rising_edge' or 'falling_edge' timing type.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRXL/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRXL/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX2/QN' is ignored.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'LBR-170'.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX1' is assumed to be ' CKN'.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX4' is assumed to be ' CKN'.
+@file(01_run_genus_dft.tcl) 76: if {[file exists "$LIB_DIR/lef/all.lef"]} {
+    read_physical -lef "$LIB_DIR/lef/all.lef"
+}
+
+  According to lef_library, there are total 6 routing layers [ V(3) / H(3) ]
+
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AND2X6' was marked 'avoid' because there was no physical data in the LEF file.
+        : To prevent the library cell from being set to 'avoid', set attribute 'lib_lef_consistency_check_enable' to 'false'.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AND3X8' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AND4X8' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO21X1' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO21X2' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO21XL' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO22X1' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO22X2' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO22XL' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKAND2X2' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKAND2X6' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKBUFX6' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKINVX6' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKMX2X12' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKXOR2X1' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKXOR2X4' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'DFFQX1' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'DFFQX2' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'DFFQX4' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'DFFSHQX8' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'PHYS-103'.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL8 cannot be found in library.
+        : Ensure that the proper library files are available and have been imported.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL64 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL32 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL16 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell RF2R1WX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell RF1R1WX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSX2 cannot be found in library.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'PHYS-279'.
+@file(01_run_genus_dft.tcl) 83: puts "INFO: Reading RTL files from $FLIST..."
+INFO: Reading RTL files from /home/admin/DFT/pulpissimo/dft/filelists/cv32e40p_core.flist...
+@file(01_run_genus_dft.tcl) 84: set inc_dirs [list]
+@file(01_run_genus_dft.tcl) 85: set rtl_files [list]
+@file(01_run_genus_dft.tcl) 87: set fp [open $FLIST r]
+@file(01_run_genus_dft.tcl) 88: while {[gets $fp line] >= 0} {
+    set line [string trim $line]
+    if {$line eq "" || [string match "//*" $line] || [string match "#*" $line]} {
+        continue
+    }
+    # Substitute ${CV32E40P_DIR} dynamically
+    regsub -all {\$\{CV32E40P_DIR\}} $line $CV32E40P_DIR line
+    
+    if {[string match "+incdir+*" $line]} {
+        regsub {^\+incdir\+} $line "" dir_path
+        lappend inc_dirs $dir_path
+    } else {
+        lappend rtl_files $line
+    }
+}
+@file(01_run_genus_dft.tcl) 103: close $fp
+@file(01_run_genus_dft.tcl) 105: set_db root: .init_hdl_search_path $inc_dirs
+  Setting attribute of root '/': 'init_hdl_search_path' = /home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include /home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/bhv
+@file(01_run_genus_dft.tcl) 106: read_hdl -language sv $rtl_files
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include/cv32e40p_apu_core_pkg.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include/cv32e40p_pkg.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu_div.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_cs_registers.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv'
+%DLS-E-AuxAttrExists, StatementList node already has auxiliary
+	attribute NODE_BASE_FILE_INFO; in AddAttribute.
+module cv32e40p_decoder import cv32e40p_pkg::*; import cv32e40p_apu_core_pkg::*; import fpnew_pkg::*;
+                                                                                                |
+Error   : The referenced package does not exist.. [VLOGPT-28] [read_hdl]
+        : Reference to non-existent package 'fpnew_pkg' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 28, column 97.
+        : The referenced package does not exist in the same HDL library.
+  output logic [fpnew_pkg::FP_FORMAT_BITS-1:0]  fpu_dst_fmt_o,   // fpu destination format
+                          |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Bad or unsupported package prefix 'fpnew_pkg' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 104, column 27.
+        : Invalid Verilog syntax is parsed, or unsupported Verilog syntax is encountered.
+  output logic [fpnew_pkg::FP_FORMAT_BITS-1:0]  fpu_dst_fmt_o,   // fpu destination format
+                                        |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ']', found '<identifier>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 104, column 41.
+  output logic [fpnew_pkg::FP_FORMAT_BITS-1:0]  fpu_dst_fmt_o,   // fpu destination format
+                                         |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ')', found '-' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 104, column 42.
+  output logic [fpnew_pkg::FP_FORMAT_BITS-1:0]  fpu_dst_fmt_o,   // fpu destination format
+                                         |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found '-' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 104, column 42.
+  logic [fpnew_pkg::OP_BITS-1:0] fpu_op;     // fpu operation
+                   |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Bad or unsupported package prefix 'fpnew_pkg' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 174, column 20.
+  logic [fpnew_pkg::OP_BITS-1:0] fpu_op;     // fpu operation
+                          |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ']', found '<identifier>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 174, column 27.
+  logic [fpnew_pkg::OP_BITS-1:0] fpu_op;     // fpu operation
+                           |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found '-' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 174, column 28.
+    ctrl_transfer_target_mux_sel_o       = JT_JAL;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'ctrl_transfer_target_mux_sel_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 193, column 5.
+        : Verilog module is using a parameter that is not defined in the module. You will get a notification for this, if you read the verilog file using the read_hdl command.
+    apu_op_o                    = '0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'apu_op_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 216, column 5.
+    apu_lat_o                   = '0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'apu_lat_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 217, column 5.
+    fp_rnd_mode_o               = '0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'fp_rnd_mode_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 218, column 5.
+    fpu_op                      = fpnew_pkg::SGNJ;
+                                            |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Bad or unsupported package prefix 'fpnew_pkg' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 219, column 45.
+    fpu_op                      = fpnew_pkg::SGNJ;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'fpu_op' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 219, column 5.
+    fpu_op                      = fpnew_pkg::SGNJ;
+                                                |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found '<identifier>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 219, column 49.
+    fpu_dst_fmt_o               = fpnew_pkg::FP32;
+                                            |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Bad or unsupported package prefix 'fpnew_pkg' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 222, column 45.
+    fpu_dst_fmt_o               = fpnew_pkg::FP32;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'fpu_dst_fmt_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 222, column 5.
+    fpu_dst_fmt_o               = fpnew_pkg::FP32;
+                                                |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found '<identifier>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 222, column 49.
+    fpu_src_fmt_o               = fpnew_pkg::FP32;
+                                            |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Bad or unsupported package prefix 'fpnew_pkg' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 223, column 45.
+    fpu_src_fmt_o               = fpnew_pkg::FP32;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'fpu_src_fmt_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 223, column 5.
+    fpu_src_fmt_o               = fpnew_pkg::FP32;
+                                                |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found '<identifier>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 223, column 49.
+    fpu_int_fmt_o               = fpnew_pkg::INT32;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'fpu_int_fmt_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 224, column 5.
+    fpu_int_fmt_o               = fpnew_pkg::INT32;
+                                          |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found '<identifier>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 224, column 43.
+    check_fprm                  = 1'b0;
+                                  |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found 'number' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 225, column 35.
+    fp_op_group                 = ADDMUL;
+                                       |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 226, column 40.
+        : Illegal Verilog syntax is encountered.
+    fp_op_group                 = ADDMUL;
+                                       |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found '<identifier>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 226, column 40.
+    regfile_mem_we              = 1'b0;
+                                  |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found 'number' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 228, column 35.
+    regfile_alu_we              = 1'b0;
+                                  |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found 'number' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 229, column 35.
+    regfile_alu_waddr_sel_o     = 1'b1;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'regfile_alu_waddr_sel_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 230, column 5.
+    regfile_alu_waddr_sel_o     = 1'b1;
+                                  |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found 'number' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 230, column 35.
+    prepost_useincr_o           = 1'b1;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'prepost_useincr_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 232, column 5.
+    prepost_useincr_o           = 1'b1;
+                                  |
+Error   : Parsing error. [VLOGPT-1] [read_hdl]
+        : Expecting token ';', found 'number' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 232, column 35.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'VLOGPT-1'.
+    hwlp_target_mux_sel_o       = 1'b0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'hwlp_target_mux_sel_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 235, column 5.
+    hwlp_start_mux_sel_o        = 1'b0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'hwlp_start_mux_sel_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 236, column 5.
+    hwlp_cnt_mux_sel_o          = 1'b0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'hwlp_cnt_mux_sel_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 237, column 5.
+    csr_access_o                = 1'b0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'csr_access_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 239, column 5.
+    csr_status_o                = 1'b0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'csr_status_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 240, column 5.
+    csr_op                      = CSR_OP_READ;
+                                            |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 242, column 45.
+    data_we_o                   = 1'b0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'data_we_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 248, column 5.
+    data_type_o                 = 2'b00;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'data_type_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 249, column 5.
+    data_sign_extension_o       = 2'b00;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'data_sign_extension_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 250, column 5.
+    data_reg_offset_o           = 2'b00;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'data_reg_offset_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 251, column 5.
+    data_load_event_o           = 1'b0;
+    |
+Error   : Reference to undeclared variable. A variable/parameter must be declared before it is referenced. [VLOGPT-20] [read_hdl]
+        : Symbol 'data_load_event_o' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 253, column 5.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'VLOGPT-20'.
+        alu_operator_o      = ALU_ADD;
+                                    |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 302, column 37.
+        alu_operator_o      = ALU_ADD;
+                                    |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 314, column 37.
+          3'b000: alu_operator_o = ALU_EQ;
+                                        |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 334, column 41.
+          3'b001: alu_operator_o = ALU_NE;
+                                        |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 335, column 41.
+          3'b100: alu_operator_o = ALU_LTS;
+                                         |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 336, column 42.
+          3'b101: alu_operator_o = ALU_GES;
+                                         |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 337, column 42.
+          3'b110: alu_operator_o = ALU_LTU;
+                                         |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 338, column 42.
+          3'b111: alu_operator_o = ALU_GEU;
+                                         |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 339, column 42.
+              alu_operator_o      = ALU_EQ;
+                                         |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 342, column 42.
+              alu_operator_o      = ALU_NE;
+                                         |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 352, column 42.
+          alu_operator_o = ALU_ADD;
+                                 |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 380, column 34.
+          alu_operator_o      = ALU_ADD;
+                                      |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 430, column 39.
+        alu_operator_o      = ALU_ADD;
+                                    |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 556, column 37.
+        alu_operator_o      = ALU_ADD;
+                                    |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 564, column 37.
+          3'b000: alu_operator_o = ALU_ADD;  // Add Immediate
+                                         |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 575, column 42.
+          3'b010: alu_operator_o = ALU_SLTS; // Set to one if Lower Than Immediate
+                                          |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 576, column 43.
+          3'b011: alu_operator_o = ALU_SLTU; // Set to one if Lower Than Immediate Unsigned
+                                          |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 577, column 43.
+          3'b100: alu_operator_o = ALU_XOR;  // Exclusive Or with Immediate
+                                         |
+Warning : This assignment is a violation of SystemVerilog strong typing rules for enumeration data types. [VLOGPT-702]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 578, column 42.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'VLOGPT-702'.
+              alu_op_b_mux_sel_o  = OP_B_IMM;
+                                    |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OP_B_IMM' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 344, column 37.
+        : Error encountered during Verilog parsing.
+              imm_b_mux_sel_o     = IMMB_BI;
+                                    |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'IMMB_BI' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 345, column 37.
+              alu_op_b_mux_sel_o  = OP_B_IMM;
+                                    |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OP_B_IMM' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 354, column 37.
+              imm_b_mux_sel_o     = IMMB_BI;
+                                    |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'IMMB_BI' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 355, column 37.
+        if (PULP_XPULP || (instr_rdata_i[6:0] == OPCODE_STORE)) begin
+                           |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'instr_rdata_i' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 375, column 28.
+        if (PULP_XPULP || (instr_rdata_i[6:0] == OPCODE_STORE)) begin
+                                                 |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OPCODE_STORE' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 375, column 50.
+          if (instr_rdata_i[6:0] == OPCODE_STORE_POST) begin
+                                    |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OPCODE_STORE_POST' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 385, column 37.
+              alu_op_b_mux_sel_o = OP_B_REGC_OR_FWD;
+                                   |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OP_B_REGC_OR_FWD' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 399, column 36.
+              regc_mux_o         = REGC_RD;
+                                   |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'REGC_RD' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 400, column 36.
+      OPCODE_LOAD,
+      |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OPCODE_LOAD' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 422, column 7.
+        if (PULP_XPULP || (instr_rdata_i[6:0] == OPCODE_LOAD)) begin
+                           |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'instr_rdata_i' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 424, column 28.
+        if (PULP_XPULP || (instr_rdata_i[6:0] == OPCODE_LOAD)) begin
+                                                 |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OPCODE_LOAD' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 424, column 50.
+          if (instr_rdata_i[6:0] == OPCODE_LOAD_POST) begin
+                                    |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OPCODE_LOAD_POST' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 435, column 37.
+          if (instr_rdata_i[14:12] == 3'b111) begin
+              |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'instr_rdata_i' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 453, column 15.
+              alu_op_b_mux_sel_o = OP_B_REGB_OR_FWD;
+                                   |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OP_B_REGB_OR_FWD' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 457, column 36.
+            if (PULP_CLUSTER && (instr_rdata_i[6:0] == OPCODE_LOAD)) begin
+                                 |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'instr_rdata_i' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 480, column 34.
+            if (PULP_CLUSTER && (instr_rdata_i[6:0] == OPCODE_LOAD)) begin
+                                                       |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'OPCODE_LOAD' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 480, column 56.
+        if (A_EXTENSION) begin : decode_amo
+                                 |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'decode_amo' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 498, column 34.
+          if (instr_rdata_i[14:12] == 3'b010) begin // RV32A Extension (word)
+              |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'instr_rdata_i' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 499, column 15.
+              AMO_SWAP,
+              |
+Error   : Unresolved subprogram reference. [VLOGPT-203] [read_hdl]
+        : Call to subprogram 'AMO_SWAP' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 518, column 15.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'VLOGPT-203'.
+#@ End verbose source ./scripts/01_run_genus_dft.tcl
+1
+Encountered problems processing file: scripts/01_run_genus_dft.tcl
+WARNING: This version of the tool is 545 days old.
+
+Another Ctrl-C within 1 second will terminate the tool.
+CURRENT RESOURCES: RT {elapsed: 138s, ST: 22s, FG: 22s, CPU: 5.3%}, MEM {curr: 1.7G, peak: 1.7G, phys curr: 0.8G, phys peak: 0.8G}, SYS {load: 0.1, cpu: 6, total: 7.3G, free: 1.3G}
+Abnormal exit.
