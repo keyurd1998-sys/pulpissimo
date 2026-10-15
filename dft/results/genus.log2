@@ -1,0 +1,1297 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2025 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[15:50:13.455545] Configured Lic search path (25.01-s002): 5280@pine-server
+
+Version: 25.10-p002_1, built Thu Apr 17 03:05:38 PDT 2025
+Options: -files scripts/01_run_genus_dft.tcl -log results/genus.log 
+Date:    Thu Oct 15 15:50:13 2026
+Host:    Pine-06 (x86_64 w/Linux 5.14.0-611.30.1.el9_7.x86_64) (6cores*6cpus*1physical cpu*Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz 9216KB) (7671680KB)
+PID:     2931598
+OS:      Red Hat Enterprise Linux 9.7 (Plow)
+
+Checking out license: Genus_Synthesis
+[15:50:13.457977] Periodic Lic check successful
+[15:50:13.982275] Feature usage summary:
+[15:50:13.982280] Genus_Synthesis  
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Finished executable startup (2 seconds elapsed).
+
+Loading tool scripts...
+Finished loading tool scripts (16 seconds elapsed).
+
+#@ Processing -files option
+@genus:root: 1> source scripts/01_run_genus_dft.tcl
+#@ Begin verbose source ./scripts/01_run_genus_dft.tcl
+@file(01_run_genus_dft.tcl) 7: puts "=========================================================================="
+==========================================================================
+@file(01_run_genus_dft.tcl) 8: puts "  STARTING GENUS SYNTHESIS & DFT INSERTION FOR CV32E40P CORE             "
+  STARTING GENUS SYNTHESIS & DFT INSERTION FOR CV32E40P CORE             
+@file(01_run_genus_dft.tcl) 9: puts "=========================================================================="
+==========================================================================
+@file(01_run_genus_dft.tcl) 14: set DESIGN       "cv32e40p_core"
+@file(01_run_genus_dft.tcl) 15: set SCRIPT_DIR   [file dirname [file normalize [info script]]]
+@file(01_run_genus_dft.tcl) 16: set DFT_ROOT     [file normalize "$SCRIPT_DIR/.."]
+@file(01_run_genus_dft.tcl) 17: set REPO_ROOT    [file normalize "$DFT_ROOT/.."]
+@file(01_run_genus_dft.tcl) 18: set RESULTS_DIR  "$DFT_ROOT/results"
+@file(01_run_genus_dft.tcl) 19: set FLIST        "$DFT_ROOT/filelists/cv32e40p_core.flist"
+@file(01_run_genus_dft.tcl) 20: set SDC_FILE     "$DFT_ROOT/constraints/cv32e40p_core.sdc"
+@file(01_run_genus_dft.tcl) 23: set LIB_DIR "/home/admin/DFT/Library"
+@file(01_run_genus_dft.tcl) 24: puts "INFO: Using Library Directory: $LIB_DIR"
+INFO: Using Library Directory: /home/admin/DFT/Library
+@file(01_run_genus_dft.tcl) 27: if {[info exists env(CV32E40P_DIR)] && [file isdirectory $env(CV32E40P_DIR)]} {
+    set CV32E40P_DIR $env(CV32E40P_DIR)
+} else {
+    set cv_dirs [glob -nocomplain "$REPO_ROOT/.bender/git/checkouts/cv32e40p-*"]
+    if {[llength $cv_dirs] > 0} {
+        set CV32E40P_DIR [lindex $cv_dirs 0]
+    } else {
+        puts "ERROR: Cannot find cv32e40p checkout under $REPO_ROOT/.bender/git/checkouts/!"
+        puts "Please run 'make checkout' at repository root first."
+        exit 1
+    }
+}
+@file(01_run_genus_dft.tcl) 39: puts "INFO: Using CV32E40P RTL Directory: $CV32E40P_DIR"
+INFO: Using CV32E40P RTL Directory: /home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974
+@file(01_run_genus_dft.tcl) 42: file mkdir "$RESULTS_DIR/reports"
+@file(01_run_genus_dft.tcl) 43: file mkdir "$RESULTS_DIR/netlists"
+@file(01_run_genus_dft.tcl) 44: file mkdir "$RESULTS_DIR/dbs"
+@file(01_run_genus_dft.tcl) 45: file mkdir "$RESULTS_DIR/modus_atpg"
+@file(01_run_genus_dft.tcl) 50: set_db root: .max_cpus_per_server 8
+  Setting attribute of root '/': 'max_cpus_per_server' = 8
+@file(01_run_genus_dft.tcl) 51: set_db root: .information_level 9
+  Setting attribute of root '/': 'information_level' = 9
+@file(01_run_genus_dft.tcl) 54: set_db root: .lp_insert_clock_gating true
+  Setting attribute of root '/': 'lp_insert_clock_gating' = true
+@file(01_run_genus_dft.tcl) 57: set_db root: .hdl_array_naming_style %s\[%d\]
+  Setting attribute of root '/': 'hdl_array_naming_style' = %s[%d]
+@file(01_run_genus_dft.tcl) 58: set_db root: .hdl_unconnected_input_port_value none
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_unconnected_input_port" value 'none' to set the attribute "hdl_unconnected_value".
+        : To revert to old behaviour set the value of the attribute "hdl_use_new_undriven_handling" to 0.
+  Setting attribute of root '/': 'hdl_unconnected_input_port_value' = none
+@file(01_run_genus_dft.tcl) 59: set_db root: .hdl_undriven_output_port_value   none
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_undriven_output_port" value 'none' to set the attribute "hdl_unconnected_value".
+  Setting attribute of root '/': 'hdl_undriven_output_port_value' = none
+@file(01_run_genus_dft.tcl) 60: set_db root: .hdl_undriven_signal_value        none
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_undriven_signal_value" value 'none' to set the attribute "hdl_unconnected_value".
+  Setting attribute of root '/': 'hdl_undriven_signal_value' = none
+@file(01_run_genus_dft.tcl) 63: set_db root: .syn_generic_effort medium
+  Setting attribute of root '/': 'syn_generic_effort' = medium
+@file(01_run_genus_dft.tcl) 64: set_db root: .syn_map_effort     high
+  Setting attribute of root '/': 'syn_map_effort' = high
+@file(01_run_genus_dft.tcl) 65: set_db root: .syn_opt_effort     high
+  Setting attribute of root '/': 'syn_opt_effort' = high
+@file(01_run_genus_dft.tcl) 68: set_db root: .init_lib_search_path [list . "$LIB_DIR/timing" "$LIB_DIR/lef"]
+  Setting attribute of root '/': 'init_lib_search_path' = . /home/admin/DFT/Library/timing /home/admin/DFT/Library/lef
+@file(01_run_genus_dft.tcl) 73: puts "INFO: Reading timing library: $LIB_DIR/timing/slow.lib"
+INFO: Reading timing library: /home/admin/DFT/Library/timing/slow.lib
+@file(01_run_genus_dft.tcl) 74: read_libs "$LIB_DIR/timing/slow.lib"
+Info    : Missing library level attribute. [LBR-516]
+        : slew_derate_from_library not specified in the library, using .lib default of 1. (File /home/admin/DFT/Library/timing/slow.lib, Line 8)
+Info    : Missing a function attribute in the output pin definition. [LBR-518]
+        : Functionality is missing at pin 'Y' for the cell 'HOLDX1'. (File /home/admin/DFT/Library/timing/slow.lib, Line 32486)
+
+  Message Summary for Library slow.lib:
+  *************************************
+  Missing a function attribute in the output pin definition. [LBR-518]: 1
+  Missing library level attribute. [LBR-516]: 1
+  *************************************
+ 
+            Reading file '/home/admin/DFT/Library/timing/slow.lib'
+Info    : Created nominal operating condition. [LBR-412]
+        : Operating condition '_nominal_' was created for the PVT values (1.000000, 1.080000, 125.000000) in library 'slow.lib'.
+        : The nominal operating condition is represented, either by the nominal PVT values specified in the library source (via nom_process,nom_voltage and nom_temperature respectively), or by the default PVT values (1.0,1.0,1.0).
+Info    : An output library pin lacks a function attribute. [LBR-41]
+        : Output pin 'HOLDX1/Y' has no function.
+        : If the remainder of this library cell's semantic checks are successful, it will be considered as a timing-model (because one of its outputs does not have a valid function.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX2'.  Ignoring the test_cell.
+        : Review the definition of the test_cell's function or its parent library-cell's function.  An inconsistency between the two may exist.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRXL'.  Ignoring the test_cell.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX4' has invalid (or complex) clock function.
+        : The sequential cell cannot be inferred because its clock function is unknown.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRXL' has invalid (or complex) clock function.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX1'.  Ignoring the test_cell.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX4'.  Ignoring the test_cell.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX1' has invalid (or complex) clock function.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX2' is assumed to be ' CKN'.
+        : The tool derives the clock polarity from the sequential timing arcs specified through the Liberty 'timing_type' attribute. For the positive-edge triggered cells a positive value is expected for the 'clocked_on' or 'enable' attribute while an inverted value is expected for the negative-edge triggered sequential cells.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRXL' is assumed to be ' CKN'.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX4/Q' is ignored.
+        : Timing sense should never be set with 'rising_edge' or 'falling_edge' timing type.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRXL/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRXL/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX2/QN' is ignored.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'LBR-170'.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX1' is assumed to be ' CKN'.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX4' is assumed to be ' CKN'.
+@file(01_run_genus_dft.tcl) 76: if {[file exists "$LIB_DIR/lef/all.lef"]} {
+    read_physical -lef "$LIB_DIR/lef/all.lef"
+}
+
+  According to lef_library, there are total 6 routing layers [ V(3) / H(3) ]
+
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AND2X6' was marked 'avoid' because there was no physical data in the LEF file.
+        : To prevent the library cell from being set to 'avoid', set attribute 'lib_lef_consistency_check_enable' to 'false'.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AND3X8' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AND4X8' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO21X1' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO21X2' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO21XL' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO22X1' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO22X2' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'AO22XL' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKAND2X2' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKAND2X6' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKBUFX6' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKINVX6' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKMX2X12' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKXOR2X1' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'CLKXOR2X4' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'DFFQX1' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'DFFQX2' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'DFFQX4' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Marking library cell 'avoid'. [PHYS-103]
+        : The library cell 'DFFSHQX8' was marked 'avoid' because there was no physical data in the LEF file.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'PHYS-103'.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL8 cannot be found in library.
+        : Ensure that the proper library files are available and have been imported.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL64 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL32 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL16 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell RF2R1WX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell RF1R1WX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSX2 cannot be found in library.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'PHYS-279'.
+@file(01_run_genus_dft.tcl) 83: puts "INFO: Reading RTL files from $FLIST..."
+INFO: Reading RTL files from /home/admin/DFT/pulpissimo/dft/filelists/cv32e40p_core.flist...
+@file(01_run_genus_dft.tcl) 84: set inc_dirs [list]
+@file(01_run_genus_dft.tcl) 85: set rtl_files [list]
+@file(01_run_genus_dft.tcl) 87: set fp [open $FLIST r]
+@file(01_run_genus_dft.tcl) 88: while {[gets $fp line] >= 0} {
+    set line [string trim $line]
+    if {$line eq "" || [string match "//*" $line] || [string match "#*" $line]} {
+        continue
+    }
+    # Substitute ${CV32E40P_DIR} dynamically
+    regsub -all {\$\{CV32E40P_DIR\}} $line $CV32E40P_DIR line
+    
+    if {[string match "+incdir+*" $line]} {
+        regsub {^\+incdir\+} $line "" dir_path
+        lappend inc_dirs $dir_path
+    } else {
+        lappend rtl_files $line
+    }
+}
+@file(01_run_genus_dft.tcl) 103: close $fp
+@file(01_run_genus_dft.tcl) 105: set_db root: .init_hdl_search_path $inc_dirs
+  Setting attribute of root '/': 'init_hdl_search_path' = /home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include /home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/bhv
+@file(01_run_genus_dft.tcl) 106: read_hdl -language sv $rtl_files
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include/cv32e40p_apu_core_pkg.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include/cv32e40p_pkg.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/vendor/pulp_platform_fpnew/src/fpnew_pkg.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu_div.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_cs_registers.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv'
+%DLS-E-AuxAttrExists, StatementList node already has auxiliary
+	attribute NODE_BASE_FILE_INFO; in AddAttribute.
+%DLS-E-AuxAttrExists, StatementList node already has auxiliary
+	attribute NODE_BASE_FILE_INFO; in AddAttribute.
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_int_controller.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_ex_stage.sv'
+%DLS-E-AuxAttrExists, StatementList node already has auxiliary
+	attribute NODE_BASE_FILE_INFO; in AddAttribute.
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_hwloop_regs.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv'
+%DLS-E-AuxAttrExists, StatementList node already has auxiliary
+	attribute NODE_BASE_FILE_INFO; in AddAttribute.
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_if_stage.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_load_store_unit.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_apu_disp.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_popcnt.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_ff_one.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_register_file_ff.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/bhv/cv32e40p_sim_clock_gate.sv'
+            Reading Verilog file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv'
+%DLS-E-AuxAttrExists, StatementList node already has auxiliary
+	attribute NODE_BASE_FILE_INFO; in AddAttribute.
+@file(01_run_genus_dft.tcl) 108: puts "INFO: Elaborating design '$DESIGN'..."
+INFO: Elaborating design 'cv32e40p_core'...
+@file(01_run_genus_dft.tcl) 109: elaborate $DESIGN
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHX2' is 'pos_unate', but unateness determined from function is 'non_unate'.
+        : The 'timing_sense' attribute will be respected.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHX2' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'CI' and 'S' in libcell 'ADDFHX2'.
+        : Setting the 'timing_sense' to non_unate.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHX2' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHX2' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDFHX2'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHX2' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHX2' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDFHX2'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHX4' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHX4' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'CI' and 'S' in libcell 'ADDFHX4'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHX4' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHX4' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDFHX4'.
+Info    : Setting the maximum print count of this message to 10 if information_level is less than 9. [LBR-161]
+        : To print all the warning messages, set the information_level to 9.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHX4' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHX4' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDFHX4'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'CI' and 'S' in libcell 'ADDFHXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDFHXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDFHXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'CI' and 'S' in libcell 'ADDFXL'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'LBR-155'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDFXL'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDFXL'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDHX2'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDHX2'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDHXL'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDHXL'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'CLKMX2X12'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'Y' in libcell 'CLKXOR2X1'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'Y' in libcell 'CLKXOR2X1'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'Y' in libcell 'CLKXOR2X4'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'LBR-162'.
+  Libraries have 240 usable logic and 97 usable sequential lib-cells.
+Info    : Unusable library cells found at the time of loading a library.  [LBR-415]
+        : Library: 'slow.lib', Total cells: 477, Unusable cells: 138.
+	List of unusable cells: 'AND2X6 AND3X8 AND4X8 AO21X1 AO21X2 AO21XL AO22X1 AO22X2 AO22XL CLKAND2X2 CLKAND2X6 CLKBUFX6 CLKINVX6 CLKMX2X12 CLKXOR2X1 CLKXOR2X4 DFFQX1 DFFQX2 DFFQX4 DFFSHQX8 DLY1X4 DLY2X4 DLY3X4 EDFFHQX2 HOLDX1 MDFFHQX8 MX2X6 MX3X1 MX3X2 MX3X4 MXI2X6 MXI3X1 MXI3X4 NAND2X6 NAND3X6 NAND4X6 NOR2X6 NOR4X6 OA21X1 OA22X1 OA22X2 OR4X6 OR4X8 SDFFHQX8 SDFFQX1 SEDFFHQX8 SMDFFHQX1 SMDFFHQX2 SMDFFHQX4 SMDFFHQX8 TBUFX6 TLATNCAX12 TLATNCAX2 TLATNCAX20 TLATNCAX6 TLATNSRX4 TLATNSRXL TLATNTSCAX16 TLATNTSCAX4 TLATNTSCAX8 TLATSRX2 TLATSRX4 ACHCONX2 AND3X6 AO22X4 BMXIX2 CLKAND2X12 CLKAND2X3 CLKMX2X6 CLKXOR2X2 EDFFHQX1 MDFFHQX1 MDFFHQX2 MDFFHQX4 MXI3X2 MXI3XL NAND4X8 NOR3X6 OA22X4 OR2X6 OR2X8 OR3X8 SDFFQX4 SDFFQXL SDFFRHQX8 TLATNCAX16 TLATNSRX2 TLATNTSCAX12 TLATNTSCAX2 TLATNTSCAX20 TLATNTSCAX6 TLATSRX1 TLATSRXL XNOR3X1 XNOR3XL AO21X4 BMXIX4 BUFX6 CLKAND2X8 CLKMX2X2 CLKMX2X3 CLKMX2X4 DFFQXL DFFRHQX8 DLY4X4 EDFFHQX8 INVX6 MX3XL NAND2X8 NAND3X8 OA21X2 OA21XL SDFFSHQX8 SDFFSRHQX8 TLATNCAX4 AND2X8 AND4X6 DFFSRHQX8 MX2X8 NOR2X8 NOR4X8 TLATNCAX3 TLATNCAX8 TLATNSRX1 TLATNTSCAX3 XOR3XL DFFHQX8 EDFFHQX4 MXI2X8 OA21X4 OR3X6 SDFFQX2 CLKXOR2X8 NOR3X8 OA22XL XOR3X1 CLKMX2X8 CLKAND2X4 .'
+        : For  more  information, refer to 'Cells Identified as Unusable' in the 'User Guide'. To know the reason why a cell is considered as unusable, check 'unusable_reason' libcell attribute.
+Info    : Unusable library cells found at the time of loading a library.  [LBR-415]
+        : Library: 'physical_cells', Total cells: 144, Unusable cells: 144.
+	List of unusable cells: 'FILL8 FILL64 FILL4 FILL32 FILL2 FILL16 FILL1 RF2R1WX2 RF1R1WX2 TLATSXL TLATSX4 TLATSX2 TLATSX1 TLATRXL TLATRX4 TLATRX2 TLATRX1 TLATNSXL TLATNSX4 TLATNSX2 TLATNSX1 TLATNRXL TLATNRX4 TLATNRX2 TLATNRX1 TTLATXL TTLATX4 TTLATX2 TTLATX1 TBUFIXL TBUFIX8 TBUFIX4 TBUFIX3 TBUFIX2 TBUFIX20 TBUFIX1 TBUFIX16 TBUFIX12 SEDFFHQXL SDFFSRHQXL SDFFSHQXL SDFFRHQXL SDFFNSXL SDFFNSX4 SDFFNSX2 SDFFNSX1 SDFFNRXL SDFFNRX4 SDFFNRX2 SDFFNRX1 SDFFNXL SDFFNX4 SDFFNX2 SDFFNX1 SDFFHQXL JKFFSRXL JKFFSRX4 JKFFSRX2 JKFFSRX1 JKFFSXL JKFFSX4 JKFFSX2 JKFFSX1 JKFFRXL JKFFRX4 JKFFRX2 JKFFRX1 JKFFXL JKFFX4 JKFFX2 JKFFX1 DFFSRHQXL DFFSHQXL DFFSX2 DFFRHQXL DFFNSRX4 DFFNSXL DFFNSX4 DFFNSX2 DFFNSX1 DFFNRXL DFFNRX4 DFFNRX2 DFFNRX1 DFFNXL DFFNX4 DFFNX2 DFFNX1 DFFHQXL CLKINVXL CLKBUFXL CLKBUFX1 BUFXL BUFX1 RFRDX4 RFRDX2 RFRDX1 XOR3X4 XOR3X2 XNOR3X4 XNOR3X2 AFCSHCONX4 AFCSHCONX2 AFCSHCINX4 AFCSHCINX2 AHHCONX4 AHHCONX2 AHHCINX4 AHHCINX2 AFHCONX4 AFHCONX2 AFHCINX4 AFHCINX2 CMPR42X2 CMPR42X1 CMPR32X1 CMPR22X1 BMXX1 BENCX4 BENCX2 BENCX1 PCORNERDG PDIDGZ PDO04CDG PADDO PADDI PFEED01 PFEED1 PFEED10 PFEED2 PFEED20 PFEED35 PFEED5 PFEED50 PVDD1DGZ PVSS1DGZ PDB04DGZ PADDB PADDOZ CDK_S128x16 CDK_S256x16 CDK_R512x16 pll ANTENNA .'
+                  INLINE_INFO: Skipping marking small hierarchies inline as the variable 'hdl_dissolve_primitive_instance_hierarchy_threshold' has not been set to a positive value.
+Info    : Elaborating Design. [ELAB-1]
+        : Elaborating top-level block 'cv32e40p_core' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv'.
+Warning : Using default parameter value for module elaboration. [CDFG-818]
+        : Elaborating block 'cv32e40p_core' with default parameters value.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_operands_o' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 76.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_operands_ex' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 209.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_read_regs' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 212.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_write_regs' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 215.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'hwlp_start' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 315.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'hwlp_end' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 316.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'hwlp_cnt' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 317.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'pmp_addr' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 346.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'pmp_cfg' in module 'cv32e40p_core' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 347.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.sleep_unit_i' in module 'cv32e40p_core' of library 'default' to module 'cv32e40p_sleep_unit' of library 'default' (line 56 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 384.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_sleep_unit_PULP_CLUSTER0' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.sleep_unit_i.core_clock_gate_i' in module 'cv32e40p_sleep_unit_PULP_CLUSTER0' of library 'default' to module 'cv32e40p_clock_gate' of library 'default' (line 15 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/bhv/cv32e40p_sim_clock_gate.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv' on line 154.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_clock_gate' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/bhv/cv32e40p_sim_clock_gate.sv'.
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/equal_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 25 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/bhv/cv32e40p_sim_clock_gate.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 25 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/bhv/cv32e40p_sim_clock_gate.sv' will be considered in the following order: {'hdl_implementation:GB/equal_unsigned/very_fast' (priority 1)}
+Info    : Latch inferred. Check and revisit your RTL if this is not the intended behavior. [CDFG2G-616]
+        : Latch inferred for variable 'clk_en' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/bhv/cv32e40p_sim_clock_gate.sv' on line 25, column 24.
+        : Use the attributes 'set_attribute hdl_error_on_latch true'(LUI) or 'set_db hdl_error_on_latch true' (CUI) to issue an error when a latch is inferred. Use the attributes 'set_attributes hdl_latch_keep_feedback true'(LUI) or 'set_db hdl_latch_keep_feedback true'(CUI) to infer combinational logic rather than a latch in case a variable is explicitly assigned to itself.
+Warning : Removing unused register. [CDFG-508]
+        : Removing unused flip-flop register 'p_elw_busy_q' in module 'cv32e40p_sleep_unit_PULP_CLUSTER0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv' on line 145.
+        : Genus removes the flip-flop or latch inferred for an unused signal or variable. To preserve the flip-flop or latch, set the hdl_preserve_unused_registers attribute to true or use a pragma in the RTL.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'pulp_clock_en_i' is not used in module 'cv32e40p_sleep_unit_PULP_CLUSTER0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv' on line 79.
+        : (In port definition within the module, the input port is not used in any assignment statements or conditional expressions for decision statements.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'p_elw_start_i' is not used in module 'cv32e40p_sleep_unit_PULP_CLUSTER0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv' on line 80.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'p_elw_finish_i' is not used in module 'cv32e40p_sleep_unit_PULP_CLUSTER0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv' on line 81.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'debug_p_elw_no_sleep_i' is not used in module 'cv32e40p_sleep_unit_PULP_CLUSTER0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv' on line 82.
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/equal_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 139 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 139 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_sleep_unit.sv' will be considered in the following order: {'hdl_implementation:GB/equal_unsigned/very_fast' (priority 1)}
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.if_stage_i' in module 'cv32e40p_core' of library 'default' to module 'cv32e40p_if_stage' of library 'default' (line 28 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_if_stage.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 428.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_if_stage_PULP_XPULP0_PULP_OBI0_PULP_SECURE0_FPU0' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_if_stage.sv'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.if_stage_i.prefetch_buffer_i' in module 'cv32e40p_if_stage_PULP_XPULP0_PULP_OBI0_PULP_SECURE0_FPU0' of library 'default' to module 'cv32e40p_prefetch_buffer' of library 'default' (line 27 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_if_stage.sv' on line 181.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.if_stage_i.prefetch_buffer_i.prefetch_controller_i' in module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' of library 'default' to module 'cv32e40p_prefetch_controller' of library 'default' (line 40 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 90.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'IDLE' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include/cv32e40p_pkg.sv' on line 224.
+        : Review and make sure the mismatch is intentional. Genus can possibly issue bitwidth mismatch warning for explicit assignments present in RTL as-well-as for implicit assignments inferred by the tool. For example, in case of enum declaration without value, the tool will implicitly assign value to the enum variables. It also issues the warning for any bitwidth mismatch that appears in this implicit assignment.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'BRANCH_WAIT' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include/cv32e40p_pkg.sv' on line 226.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_prefetch_controller_PULP_OBI0_PULP_XPULP0_DEPTH2' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'IDLE' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include/cv32e40p_pkg.sv' on line 224.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'BRANCH_WAIT' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/include/cv32e40p_pkg.sv' on line 226.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '-' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' on line 331.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '-' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' on line 234.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' on line 211.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' on line 123.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' on line 338.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' on line 123.
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/equal_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 348 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 348 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/equal_unsigned/very_fast' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/add_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=2 B=2 Z=3) at line 146 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=2 B=2 Z=3) at line 146 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/add_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/add_unsigned/medium' (priority 1), 'hdl_implementation:GB/add_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/lt_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'LT_UNS_OP' (pin widths: A=3 B=2 Z=1) at line 146 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'LT_UNS_OP' (pin widths: A=3 B=2 Z=1) at line 146 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/lt_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/lt_unsigned/medium' (priority 1), 'hdl_implementation:GB/lt_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/sub_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'SUB_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 234 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'SUB_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 234 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/sub_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/sub_unsigned/medium' (priority 1), 'hdl_implementation:GB/sub_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/add_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 237 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 237 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/add_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/add_unsigned/medium' (priority 1), 'hdl_implementation:GB/add_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/gt_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'GT_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 330 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'GT_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 330 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/gt_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/gt_unsigned/medium' (priority 1), 'hdl_implementation:GB/gt_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/gt_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'GT_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 123 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'GT_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 123 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/gt_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/gt_unsigned/medium' (priority 1), 'hdl_implementation:GB/gt_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/sub_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'SUB_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 339 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'SUB_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 339 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/sub_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/sub_unsigned/medium' (priority 1), 'hdl_implementation:GB/sub_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/add_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=32 B=3 Z=32) at line 138 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=32 B=3 Z=32) at line 138 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/add_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/add_unsigned/medium' (priority 1), 'hdl_implementation:GB/add_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/nequal_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'NE_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 114 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'NE_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 114 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_controller.sv' will be considered in the following order: {'hdl_implementation:GB/nequal_unsigned/very_fast' (priority 1)}
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.if_stage_i.prefetch_buffer_i.fifo_i' in module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' of library 'default' to module 'cv32e40p_fifo' of library 'default' (line 15 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 127.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_fifo_FALL_THROUGH0_DATA_WIDTH32_DEPTH2' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'mem_n' in module 'cv32e40p_fifo_FALL_THROUGH0_DATA_WIDTH32_DEPTH2' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 49.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'mem_q' in module 'cv32e40p_fifo_FALL_THROUGH0_DATA_WIDTH32_DEPTH2' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 49.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'write_pointer_n' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 82.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'status_cnt_n' [2] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 84.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'read_pointer_n' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 91.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'status_cnt_n' [2] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 93.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'write_pointer_q' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 127.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'status_cnt_q' [2] doesn't match the width of right hand side [1] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 128.
+Warning : Case statement is not parallel but has the 'parallel' case pragma set. [CDFG-475]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 117.
+        : This may cause simulation mismatches between the original and synthesized designs.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '+' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 127.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '+' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 91.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 127.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 126.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 128.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '>' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 126.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'testmode_i' is not used in module 'cv32e40p_fifo_FALL_THROUGH0_DATA_WIDTH32_DEPTH2' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' on line 26.
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/gt_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'GT_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 126 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'GT_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 126 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' will be considered in the following order: {'hdl_implementation:GB/gt_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/gt_unsigned/medium' (priority 1), 'hdl_implementation:GB/gt_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/equal_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 60 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=2 B=1 Z=1) at line 60 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' will be considered in the following order: {'hdl_implementation:GB/equal_unsigned/very_fast' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/add_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 91 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 91 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' will be considered in the following order: {'hdl_implementation:GB/add_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/add_unsigned/medium' (priority 1), 'hdl_implementation:GB/add_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/equal_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=2 B=2 Z=1) at line 59 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=2 B=2 Z=1) at line 59 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' will be considered in the following order: {'hdl_implementation:GB/equal_unsigned/very_fast' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/add_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 82 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 82 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' will be considered in the following order: {'hdl_implementation:GB/add_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/add_unsigned/medium' (priority 1), 'hdl_implementation:GB/add_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/sub_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'SUB_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 93 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'SUB_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 93 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' will be considered in the following order: {'hdl_implementation:GB/sub_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/sub_unsigned/medium' (priority 1), 'hdl_implementation:GB/sub_unsigned/slow' (priority 1)}
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/add_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 84 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'ADD_UNS_OP' (pin widths: A=2 B=1 Z=2) at line 84 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_fifo.sv' will be considered in the following order: {'hdl_implementation:GB/add_unsigned/very_fast' (priority 1), 'hdl_implementation:GB/add_unsigned/medium' (priority 1), 'hdl_implementation:GB/add_unsigned/slow' (priority 1)}
+Info    : Unused instance port. [ELABUTL-132]
+        : Unused Port 'full_o' of instance 'fifo_i' of module 'cv32e40p_fifo_FALL_THROUGH0_DATA_WIDTH32_DEPTH2' inside module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 127.
+        : Please check the reported scenario of unconnected instance port to ensure that it matches the design intent.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.if_stage_i.prefetch_buffer_i.instruction_obi_i' in module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' of library 'default' to module 'cv32e40p_obi_interface' of library 'default' (line 38 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 156.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_obi_interface_TRANS_STABLE0' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv'.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'TRANSPARENT' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' on line 72.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'REGISTERED' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' on line 74.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'TRANSPARENT' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' on line 72.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'REGISTERED' [1] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' on line 74.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '==' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' on line 201.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '==' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' on line 155.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '==' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' on line 187.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '==' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' on line 155.
+Info    : An implementation was inferred. [CWD-19]
+        : The implementation 'hdl_implementation:GB/equal_unsigned/very_fast' was inferred through the binding 'b1' for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 178 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv'.
+Info    : Sorted the set of valid implementations for synthetic operator. [CWD-36]
+        : The implementations for the call to synthetic operator 'EQ_UNS_OP' (pin widths: A=1 B=1 Z=1) at line 178 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_obi_interface.sv' will be considered in the following order: {'hdl_implementation:GB/equal_unsigned/very_fast' (priority 1)}
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CWD-19'.
+Info    : Unused instance port. [ELABUTL-132]
+        : Unused Port 'obi_we_o' of instance 'instruction_obi_i' of module 'cv32e40p_obi_interface_TRANS_STABLE0' inside module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 156.
+Info    : Unused instance port. [ELABUTL-132]
+        : Unused Port 'obi_be_o' of instance 'instruction_obi_i' of module 'cv32e40p_obi_interface_TRANS_STABLE0' inside module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 156.
+Info    : Unused instance port. [ELABUTL-132]
+        : Unused Port 'obi_wdata_o' of instance 'instruction_obi_i' of module 'cv32e40p_obi_interface_TRANS_STABLE0' inside module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 156.
+Info    : Unused instance port. [ELABUTL-132]
+        : Unused Port 'obi_atop_o' of instance 'instruction_obi_i' of module 'cv32e40p_obi_interface_TRANS_STABLE0' inside module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 156.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'instr_err_pmp_i' is not used in module 'cv32e40p_prefetch_buffer_PULP_OBI0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_prefetch_buffer.sv' on line 52.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.if_stage_i.aligner_i' in module 'cv32e40p_if_stage_PULP_XPULP0_PULP_OBI0_PULP_SECURE0_FPU0' of library 'default' to module 'cv32e40p_aligner' of library 'default' (line 23 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_if_stage.sv' on line 256.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_aligner' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv'.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'ALIGNED32' [3] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 46.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'MISALIGNED32' [3] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 47.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'MISALIGNED16' [3] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 48.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'BRANCH_MISALIGNED' [3] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 49.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'WAIT_VALID_BRANCH' [3] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 51.
+Info    : Bitwidth mismatch in assignment. [CDFG-372]
+        : Width of left hand side 'ALIGNED32' [3] doesn't match the width of right hand side [32] in assignment in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 46.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CDFG-372'.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 148.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 78.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 209.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 78.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 164.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 104.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '==' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 164.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '==' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_aligner.sv' on line 104.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.if_stage_i.compressed_decoder_i' in module 'cv32e40p_if_stage_PULP_XPULP0_PULP_OBI0_PULP_SECURE0_FPU0' of library 'default' to module 'cv32e40p_compressed_decoder' of library 'default' (line 27 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_if_stage.sv' on line 274.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_compressed_decoder_FPU0' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv'.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-concat%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 445.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-concat%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 442.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-concat%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 513.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-concat%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 510.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-concat%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 531.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-concat%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 528.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 416.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 216.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 250.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 216.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 95.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 61.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 150.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 61.
+Info    : Common subexpression eliminated. [CDFG-738]
+        : Eliminated '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 249.
+Info    : Common subexpression kept. [CDFG-739]
+        : Kept '%bit-select%' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 61.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CDFG-738'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CDFG-739'.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_compressed_decoder_FPU0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 336.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_compressed_decoder_FPU0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 54.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_compressed_decoder_FPU0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 192.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_compressed_decoder_FPU0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_compressed_decoder.sv' on line 433.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.id_stage_i' in module 'cv32e40p_core' of library 'default' to module 'cv32e40p_id_stage' of library 'default' (line 30 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 526.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv'.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_operands_ex_o' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 140.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_read_regs_o' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 144.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_write_regs_o' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 147.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'hwlp_start_o' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 169.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'hwlp_end_o' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 170.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'hwlp_cnt_o' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 171.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_operands' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 382.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_read_regs' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 386.
+Info    : Processing multi-dimensional arrays. [CDFG-250]
+        : Variable 'apu_write_regs' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 388.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.id_stage_i.register_file_i' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' of library 'default' to module 'cv32e40p_register_file' of library 'default' (line 30 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_register_file_ff.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 911.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_register_file_ADDR_WIDTH6_DATA_WIDTH32_FPU0_PULP_ZFINX0' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_register_file_ff.sv'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CDFG-250'.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'scan_cg_en_i' is not used in module 'cv32e40p_register_file_ADDR_WIDTH6_DATA_WIDTH32_FPU0_PULP_ZFINX0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_register_file_ff.sv' on line 40.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.id_stage_i.decoder_i' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' of library 'default' to module 'cv32e40p_decoder' of library 'default' (line 28 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 959.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv'.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 2625.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 445.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 1112.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 2712.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 2699.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 391.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 666.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 1110.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 424.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 2620.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 424.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 375.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 424.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 375.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 424.
+Info    : Identified sum-of-products logic to be optimized during syn_generic. [CDFG-769]
+        : Sum-of-products logic in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 375.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CDFG-769'.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'frm_i' is not used in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 102.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'mcounteren_i' is not used in module 'cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_decoder.sv' on line 153.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.id_stage_i.controller_i' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' of library 'default' to module 'cv32e40p_controller' of library 'default' (line 31 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 1087.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv'.
+Warning : Case statement is not parallel but has the 'parallel' case pragma set. [CDFG-475]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 540.
+Warning : Case statement is not parallel but has the 'parallel' case pragma set. [CDFG-475]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 658.
+Warning : Case statement is not parallel but has the 'parallel' case pragma set. [CDFG-475]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 904.
+Warning : Case statement is not parallel but has the 'parallel' case pragma set. [CDFG-475]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 1026.
+Warning : Case statement is not parallel but has the 'parallel' case pragma set. [CDFG-475]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 1100.
+Info    : Skip related conditional write and read sequence. [CDFG-773]
+        : For variable 'pc_mux_o' in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 1068.
+Info    : Skip related conditional write and read sequence. [CDFG-773]
+        : For variable 'pc_set_o' in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 1068.
+Info    : Skip related conditional write and read sequence. [CDFG-773]
+        : For variable 'pc_mux_o' in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 629.
+Info    : Skip related conditional write and read sequence. [CDFG-773]
+        : For variable 'pc_set_o' in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 629.
+Info    : Skip related conditional write and read sequence. [CDFG-773]
+        : For variable 'jump_done' in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 629.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 326.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 528.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 616.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 619.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 629.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 636.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 1063.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 1068.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 1071.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'pc_id_i' is not used in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 80.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'is_compressed_i' is not used in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 81.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'hwlp_start_addr_i[1]' is not used in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 84.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'hwlp_end_addr_i[0]' is not used in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 85.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'hwlp_end_addr_i[1]' is not used in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 85.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'hwlp_counter_i[1]' is not used in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 86.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'hwlp_counter_i[0]' is not used in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 86.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'id_valid_i' is not used in module 'cv32e40p_controller_PULP_CLUSTER0_PULP_XPULP0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_controller.sv' on line 195.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.id_stage_i.int_controller_i' in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' of library 'default' to module 'cv32e40p_int_controller' of library 'default' (line 24 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_int_controller.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 1267.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_int_controller_PULP_SECURE0' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_int_controller.sv'.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'u_ie_i' is not used in module 'cv32e40p_int_controller_PULP_SECURE0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_int_controller.sv' on line 46.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'current_priv_lvl_i' is not used in module 'cv32e40p_int_controller_PULP_SECURE0' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_int_controller.sv' on line 47.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 525.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 526.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 532.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 533.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 534.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 541.
+Info    : Unused module input port. [CDFG-500]
+        : Input port 'csr_hwlp_regid_i' is not used in module 'cv32e40p_id_stage_PULP_XPULP0_PULP_CLUSTER0_N_HWLP2_PULP_SECURE0_USE_PMP0_A_EXTENSION0_APU0_FPU0_PULP_ZFINX0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_id_stage.sv' on line 176.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CDFG-500'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.ex_stage_i' in module 'cv32e40p_core' of library 'default' to module 'cv32e40p_ex_stage' of library 'default' (line 32 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_ex_stage.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_core.sv' on line 749.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_ex_stage_FPU0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_ex_stage.sv'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.ex_stage_i.alu_i' in module 'cv32e40p_ex_stage_FPU0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5' of library 'default' to module 'cv32e40p_alu' of library 'default' (line 28 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_ex_stage.sv' on line 238.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_alu' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv'.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'adder_result_expanded' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 168.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.ex_stage_i.alu_i.popcnt_i' in module 'cv32e40p_alu' of library 'default' to module 'cv32e40p_popcnt' of library 'default' (line 25 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_popcnt.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 744.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_popcnt' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_popcnt.sv'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.ex_stage_i.alu_i.ff_one_i' in module 'cv32e40p_alu' of library 'default' to module 'cv32e40p_ff_one' of library 'default' (line 25 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_ff_one.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 764.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_ff_one' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_ff_one.sv'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.ex_stage_i.alu_i.alu_div_i' in module 'cv32e40p_alu' of library 'default' to module 'cv32e40p_alu_div' of library 'default' (line 26 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu_div.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 898.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_alu_div' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu_div.sv'.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_alu' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 361.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_alu' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 362.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_alu' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 363.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_alu' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 559.
+Info    : Replaced logic with a constant value. [CDFG-771]
+        : Constant Replacement in Module 'cv32e40p_alu' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' on line 562.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CDFG-771'.
+Info    : Skipping an invalid binding for a subprogram call. [CWD-21]
+        : The binding 'hdl_bind:GB/decoder/b2' is invalid for the call to synthetic operator 'SLL_VLOG_UNS_OP' (pin widths: A=32 SH=5 Z=32) at line 813 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_alu.sv' because the constraint '1' on the synthetic operator pin 'A' does not match the actual pin value 'bound'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'cv32e40p_core.ex_stage_i.mult_i' in module 'cv32e40p_ex_stage_FPU0_APU_NARGS_CPU3_APU_WOP_CPU6_APU_NDSFLAGS_CPU15_APU_NUSFLAGS_CPU5' of library 'default' to module 'cv32e40p_mult' of library 'default' (line 26 in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv') in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_ex_stage.sv' on line 273.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cv32e40p_mult' from file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv'.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'short_op_c' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 108.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'short_mul' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 110.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'short_mac' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 111.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'short_result' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 116.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'int_result' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 228.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_char_mul[0]' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 266.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_char_mul[1]' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 267.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_char_mul[2]' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 268.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_char_mul[3]' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 269.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_char_result' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 279.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_short_mul[0]' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 299.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_short_mul[1]' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 300.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_short_op_b_ext' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 251.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'dot_short_result' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 309.
+Info    : Sign mismatch in assignment. [CDFG-373]
+        : Assignment has unsigned left hand side 'clpx_shift_result' and signed right hand side in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' on line 312.
+Info    : Skipping an invalid binding for a subprogram call. [CWD-21]
+        : The binding 'hdl_bind:CW/CW_mult_signed/b1' is invalid for the call to synthetic operator 'MULT_TC_OP' (pin widths: A=17 B=17 Z=34) at line 110 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' because the 'avoid' attribute on the binding is set to 'true'.
+Info    : Skipping an invalid binding for a subprogram call. [CWD-21]
+        : The binding 'hdl_bind:CW/CW_mult_signed/b1' is invalid for the call to synthetic operator 'MULT_TC_OP' (pin widths: A=32 B=32 Z=32) at line 230 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' because the 'avoid' attribute on the binding is set to 'true'.
+Info    : Skipping an invalid binding for a subprogram call. [CWD-21]
+        : The binding 'hdl_bind:CW/CW_mult_signed/b1' is invalid for the call to synthetic operator 'MULT_TC_OP' (pin widths: A=9 B=9 Z=18) at line 266 in the file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_mult.sv' because the 'avoid' attribute on the binding is set to 'true'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'CDFG-567'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'ELAB-2'.
+Warning : Case statement is not parallel but has the 'parallel' case pragma set. [CDFG-475]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_cs_registers.sv' on line 1089.
+Warning : Case statement is not parallel but has the 'parallel' case pragma set. [CDFG-475]
+        : in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_cs_registers.sv' on line 1086.
+Warning : Removing unused register. [CDFG-508]
+        : Removing unused flip-flop register 'frm_q' in module 'cv32e40p_cs_registers_APU0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_N_PMP_ENTRIES16_NUM_MHPMCOUNTERS1_PULP_XPULP0_PULP_CLUSTER0_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_cs_registers.sv' on line 1256.
+Warning : Removing unused register. [CDFG-508]
+        : Removing unused flip-flop register 'fflags_q' in module 'cv32e40p_cs_registers_APU0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_N_PMP_ENTRIES16_NUM_MHPMCOUNTERS1_PULP_XPULP0_PULP_CLUSTER0_DEBUG_TRIGGER_EN1' in file '/home/admin/DFT/pulpissimo/.bender/git/checkouts/cv32e40p-703290f15a6e8974/rtl/cv32e40p_cs_registers.sv' on line 1257.
+Info    : Done Elaborating Design. [ELAB-3]
+        : Done elaborating 'cv32e40p_core'.
+                  Checking for analog nets...
+                  Check completed for analog nets.
+Checking for source RTL...
+Check completed for source RTL.
+Running Unified Mux Engine Tricks...
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_mult_signed_mode_o_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_mult_int_en_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_mult_operator_o_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_alu_op_b_mux_sel_o_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_alu_op_a_mux_sel_o_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_alu_operator_o_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_alu_en_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_regc_used_o_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_regb_used_o_604_13
+          Accepted sweep muxes in module cv32e40p_decoder_PULP_XPULP0_PULP_CLUSTER0_A_EXTENSION0_FPU0_PULP_SECURE0_USE_PMP0_APU_WOP_CPU6_DEBUG_TRIGGER_EN1 for instance(s): mux_illegal_insn_o_604_13
+Completed Unified Mux Engine Tricks
+
+Stage: post_elab
+-------------------------------------------------------
+| Trick             | Accepts | Rejects | Runtime (s) | 
+-------------------------------------------------------
+| ume_constant_bmux |       0 |       0 |        0.00 | 
+| ume_merge         |       0 |       0 |        0.00 | 
+| ume_ssm           |       0 |       0 |        0.01 | 
+| ume_cse           |       1 |       0 |        0.08 | 
+| ume_shrink        |       9 |       0 |        0.01 | 
+| ume_sweep         |      10 |       0 |        0.00 | 
+| ume_constant_bmux |       0 |       0 |        0.00 | 
+| ume_merge         |       0 |       0 |        0.00 | 
+| ume_ssm           |       0 |       0 |        0.01 | 
+| ume_cse           |       0 |       0 |        0.06 | 
+| ume_shrink        |       0 |       0 |        0.00 | 
+| ume_sweep         |       0 |       0 |        0.00 | 
+-------------------------------------------------------
+Starting optimize datapath shifters [v1.0] (stage: post_elab, startdef: cv32e40p_core, recur: true)
+Completed optimize datapath shifters (accepts: 0, rejects: 0, runtime: 0.001s)
+Starting clip mux common data inputs [v1.0] (stage: post_elab, startdef: cv32e40p_core, recur: true)
+Completed clip mux common data inputs (accepts: 1, rejects: 0, runtime: 0.007s)
+Starting clip the non-user hierarchies [v2.0] (stage: post_elab, startdef: cv32e40p_core, recur: true)
+Completed clip the non-user hierarchies (accepts: 9, rejects: 0, runtime: 0.062s)
+Starting basic netlist cleanup [v1.0] (stage: post_elab, startdef: cv32e40p_core, recur: true)
+Completed basic netlist cleanup (accepts: 0, rejects: 0, runtime: 0.000s)
+
+Stage: post_elab
+--------------------------------------------------------------------
+| Transform                      | Accepts | Rejects | Runtime (s) | 
+--------------------------------------------------------------------
+| hlo_optimize_datapath_shifters |       0 |       0 |        0.00 | 
+| hlo_clip_mux_input             |       1 |       0 |        0.01 | 
+| hlo_clip                       |       9 |       0 |        0.06 | 
+| hlo_cleanup                    |       0 |       0 |        0.00 | 
+--------------------------------------------------------------------
+UM:   flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   elaborate
+@file(01_run_genus_dft.tcl) 110: check_design -unresolved
+
+
+ 	 Check Design Report (c)
+	 ------------------- 
+
+  Unresolved References & Empty Modules
+  ------------------------------------- 
+No unresolved references in design 'cv32e40p_core'
+
+No empty modules in design 'cv32e40p_core'
+
+  Done Checking the design.
+@file(01_run_genus_dft.tcl) 115: puts "INFO: Reading SDC constraints from $SDC_FILE..."
+INFO: Reading SDC constraints from /home/admin/DFT/pulpissimo/dft/constraints/cv32e40p_core.sdc...
+@file(01_run_genus_dft.tcl) 116: read_sdc $SDC_FILE
+            Reading file '/home/admin/DFT/pulpissimo/dft/constraints/cv32e40p_core.sdc'
+Statistics for commands executed by read_sdc:
+ "all_inputs"               - successful      1 , failed      0 (runtime  0.00)
+ "all_outputs"              - successful      1 , failed      0 (runtime  0.00)
+ "create_clock"             - successful      1 , failed      0 (runtime  0.01)
+ "get_ports"                - successful     24 , failed      0 (runtime  0.01)
+ "remove_from_collection"   - successful      3 , failed      0 (runtime  0.00)
+ "set_input_delay"          - successful      9 , failed      0 (runtime  0.01)
+ "set_output_delay"         - successful     10 , failed      0 (runtime  0.00)
+read_sdc completed in 00:00:01 (hh:mm:ss)
+@file(01_run_genus_dft.tcl) 121: puts "INFO: Configuring DFT and defining test signals..."
+INFO: Configuring DFT and defining test signals...
+@file(01_run_genus_dft.tcl) 124: set_db root: .dft_scan_style muxed_scan
+  Setting attribute of root '/': 'dft_scan_style' = muxed_scan
+@file(01_run_genus_dft.tcl) 125: set_db root: .dft_prefix DFT_
+  Setting attribute of root '/': 'dft_prefix' = DFT_
+@file(01_run_genus_dft.tcl) 127: set_db root: .dft_identify_top_level_test_clocks true
+  Setting attribute of root '/': 'dft_identify_top_level_test_clocks' = true
+@file(01_run_genus_dft.tcl) 128: set_db root: .dft_identify_test_signals true
+  Setting attribute of root '/': 'dft_identify_test_signals' = true
+@file(01_run_genus_dft.tcl) 129: set_db root: .dft_identify_internal_test_clocks false
+  Setting attribute of root '/': 'dft_identify_internal_test_clocks' = false
+@file(01_run_genus_dft.tcl) 130: set_db root: .use_scan_seqs_for_non_dft false
+  Setting attribute of root '/': 'use_scan_seqs_for_non_dft' = false
+@file(01_run_genus_dft.tcl) 133: define_shift_enable -name scan_en -active high -create_port SCAN_ENABLE -default -lec_value 0
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_shift_enable'
+        : This command is obsolete and the new command define_test_signal should be used.
+Info    : Created DFT port. [DFT-130]
+        : Created shift enable port 'SCAN_ENABLE' in module 'cv32e40p_core'.
+        : A port for DFT purposes was created.
+Info    : Added DFT object. [DFT-100]
+        : Added shift enable signal 'scan_en'.
+@file(01_run_genus_dft.tcl) 136: define_test_mode -name test_mode -active high -create_port TEST_MODE -lec_value 0
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_test_mode'
+Info    : Created DFT port. [DFT-130]
+        : Created test mode port 'TEST_MODE' in module 'cv32e40p_core'.
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'test_mode'.
+Info    : Unusable library cells found at the time of loading a library.  [LBR-415]
+        : Library: 'slow.lib', Total cells: 477, Unusable cells: 138.
+	List of unusable cells: 'AND2X6 AND3X8 AND4X8 AO21X1 AO21X2 AO21XL AO22X1 AO22X2 AO22XL CLKAND2X2 CLKAND2X6 CLKBUFX6 CLKINVX6 CLKMX2X12 CLKXOR2X1 CLKXOR2X4 DFFQX1 DFFQX2 DFFQX4 DFFSHQX8 DLY1X4 DLY2X4 DLY3X4 EDFFHQX2 HOLDX1 MDFFHQX8 MX2X6 MX3X1 MX3X2 MX3X4 MXI2X6 MXI3X1 MXI3X4 NAND2X6 NAND3X6 NAND4X6 NOR2X6 NOR4X6 OA21X1 OA22X1 OA22X2 OR4X6 OR4X8 SDFFHQX8 SDFFQX1 SEDFFHQX8 SMDFFHQX1 SMDFFHQX2 SMDFFHQX4 SMDFFHQX8 TBUFX6 TLATNCAX12 TLATNCAX2 TLATNCAX20 TLATNCAX6 TLATNSRX4 TLATNSRXL TLATNTSCAX16 TLATNTSCAX4 TLATNTSCAX8 TLATSRX2 TLATSRX4 ACHCONX2 AND3X6 AO22X4 BMXIX2 CLKAND2X12 CLKAND2X3 CLKMX2X6 CLKXOR2X2 EDFFHQX1 MDFFHQX1 MDFFHQX2 MDFFHQX4 MXI3X2 MXI3XL NAND4X8 NOR3X6 OA22X4 OR2X6 OR2X8 OR3X8 SDFFQX4 SDFFQXL SDFFRHQX8 TLATNCAX16 TLATNSRX2 TLATNTSCAX12 TLATNTSCAX2 TLATNTSCAX20 TLATNTSCAX6 TLATSRX1 TLATSRXL XNOR3X1 XNOR3XL AO21X4 BMXIX4 BUFX6 CLKAND2X8 CLKMX2X2 CLKMX2X3 CLKMX2X4 DFFQXL DFFRHQX8 DLY4X4 EDFFHQX8 INVX6 MX3XL NAND2X8 NAND3X8 OA21X2 OA21XL SDFFSHQX8 SDFFSRHQX8 TLATNCAX4 AND2X8 AND4X6 DFFSRHQX8 MX2X8 NOR2X8 NOR4X8 TLATNCAX3 TLATNCAX8 TLATNSRX1 TLATNTSCAX3 XOR3XL DFFHQX8 EDFFHQX4 MXI2X8 OA21X4 OR3X6 SDFFQX2 CLKXOR2X8 NOR3X8 OA22XL XOR3X1 CLKMX2X8 CLKAND2X4 .'
+Info    : Unusable library cells found at the time of loading a library.  [LBR-415]
+        : Library: 'physical_cells', Total cells: 144, Unusable cells: 144.
+	List of unusable cells: 'FILL8 FILL64 FILL4 FILL32 FILL2 FILL16 FILL1 RF2R1WX2 RF1R1WX2 TLATSXL TLATSX4 TLATSX2 TLATSX1 TLATRXL TLATRX4 TLATRX2 TLATRX1 TLATNSXL TLATNSX4 TLATNSX2 TLATNSX1 TLATNRXL TLATNRX4 TLATNRX2 TLATNRX1 TTLATXL TTLATX4 TTLATX2 TTLATX1 TBUFIXL TBUFIX8 TBUFIX4 TBUFIX3 TBUFIX2 TBUFIX20 TBUFIX1 TBUFIX16 TBUFIX12 SEDFFHQXL SDFFSRHQXL SDFFSHQXL SDFFRHQXL SDFFNSXL SDFFNSX4 SDFFNSX2 SDFFNSX1 SDFFNRXL SDFFNRX4 SDFFNRX2 SDFFNRX1 SDFFNXL SDFFNX4 SDFFNX2 SDFFNX1 SDFFHQXL JKFFSRXL JKFFSRX4 JKFFSRX2 JKFFSRX1 JKFFSXL JKFFSX4 JKFFSX2 JKFFSX1 JKFFRXL JKFFRX4 JKFFRX2 JKFFRX1 JKFFXL JKFFX4 JKFFX2 JKFFX1 DFFSRHQXL DFFSHQXL DFFSX2 DFFRHQXL DFFNSRX4 DFFNSXL DFFNSX4 DFFNSX2 DFFNSX1 DFFNRXL DFFNRX4 DFFNRX2 DFFNRX1 DFFNXL DFFNX4 DFFNX2 DFFNX1 DFFHQXL CLKINVXL CLKBUFXL CLKBUFX1 BUFXL BUFX1 RFRDX4 RFRDX2 RFRDX1 XOR3X4 XOR3X2 XNOR3X4 XNOR3X2 AFCSHCONX4 AFCSHCONX2 AFCSHCINX4 AFCSHCINX2 AHHCONX4 AHHCONX2 AHHCINX4 AHHCINX2 AFHCONX4 AFHCONX2 AFHCINX4 AFHCINX2 CMPR42X2 CMPR42X1 CMPR32X1 CMPR22X1 BMXX1 BENCX4 BENCX2 BENCX1 PCORNERDG PDIDGZ PDO04CDG PADDO PADDI PFEED01 PFEED1 PFEED10 PFEED2 PFEED20 PFEED35 PFEED5 PFEED50 PVDD1DGZ PVSS1DGZ PDB04DGZ PADDB PADDOZ CDK_S128x16 CDK_S256x16 CDK_R512x16 pll ANTENNA .'
+@file(01_run_genus_dft.tcl) 139: define_test_clock -name scan_clk -period 20000 clk_i
+Info    : Added DFT object. [DFT-100]
+        : Added test clock domain 'scan_clk'.
+Info    : Added DFT object. [DFT-100]
+        : Added test clock 'scan_clk'.
+@file(01_run_genus_dft.tcl) 142: define_test_mode -name scan_rst -active low -scan_shift rst_ni
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_test_mode'
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'scan_rst'.
+@file(01_run_genus_dft.tcl) 146: define_test_mode -name scan_cg_en -active high scan_cg_en_i
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_test_mode'
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'scan_cg_en'.
+@file(01_run_genus_dft.tcl) 149: if {[get_db root: .lp_insert_clock_gating] eq "true"} {
+    set_db design:$DESIGN .lp_clock_gating_test_signal [get_db test_signal:$DESIGN/scan_en]
+}
+  Setting attribute of design 'cv32e40p_core': 'lp_clock_gating_test_signal' = test_signal:cv32e40p_core/scan_en
+@file(01_run_genus_dft.tcl) 154: puts "INFO: Running Pre-DFT Rule Check (TDRC)..."
+INFO: Running Pre-DFT Rule Check (TDRC)...
+@file(01_run_genus_dft.tcl) 155: check_dft_rules > "$RESULTS_DIR/reports/${DESIGN}_dft_rules_pre_syn.rpt"
+  =================
+   Message Summary
+  =================
+-----------------------------------------------------------------------------------------------------------------------------
+|    Id     |  Sev  |Count|                                          Message Text                                           |
+-----------------------------------------------------------------------------------------------------------------------------
+|CDFG-250   |Info   |   20|Processing multi-dimensional arrays.                                                             |
+|CDFG-372   |Info   |   20|Bitwidth mismatch in assignment.                                                                 |
+|           |       |     |Review and make sure the mismatch is intentional. Genus can possibly issue bitwidth mismatch     |
+|           |       |     | warning for explicit assignments present in RTL as-well-as for implicit assignments inferred by |
+|           |       |     | the tool. For example, in case of enum declaration without value, the tool will implicitly      |
+|           |       |     | assign value to the enum variables. It also issues the warning for any bitwidth mismatch that   |
+|           |       |     | appears in this implicit assignment.                                                            |
+|CDFG-373   |Info   |   16|Sign mismatch in assignment.                                                                     |
+|CDFG-475   |Warning|    8|Case statement is not parallel but has the 'parallel' case pragma set.                           |
+|           |       |     |This may cause simulation mismatches between the original and synthesized designs.               |
+|CDFG-500   |Info   |   20|Unused module input port.                                                                        |
+|           |       |     |(In port definition within the module, the input port is not used in any assignment statements or|
+|           |       |     | conditional expressions for decision statements.                                                |
+|CDFG-508   |Warning|    3|Removing unused register.                                                                        |
+|           |       |     |Genus removes the flip-flop or latch inferred for an unused signal or variable. To preserve the  |
+|           |       |     | flip-flop or latch, set the hdl_preserve_unused_registers attribute to true or use a pragma in  |
+|           |       |     | the RTL.                                                                                        |
+|CDFG-567   |Info   |   20|Instantiating Subdesign.                                                                         |
+|CDFG-738   |Info   |   20|Common subexpression eliminated.                                                                 |
+|CDFG-739   |Info   |   20|Common subexpression kept.                                                                       |
+|CDFG-769   |Info   |   20|Identified sum-of-products logic to be optimized during syn_generic.                             |
+|CDFG-771   |Info   |   20|Replaced logic with a constant value.                                                            |
+|CDFG-773   |Info   |    5|Skip related conditional write and read sequence.                                                |
+|CDFG-818   |Warning|    1|Using default parameter value for module elaboration.                                            |
+|CDFG2G-616 |Info   |    1|Latch inferred. Check and revisit your RTL if this is not the intended behavior.                 |
+|           |       |     |Use the attributes 'set_attribute hdl_error_on_latch true'(LUI)                                  |
+|           |       |     | or 'set_db hdl_error_on_latch true' (CUI)                                                       |
+|           |       |     | to issue an error when a latch is inferred. Use the attributes 'set_attributes                  |
+|           |       |     | hdl_latch_keep_feedback true'(LUI) or 'set_db hdl_latch_keep_feedback true'(CUI)                |
+|           |       |     | to infer combinational logic rather than a latch in case a variable is explicitly assigned to   |
+|           |       |     | itself.                                                                                         |
+|CWD-19     |Info   |   20|An implementation was inferred.                                                                  |
+|CWD-21     |Info   |    4|Skipping an invalid binding for a subprogram call.                                               |
+|CWD-36     |Info   |   20|Sorted the set of valid implementations for synthetic operator.                                  |
+|DFT-100    |Info   |    6|Added DFT object.                                                                                |
+|DFT-130    |Info   |    2|Created DFT port.                                                                                |
+|           |       |     |A port for DFT purposes was created.                                                             |
+|ELAB-1     |Info   |    1|Elaborating Design.                                                                              |
+|ELAB-2     |Info   |   20|Elaborating Subdesign.                                                                           |
+|ELAB-3     |Info   |    1|Done Elaborating Design.                                                                         |
+|ELABUTL-132|Info   |    5|Unused instance port.                                                                            |
+|           |       |     |Please check the reported scenario of unconnected instance port to ensure that it matches the    |
+|           |       |     | design intent.                                                                                  |
+|ELABUTL-134|Info   |    3|Using the (old) attribute value(s)                                                               |
+|           |       |     | for driving unconnected input/ undriven signal or output to set the value of new variable       |
+|           |       |     | "hdl_unconnected_value".                                                                        |
+|           |       |     |To revert to old behaviour set the value of the attribute 'hdl_use_new_undriven_handling' to 0.  |
+|LBR-41     |Info   |    1|An output library pin lacks a function attribute.                                                |
+|           |       |     |If the remainder of this library cell's semantic checks are successful, it will be considered as |
+|           |       |     | a timing-model (because one of its outputs does not have a valid function.                      |
+|LBR-64     |Warning|    4|Malformed test_cell.                                                                             |
+|           |       |     |Review the definition of the test_cell's function or its parent library-cell's function.  An     |
+|           |       |     | inconsistency between the two may exist.                                                        |
+|LBR-141    |Warning|   16|Clock function definition makes cell unusable.                                                   |
+|           |       |     |The sequential cell cannot be inferred because its clock function is unknown.                    |
+|LBR-155    |Info   |   20|Mismatch in unateness between 'timing_sense' attribute and the function.                         |
+|           |       |     |The 'timing_sense' attribute will be respected.                                                  |
+|LBR-161    |Info   |    1|Setting the maximum print count of this message to 10 if information_level is less than 9.       |
+|LBR-162    |Info   |   20|Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed.                          |
+|           |       |     |Setting the 'timing_sense' to non_unate.                                                         |
+|LBR-170    |Info   |   20|Ignoring specified timing sense.                                                                 |
+|           |       |     |Timing sense should never be set with 'rising_edge' or 'falling_edge' timing type.               |
+|LBR-409    |Info   |    4|Found conflicting clock polarity information.                                                    |
+|           |       |     |The tool derives the clock polarity from the sequential timing arcs specified through the Liberty|
+|           |       |     | 'timing_type' attribute. For the positive-edge triggered cells a positive value is expected for |
+|           |       |     | the 'clocked_on' or 'enable' attribute while an inverted value is expected for the negative-edge|
+|           |       |     | triggered sequential cells.                                                                     |
+|LBR-412    |Info   |    1|Created nominal operating condition.                                                             |
+|           |       |     |The nominal operating condition is represented, either by the nominal PVT values specified in the|
+|           |       |     | library source (via nom_process,nom_voltage and nom_temperature respectively)                   |
+|           |       |     | , or by the default PVT values (1.0,1.0,1.0).                                                   |
+|LBR-415    |Info   |    4|Unusable library cells found at the time of loading a library.                                   |
+|           |       |     |For  more  information, refer to 'Cells Identified as Unusable' in the 'User Guide'. To know the |
+|           |       |     | reason why a cell is considered as unusable, check 'unusable_reason' libcell attribute.         |
+|LBR-516    |Info   |    1|Missing library level attribute.                                                                 |
+|LBR-518    |Info   |    1|Missing a function attribute in the output pin definition.                                       |
+|MESG-11    |Warning|   15|Maximum message print count reached.                                                             |
+|PHYS-103   |Warning|   20|Marking library cell 'avoid'.                                                                    |
+|           |       |     |To prevent the library cell from being set to 'avoid', set attribute                             |
+|           |       |     | 'lib_lef_consistency_check_enable' to 'false'.                                                  |
+|PHYS-279   |Warning|   20|Physical cell not defined in library.                                                            |
+|           |       |     |Ensure that the proper library files are available and have been imported.                       |
+|TUI-37     |Warning|    4|This command will be obsolete in a next major release.                                           |
+|           |       |     |This command is obsolete and the new command define_test_signal should be used.                  |
+-----------------------------------------------------------------------------------------------------------------------------
+Info    : Initiating DFT command. [DFT-145]
+        : Initiating check_dft_rules command.
+  Checking DFT rules for 'cv32e40p_core' module under 'muxed_scan' style
+
+Detected 15 DFT rule violation(s)
+    ... see the log file for more details
+  Number of user specified non-Scan registers:   0
+      Number of registers that fail DFT rules: 2612
+      Number of registers that pass DFT rules:   0
+  Percentage of total registers that are scannable:  0%
+Warning : Clock Gating Integrated cells have been avoided in the technology libraries. [DFT-325]
+        : Usable clock gating cells found but avoided in Library
+        : DFT logic in some cases may require Clock Gating Integrated cells to correctly build the scan structures.  Clock Gating Integrated cells should be made usable prior to mapping the design or when inserting DFT logic into a mapped design.
+Info    : Reporting runtime for DFT command. [DFT-147]
+        : Runtime for check_dft_rules is 0.212000 seconds.
+Info    : Successfully completed DFT command. [DFT-146]
+        : Successfully completed check_dft_rules command.
+  =================
+   Message Summary
+  =================
+-----------------------------------------------------------------------------------------------------------------------------
+|  Id   |  Sev  |Count|                                            Message Text                                             |
+-----------------------------------------------------------------------------------------------------------------------------
+|DFT-145|Info   |    1|Initiating DFT command.                                                                              |
+|DFT-146|Info   |    1|Successfully completed DFT command.                                                                  |
+|DFT-147|Info   |    1|Reporting runtime for DFT command.                                                                   |
+|DFT-325|Warning|    1|Clock Gating Integrated cells have been avoided in the technology libraries.                         |
+|       |       |     |DFT logic in some cases may require Clock Gating Integrated cells to correctly build the scan        |
+|       |       |     | structures.  Clock Gating Integrated cells should be made usable prior to mapping the design or when|
+|       |       |     | inserting DFT logic into a mapped design.                                                           |
+-----------------------------------------------------------------------------------------------------------------------------
+@file(01_run_genus_dft.tcl) 160: puts "INFO: Running generic synthesis..."
+INFO: Running generic synthesis...
+@file(01_run_genus_dft.tcl) 161: syn_generic
+Warning : Cannot find any usable integrated clock-gating cell. [POPT-78]
+        : The provided library does not have a usable integrated clock-gating cell.
+        : If the library has an integrated clock-gating cell, but this cell has either a 'dont_use' or a 'dont_touch' attribute set to 'true', the cell is considered unusable.  To make the cell usable, set the 'avoid' attribute for the lib_cell to 'false' in Synthesis.
+      flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   syn_gen
+#@ End verbose source ./scripts/01_run_genus_dft.tcl
+1
+Encountered problems processing file: scripts/01_run_genus_dft.tcl
+WARNING: This version of the tool is 546 days old.
+
+Another Ctrl-C within 1 second will terminate the tool.
+CURRENT RESOURCES: RT {elapsed: 1286s, ST: 58s, FG: 58s, CPU: 5.1%}, MEM {curr: 1.7G, peak: 1.8G, phys curr: 1.0G, phys peak: 1.0G}, SYS {load: 0.1, cpu: 6, total: 7.3G, free: 1.1G}
+Abnormal exit.
