@@ -3,6 +3,7 @@
 
 ${CV32E40P_DIR}/rtl/include/cv32e40p_apu_core_pkg.sv
 ${CV32E40P_DIR}/rtl/include/cv32e40p_pkg.sv
+${CV32E40P_DIR}/rtl/vendor/pulp_platform_fpnew/src/fpnew_pkg.sv
 ${CV32E40P_DIR}/rtl/cv32e40p_alu.sv
 ${CV32E40P_DIR}/rtl/cv32e40p_alu_div.sv
 ${CV32E40P_DIR}/rtl/cv32e40p_aligner.sv
