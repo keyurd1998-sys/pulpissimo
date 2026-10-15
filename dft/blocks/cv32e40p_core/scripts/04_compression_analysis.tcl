@@ -24,8 +24,8 @@ define_scan_chain -name chain0 -sdi scan_in -sdo scan_out -create_ports -shift_e
 connect_scan_chains -auto_create_chains
 
 # Base scan chain reports
-redirect "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt" check_dft_rules
-redirect "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt" report_scan_chains
+check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"
+report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
 
 # Run Compressibility Analysis with Modus ATPG
 set asc_dir "$STEP_RPT_DIR/asc_1channel"
@@ -41,7 +41,7 @@ analyze_scan_compressibility \
     -directory $asc_dir \
     -verbose
 
-redirect -tee $asc_rpt "report_scan_compressibility -directory $asc_dir"
+report_scan_compressibility -directory $asc_dir > $asc_rpt
 
 # Save checkpoint database
 set DB_FILE "$DBS_DIR/04_stitched.db"
