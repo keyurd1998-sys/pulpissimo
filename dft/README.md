@@ -1,6 +1,6 @@
-# Cadence DFT & ATPG Flow for CV32E40P (PULPissimo RISC-V Core)
+# Cadence Modular DFT & ATPG Flow for PULPissimo
 
-This workspace provides an automated, Cadence-verified Design For Testability (DFT) and Automatic Test Pattern Generation (ATPG) flow for the **CV32E40P** core using **Cadence Genus** and **Cadence Modus**.
+This directory provides a modular, step-by-step Design For Testability (DFT) and Automatic Test Pattern Generation (ATPG) flow using **Cadence Genus** and **Cadence Modus**.
 
 ---
 
@@ -8,56 +8,80 @@ This workspace provides an automated, Cadence-verified Design For Testability (D
 
 ```
 dft/
+├── blocks/
+│   ├── cv32e40p_core/                # Current block: RISC-V CPU Core
+│   │   ├── scripts/
+│   │   │   ├── 00_setup_env.tcl      # Shared environment & library paths
+│   │   │   └── 01_elaborate.tcl      # Step 1: RTL Elaboration & Design Health Check
+│   │   ├── run_step.sh               # Step-by-step execution runner
+│   │   ├── dbs/                      # Checkpoint databases saved per step (.db)
+│   │   ├── reports/                  # Reports organized by step
+│   │   │   ├── 01_elaboration/
+│   │   │   ├── 02_tdrc/
+│   │   │   ├── 03_mapping/
+│   │   │   ├── 04_scan_chains/
+│   │   │   └── 05_timing_qor/
+│   │   ├── netlists/                 # Final scan netlist (.v), SCANDEF, SDC
+│   │   ├── atpg/                     # Modus ATPG workspace
+│   │   └── logs/                     # Isolated step logs (e.g. 01_elaborate.log)
+│   │
+│   └── pulpissimo_top/               # Future block: Full SoC top
+│       └── ...
+│
 ├── filelists/
-│   └── cv32e40p_core.flist      # Complete SystemVerilog source list (with fpnew_pkg & FF regfile)
+│   └── cv32e40p_core.flist          # SystemVerilog RTL filelist
 ├── constraints/
-│   └── cv32e40p_core.sdc        # 200 MHz synthesis timing constraints
-├── scripts/
-│   ├── 01_run_genus_dft.tcl     # Genus synthesis and scan insertion script
-│   └── 02_run_modus_atpg.tcl    # Modus ATPG pattern generation script
-├── run_dft.sh                   # Main bash runner
-└── README.md                    # Flow documentation
+│   └── cv32e40p_core.sdc            # 200 MHz functional timing constraints
+└── README.md
 ```
 
 ---
 
-## 2. Verified Technical Details
+## 2. Step-by-Step Learning Flow
 
-- **Target Library**: Direct server path at `/home/admin/DFT/Library`.
-  - Timing: `/home/admin/DFT/Library/timing/slow.lib`
-  - LEF: `/home/admin/DFT/Library/lef/all.lef`
-  - ATPG Models: `/home/admin/DFT/Library/atpg/include_libraries.v`
-- **Clock & Reset Setup**:
-  - Functional clock `clk_i` defined as `scan_clk` (20 ns period) via `define_test_clock`.
-  - Functional reset `rst_ni` defined as active-low via `define_test_signal -function async_set_reset -active low` (held inactive during scan shift).
-  - Shift enable `SCAN_ENABLE` auto-created as primary input port via `define_test_signal -function shift_enable -name scan_en -active high -ideal -create_port`.
-  - Clock gating bypass `scan_cg_en_i` configured via `define_test_mode -name scan_cg_en -active high` to keep all internal ICG cells transparent during test shift.
-- **Scan Chains**:
-  - 4 balanced scan chains configured with `-create_ports` and stitched using `connect_scan_chains -auto_create_chains`.
-- **Modus Handoff**:
-  - Netlist and ATPG setup exported via `write_dft_atpg -library ... -directory ... -run_from_directory`.
+Each step saves a database snapshot (`.db`) in `dbs/` so you can inspect, debug, and run each phase without restarting from scratch:
+
+1. **Step 1: RTL Elaboration & Design Health Check** (`scripts/01_elaborate.tcl`)
+   - Reads timing/physical libraries and RTL.
+   - Elaborates top-level module into generic GTECH gates.
+   - Checks unresolved instances (`check_design -unresolved`).
+   - Saves checkpoint: `dbs/01_elaborated.db`.
+
+2. **Step 2: DFT Test Signals & Pre-DFT DRC (TDRC)** (`scripts/02_dft_setup_tdrc.tcl`)
+   - Loads `01_elaborated.db`.
+   - Defines test clocks, active-low reset (`rst_ni`), and shift enable (`SCAN_ENABLE`).
+   - Runs Pre-DFT Rule Checks (`check_dft_rules`).
+   - Saves checkpoint: `dbs/02_tdrc.db`.
+
+3. **Step 3: Generic Synthesis & Scan Mapping** (`scripts/03_scan_mapping.tcl`)
+   - Loads `02_tdrc.db`.
+   - Maps logic and substitutes regular flip-flops with scan flip-flops (`syn_map`).
+   - Saves checkpoint: `dbs/03_mapped.db`.
+
+4. **Step 4: Scan Chain Architecture & Stitching** (`scripts/04_scan_stitching.tcl`)
+   - Loads `03_mapped.db`.
+   - Defines 4 scan chains, clock mixing, and lockup latches.
+   - Stitches chains using `connect_scan_chains`.
+   - Saves checkpoint: `dbs/04_stitched.db`.
+
+5. **Step 5: Post-Scan Optimization & ATPG Export** (`scripts/05_syn_opt_export.tcl`)
+   - Loads `04_stitched.db`.
+   - Optimizes post-scan timing (`syn_opt`).
+   - Exports scan netlist, SCANDEF, and Modus ATPG files (`write_dft_atpg`).
+
+6. **Step 6: Modus ATPG & Fault Coverage Analysis** (`scripts/06_run_atpg.tcl`)
+   - Runs Modus ATPG in `atpg/`.
+   - Generates stuck-at test patterns and calculates fault coverage.
 
 ---
 
 ## 3. Remote Server Execution
 
 ```bash
-# 1. Update your workspace on the server
-cd pulpissimo
+cd ~/pulpissimo
 git pull origin dft-flow
+cd dft/blocks/cv32e40p_core
 
-# 2. Enter the dft folder
-cd dft
-
-# 3. Run the full automated flow
-./run_dft.sh
-```
-
-Or run step-by-step:
-```bash
-# Step 1: Genus Synthesis & Scan Insertion
-genus -f scripts/01_run_genus_dft.tcl -log results/genus.log
-
-# Step 2: Modus ATPG
-modus -f scripts/02_run_modus_atpg.tcl -log results/modus.log
+# Run Step 1
+./run_step.sh 1
 ```
