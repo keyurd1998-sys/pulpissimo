@@ -27,37 +27,13 @@ connect_scan_chains -auto_create_chains
 check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"
 report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
 
-# Prepare ATPG library with resolved absolute paths to fix broken relative ./LIBS paths
-set resolved_atpg_lib "$STEP_RPT_DIR/atpg_libs.v"
-set fp [open $resolved_atpg_lib w]
-set found_stdcell 0
-if {[file exists "$LIB_DIR/atpg/include_libraries.v"]} {
-    set orig_fp [open "$LIB_DIR/atpg/include_libraries.v" r]
-    while {[gets $orig_fp line] >= 0} {
-        if {[regexp {`include\s+"(\./)?LIBS/([^"]+)"} $line -> prefix subpath]} {
-            set target "$LIB_DIR/$subpath"
-            if {[file exists $target]} {
-                puts $fp "`include \"$target\""
-                if {[string match "*stdcell.v" $target]} { set found_stdcell 1 }
-            }
-        } else {
-            puts $fp $line
-        }
-    }
-    close $orig_fp
-}
-if {!$found_stdcell && [file exists "$LIB_DIR/atpg/stdcell.v"]} {
-    puts $fp "`include \"$LIB_DIR/atpg/stdcell.v\""
-}
-close $fp
-
 # Run Compressibility Analysis with Modus ATPG
 set asc_dir "$STEP_RPT_DIR/asc_1channel"
 set asc_rpt "$STEP_RPT_DIR/${DESIGN}_compressibility.rpt"
 file delete -force $asc_dir
 
 analyze_scan_compressibility \
-    -library $resolved_atpg_lib \
+    -library $ATPG_LIB \
     -build_model_options "-allowmissingmodules yes" \
     -compression_method compress_scan_chains \
     -compressor xor \
