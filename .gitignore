@@ -11,11 +11,10 @@ working_dir/
 /Bender.local
 /build
 
-# Cadence DFT & Synthesis Outputs
-dft/results/
+# Cadence DFT & Synthesis Outputs: ignore only heavy databases and formality
+dft/results/dbs/
+dft/results/modus_atpg/tbdata/
+dft/results/modus_atpg/testresults/
 fv/
-genus.cmd*
-genus.log*
-modus.cmd*
-modus.log*
+
 
