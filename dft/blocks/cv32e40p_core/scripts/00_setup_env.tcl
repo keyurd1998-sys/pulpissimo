@@ -19,7 +19,11 @@ if {[info exists ::env(CADENCE_DFT_LIB)]} {
 
 set TIMING_LIB "$LIB_DIR/timing/slow.lib"
 set LEF_FILE   "$LIB_DIR/lef/all.lef"
-set ATPG_LIB   "$LIB_DIR/atpg/include_libraries.v"
+if {[file exists "$LIB_DIR/atpg/stdcell.v"]} {
+    set ATPG_LIB "$LIB_DIR/atpg/stdcell.v"
+} else {
+    set ATPG_LIB "$LIB_DIR/atpg/include_libraries.v"
+}
 
 set FLIST    "$BLOCK_DIR/filelists/cv32e40p_core.flist"
 set SDC_FILE "$BLOCK_DIR/constraints/cv32e40p_core.sdc"
