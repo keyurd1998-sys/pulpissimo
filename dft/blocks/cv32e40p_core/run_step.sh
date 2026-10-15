@@ -38,6 +38,22 @@ case "$STEP" in
         echo ">>> Checkpoint Saved: dbs/01_elaborated.db"
         echo ">>> Reports:          reports/01_elaboration/"
         ;;
+    2)
+        echo "=================================================================="
+        echo " Running Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
+        echo " Output Log: logs/02_dft_setup_tdrc.log"
+        echo "=================================================================="
+        rm -f logs/02_dft_setup_tdrc.log* logs/02_dft_setup_tdrc.cmd*
+        genus -overwrite -f scripts/02_dft_setup_tdrc.tcl -log logs/02_dft_setup_tdrc.log
+        echo ""
+        echo ">>> Step 2 Complete!"
+        echo ">>> Checkpoint Saved: dbs/02_tdrc.db"
+        echo ">>> Reports:          reports/02_tdrc/"
+        echo ">>> Violation Summary:"
+        if [ -f reports/02_tdrc/cv32e40p_core_dft_rules_pre_syn.rpt ]; then
+            head -n 28 reports/02_tdrc/cv32e40p_core_dft_rules_pre_syn.rpt
+        fi
+        ;;
     help|*)
         echo "=================================================================="
         echo " Interactive Step Runner for CV32E40P Core"
