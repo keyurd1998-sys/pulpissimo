@@ -13,10 +13,9 @@ echo " Cadence DFT & ATPG Flow for CV32E40P Core"
 echo " Working Directory: $SCRIPT_DIR"
 echo "=================================================================="
 
-# Direct library path on server
+# Direct target library path on server
 export CADENCE_DFT_LIB="/home/admin/DFT/Library"
-echo " Using Target Library: $CADENCE_DFT_LIB"
-
+echo " Target Library: $CADENCE_DFT_LIB"
 
 # Check Genus availability
 if ! command -v genus &> /dev/null; then
@@ -26,9 +25,11 @@ if ! command -v genus &> /dev/null; then
     exit 1
 fi
 
+echo ""
 echo "[Step 1/2] Running Genus Synthesis and DFT Scan Insertion..."
 genus -f scripts/01_run_genus_dft.tcl -log results/genus.log
 
+echo ""
 echo "Genus run completed. Checking for Modus..."
 
 # Check Modus availability
@@ -40,11 +41,13 @@ if ! command -v modus &> /dev/null; then
     exit 0
 fi
 
+echo ""
 echo "[Step 2/2] Running Modus ATPG & Fault Coverage Analysis..."
 modus -f scripts/02_run_modus_atpg.tcl -log results/modus.log
 
+echo ""
 echo "=================================================================="
-echo " Flow completed successfully!"
+echo " FLOW COMPLETED SUCCESSFULLY!"
 echo " Reports:   $SCRIPT_DIR/results/reports/"
 echo " Netlists:  $SCRIPT_DIR/results/netlists/"
 echo " ATPG Data: $SCRIPT_DIR/results/modus_atpg/"

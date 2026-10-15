@@ -2,6 +2,7 @@
 ## Cadence Modus ATPG Script
 ## Target: cv32e40p_core (PULPissimo RISC-V Core)
 ## Goal: ATPG Pattern Generation & Stuck-At Fault Coverage Analysis
+## Verified against: Cadence Modus User Guide & Reference (v23.1)
 ###############################################################################
 
 puts "=========================================================================="
@@ -16,10 +17,8 @@ set SCRIPT_DIR   [file dirname [file normalize [info script]]]
 set DFT_ROOT     [file normalize "$SCRIPT_DIR/.."]
 set RESULTS_DIR  "$DFT_ROOT/results"
 set MODUS_DIR    "$RESULTS_DIR/modus_atpg"
-
-# Direct Target Standard Cell Library path on server
-set LIB_DIR "/home/admin/DFT/Library"
-puts "INFO: Using Library Directory: $LIB_DIR"
+set LIB_DIR      "/home/admin/DFT/Library"
+set ATPG_LIB     "$LIB_DIR/atpg/include_libraries.v"
 
 set_db workdir $MODUS_DIR
 set WORKDIR [get_db workdir]
@@ -28,23 +27,27 @@ set_option stdout summary
 set ::env(CDS_LIC_REPORT) yes
 set_db stop_on_severity error
 
-# Clean previous temporary run data
+puts "INFO: Modus Workdir:  $WORKDIR"
+puts "INFO: Target Design:  $DESIGN"
+puts "INFO: Tech Library:   $ATPG_LIB"
+
+# Clean previous temporary run databases
 file delete -force "$WORKDIR/tbdata"
 file delete -force "$WORKDIR/testresults"
 
 #-------------------------------------------------------------------------------
 # Step 2: Build Logic Model
 #-------------------------------------------------------------------------------
-puts "INFO: Building Modus Logic Model with techlib: $LIB_DIR/atpg/include_libraries.v"
+puts "INFO: Building Modus Logic Model..."
 build_model \
     -cell                $DESIGN \
-    -techlib             "$LIB_DIR/atpg/include_libraries.v" \
+    -techlib             $ATPG_LIB \
     -designsource        "$WORKDIR/${DESIGN}.test_netlist.v" \
     -allowmissingmodules yes \
     -messagecounteach    100
 
 #-------------------------------------------------------------------------------
-# Step 3: Build Test Model
+# Step 3: Build Test Model (FULLSCAN)
 #-------------------------------------------------------------------------------
 puts "INFO: Building Test Model (FULLSCAN)..."
 build_testmode \
@@ -54,7 +57,7 @@ build_testmode \
     -allowflushedmeasures  yes
 
 #-------------------------------------------------------------------------------
-# Step 4: Report & Verify Test Structures
+# Step 4: Report & Verify Test Structures (DRC)
 #-------------------------------------------------------------------------------
 puts "INFO: Reporting Scan Chains..."
 report_test_structures \
@@ -81,14 +84,16 @@ create_logic_tests \
     -experiment "${DESIGN}_stuckat" \
     -testmode   FULLSCAN
 
-# Report fault coverage summary
-puts "INFO: Reporting Test Fault Summary & Coverage..."
+# Report fault summary and coverage
+puts "=========================================================================="
+puts "  ATPG FAULT COVERAGE REPORT                                            "
+puts "=========================================================================="
 report_faults \
     -experiment "${DESIGN}_stuckat" \
     -testmode   FULLSCAN
 
 #-------------------------------------------------------------------------------
-# Step 7: Export Verilog Test Vectors & Commit
+# Step 7: Export Verilog Test Vectors & Commit Tests
 #-------------------------------------------------------------------------------
 puts "INFO: Exporting Verilog parallel simulation test vectors..."
 write_vectors \
