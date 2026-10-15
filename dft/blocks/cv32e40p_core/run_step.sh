@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Interactive Step-by-Step DFT Runner for cv32e40p_core
+# Usage:
+#   ./run_step.sh 1    (Runs Step 1: RTL Elaboration & Health Check)
+#   ./run_step.sh 2    (Runs Step 2: DFT Setup & Pre-DFT DRC)
+#   ...
+# ==============================================================================
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+export CADENCE_DFT_LIB="/home/admin/DFT/Library"
+
+mkdir -p logs reports dbs netlists atpg
+
+# Check Genus availability
+if ! command -v genus &> /dev/null; then
+    echo "ERROR: 'genus' binary not found in PATH."
+    echo "Please load your Cadence Genus environment before running."
+    echo "Example: module load cadence/genus"
+    exit 1
+fi
+
+STEP="${1:-help}"
+
+case "$STEP" in
+    1)
+        echo "=================================================================="
+        echo " Running Step 1: RTL Elaboration & Design Health Check"
+        echo " Output Log: logs/01_elaborate.log"
+        echo "=================================================================="
+        rm -f logs/01_elaborate.log* logs/01_elaborate.cmd*
+        genus -overwrite -f scripts/01_elaborate.tcl -log logs/01_elaborate.log
+        echo ""
+        echo ">>> Step 1 Complete!"
+        echo ">>> Checkpoint Saved: dbs/01_elaborated.db"
+        echo ">>> Reports:          reports/01_elaboration/"
+        ;;
+    help|*)
+        echo "=================================================================="
+        echo " Interactive Step Runner for CV32E40P Core"
+        echo "=================================================================="
+        echo "Usage: ./run_step.sh <step_number>"
+        echo ""
+        echo "Available Steps:"
+        echo "  1  - Step 1: RTL Elaboration & Health Check"
+        echo "  2  - Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
+        echo "  3  - Step 3: Generic Synthesis & Scan Mapping (syn_map)"
+        echo "  4  - Step 4: Scan Chain Architecture & Stitching"
+        echo "  5  - Step 5: Post-Scan Optimization & ATPG Export"
+        echo "  6  - Step 6: Modus ATPG & Stuck-at Fault Analysis"
+        echo "=================================================================="
+        ;;
+esac

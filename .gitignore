@@ -15,16 +15,13 @@ working_dir/
 dft/results/dbs/
 dft/results/modus_atpg/tbdata/
 dft/results/modus_atpg/testresults/
+dft/blocks/*/dbs/
+dft/blocks/*/atpg/tbdata/
+dft/blocks/*/atpg/testresults/
 fv/
 
-# Ignore numbered backup logs and command logs so only single genus.log and modus.log are kept
-dft/results/genus.log[0-9]*
-dft/results/genus.cmd*
-dft/results/modus.log[0-9]*
-dft/results/modus.cmd*
-genus.log*
-genus.cmd*
-modus.log*
-modus.cmd*
+# Ignore numbered backup logs and command logs so only single *.log files are tracked
+*.cmd*
+*.log[0-9]*
 
 
