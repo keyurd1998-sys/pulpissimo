@@ -28,9 +28,9 @@ set TIMING_LIB "$LIB_DIR/timing/slow.lib"
 set LEF_FILE   "$LIB_DIR/lef/all.lef"
 set ATPG_LIB   "$LIB_DIR/atpg/include_libraries.v"
 
-# Design Constraints and RTL Filelist
-set FLIST    "$DFT_ROOT/filelists/cv32e40p_core.flist"
-set SDC_FILE "$DFT_ROOT/constraints/cv32e40p_core.sdc"
+# Design Constraints and RTL Filelist (Block-specific)
+set FLIST    "$BLOCK_DIR/filelists/cv32e40p_core.flist"
+set SDC_FILE "$BLOCK_DIR/constraints/cv32e40p_core.sdc"
 
 # Locate Bender checked out RTL for cv32e40p
 if {![info exists CV32E40P_DIR]} {

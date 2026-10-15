@@ -10,10 +10,14 @@ This directory provides a modular, step-by-step Design For Testability (DFT) and
 dft/
 ├── blocks/
 │   ├── cv32e40p_core/                # Current block: RISC-V CPU Core
+│   │   ├── filelists/
+│   │   │   └── cv32e40p_core.flist   # Block RTL filelist
+│   │   ├── constraints/
+│   │   │   └── cv32e40p_core.sdc     # Block timing constraints (200 MHz)
 │   │   ├── scripts/
 │   │   │   ├── 00_setup_env.tcl      # Shared environment & library paths
 │   │   │   └── 01_elaborate.tcl      # Step 1: RTL Elaboration & Design Health Check
-│   │   ├── run_step.sh               # Step-by-step execution runner
+│   │   ├── run_step.sh               # Step runner
 │   │   ├── dbs/                      # Checkpoint databases saved per step (.db)
 │   │   ├── reports/                  # Reports organized by step
 │   │   │   ├── 01_elaboration/
@@ -27,11 +31,6 @@ dft/
 │   │
 │   └── pulpissimo_top/               # Future block: Full SoC top
 │       └── ...
-│
-├── filelists/
-│   └── cv32e40p_core.flist          # SystemVerilog RTL filelist
-├── constraints/
-│   └── cv32e40p_core.sdc            # 200 MHz functional timing constraints
 └── README.md
 ```
 
