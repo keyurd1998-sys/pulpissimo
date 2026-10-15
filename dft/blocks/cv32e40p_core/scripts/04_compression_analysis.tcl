@@ -37,7 +37,7 @@ analyze_scan_compressibility \
     -compressor xor \
     -decompressor broadcast \
     -mask wide1 \
-    -ratios "50 60 70 80" \
+    -ratios {50 60 70 80} \
     -directory $asc_dir \
     -verbose
 
