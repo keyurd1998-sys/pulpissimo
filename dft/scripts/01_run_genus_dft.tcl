@@ -216,7 +216,7 @@ check_dft_rules > "$RESULTS_DIR/reports/${DESIGN}_dft_rules_post_scan.rpt"
 # Step 9: Incremental Timing Optimization
 #-------------------------------------------------------------------------------
 puts "INFO: Running incremental timing optimization..."
-syn_opt -incr
+syn_opt
 
 #-------------------------------------------------------------------------------
 # Step 10: Reports
