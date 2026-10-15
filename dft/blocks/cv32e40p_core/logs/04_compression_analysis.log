@@ -3,19 +3,19 @@ Copyright 2025 Cadence Design Systems, Inc. All rights reserved worldwide.
 Cadence and the Cadence logo are registered trademarks and Genus is a trademark
 of Cadence Design Systems, Inc. in the United States and other countries.
 
-[18:41:01.455545] Configured Lic search path (25.01-s002): 5280@pine-server
+[19:40:08.455601] Configured Lic search path (25.01-s002): 5280@pine-server
 
 Version: 25.10-p002_1, built Thu Apr 17 03:05:38 PDT 2025
-Options: -overwrite -files scripts/04_scan_stitching.tcl -log logs/04_scan_stitching.log 
-Date:    Thu Oct 15 18:41:01 2026
+Options: -overwrite -files scripts/04_compression_analysis.tcl -log logs/04_compression_analysis.log 
+Date:    Thu Oct 15 19:40:08 2026
 Host:    Pine-06 (x86_64 w/Linux 5.14.0-611.30.1.el9_7.x86_64) (6cores*6cpus*1physical cpu*Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz 9216KB) (7671680KB)
-PID:     3006368
+PID:     3029947
 OS:      Red Hat Enterprise Linux 9.7 (Plow)
 
 Checking out license: Genus_Synthesis
-[18:41:01.373315] Periodic Lic check successful
-[18:41:01.897610] Feature usage summary:
-[18:41:01.897610] Genus_Synthesis  
+[19:40:08.498475] Periodic Lic check successful
+[19:40:08.498496] Feature usage summary:
+[19:40:08.498497] Genus_Synthesis  
 
 
 ***********************************************************************************************************
@@ -26,14 +26,14 @@ Checking out license: Genus_Synthesis
 Finished executable startup (3 seconds elapsed).
 
 Loading tool scripts...
-Finished loading tool scripts (17 seconds elapsed).
+Finished loading tool scripts (16 seconds elapsed).
 
 #@ Processing -files option
-@genus:root: 1> source scripts/04_scan_stitching.tcl
-#@ Begin verbose source ./scripts/04_scan_stitching.tcl
-@file(04_scan_stitching.tcl) 1: set SCRIPT_DIR [file dirname [file normalize [info script]]]
-@file(04_scan_stitching.tcl) 2: source "$SCRIPT_DIR/00_setup_env.tcl"
-Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Thu Oct 15 18:41:18 IST 2026)...
+@genus:root: 1> source scripts/04_compression_analysis.tcl
+#@ Begin verbose source ./scripts/04_compression_analysis.tcl
+@file(04_compression_analysis.tcl) 1: set SCRIPT_DIR [file dirname [file normalize [info script]]]
+@file(04_compression_analysis.tcl) 2: source "$SCRIPT_DIR/00_setup_env.tcl"
+Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Thu Oct 15 19:40:24 IST 2026)...
 #@ Begin verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl
 @file(00_setup_env.tcl) 1: set DESIGN "cv32e40p_core"
 @file(00_setup_env.tcl) 3: set SCRIPTS_DIR  [file dirname [file normalize [info script]]]
@@ -65,15 +65,15 @@ Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_e
     }
 }
 #@ End verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl
-@file(04_scan_stitching.tcl) 4: set STEP_RPT_DIR "$REPORTS_DIR/04_scan_chains"
-@file(04_scan_stitching.tcl) 5: file mkdir $STEP_RPT_DIR
-@file(04_scan_stitching.tcl) 6: file mkdir $DBS_DIR
-@file(04_scan_stitching.tcl) 9: set PREV_DB "$DBS_DIR/03_mapped.db"
-@file(04_scan_stitching.tcl) 10: if {![file exists $PREV_DB]} {
+@file(04_compression_analysis.tcl) 4: set STEP_RPT_DIR "$REPORTS_DIR/04_scan_chains"
+@file(04_compression_analysis.tcl) 5: file mkdir $STEP_RPT_DIR
+@file(04_compression_analysis.tcl) 6: file mkdir $DBS_DIR
+@file(04_compression_analysis.tcl) 9: set PREV_DB "$DBS_DIR/03_mapped.db"
+@file(04_compression_analysis.tcl) 10: if {![file exists $PREV_DB]} {
     puts "ERROR: $PREV_DB not found! Run Step 3 first."
     exit 1
 }
-@file(04_scan_stitching.tcl) 14: read_db $PREV_DB
+@file(04_compression_analysis.tcl) 14: read_db $PREV_DB
 Reading database file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/dbs/03_mapped.db'.
 Info    : Missing library level attribute. [LBR-516]
         : slew_derate_from_library not specified in the library, using .lib default of 1. (File /home/admin/DFT/Library/timing/slow.lib, Line 8)
@@ -593,50 +593,21 @@ Info    : Added DFT object. [DFT-100]
         : Added test clock 'scan_clk'.
 Info    : Added DFT object. [DFT-100]
         : Added formal_verification_constraint 'wdl_cons_0'.
-@file(04_scan_stitching.tcl) 17: set_db [current_design] .dft_min_number_of_scan_chains 4
-  Setting attribute of design 'cv32e40p_core': 'dft_min_number_of_scan_chains' = 4
-@file(04_scan_stitching.tcl) 18: set_db [current_design] .dft_mix_clock_edges_in_scan_chains true
+@file(04_compression_analysis.tcl) 17: set_db [current_design] .dft_mix_clock_edges_in_scan_chains true
   Setting attribute of design 'cv32e40p_core': 'dft_mix_clock_edges_in_scan_chains' = true
-@file(04_scan_stitching.tcl) 19: set_db [current_design] .dft_lockup_element_type preferred_level_sensitive
+@file(04_compression_analysis.tcl) 18: set_db [current_design] .dft_lockup_element_type preferred_level_sensitive
   Setting attribute of design 'cv32e40p_core': 'dft_lockup_element_type' = preferred_level_sensitive
-@file(04_scan_stitching.tcl) 22: define_scan_chain -name chain0 -sdi scan_in_0 -sdo scan_out_0 -create_ports -shift_enable scan_en
+@file(04_compression_analysis.tcl) 21: define_scan_chain -name chain0 -sdi scan_in -sdo scan_out -create_ports -shift_enable scan_en
 Info    : Added DFT object. [DFT-100]
         : Added scan chain 'chain0'.
 Info    : Created DFT port. [DFT-130]
-        : Created scan data input port 'scan_in_0' in module 'cv32e40p_core'.
+        : Created scan data input port 'scan_in' in module 'cv32e40p_core'.
         : A port for DFT purposes was created.
 Info    : Created DFT port. [DFT-130]
-        : Created scan data output port 'scan_out_0' in module 'cv32e40p_core'.
+        : Created scan data output port 'scan_out' in module 'cv32e40p_core'.
 Info    : Added scan chain. [DFT-151]
         : scan chain successfully defined.
-@file(04_scan_stitching.tcl) 23: define_scan_chain -name chain1 -sdi scan_in_1 -sdo scan_out_1 -create_ports -shift_enable scan_en
-Info    : Added DFT object. [DFT-100]
-        : Added scan chain 'chain1'.
-Info    : Created DFT port. [DFT-130]
-        : Created scan data input port 'scan_in_1' in module 'cv32e40p_core'.
-Info    : Created DFT port. [DFT-130]
-        : Created scan data output port 'scan_out_1' in module 'cv32e40p_core'.
-Info    : Added scan chain. [DFT-151]
-        : scan chain successfully defined.
-@file(04_scan_stitching.tcl) 24: define_scan_chain -name chain2 -sdi scan_in_2 -sdo scan_out_2 -create_ports -shift_enable scan_en
-Info    : Added DFT object. [DFT-100]
-        : Added scan chain 'chain2'.
-Info    : Created DFT port. [DFT-130]
-        : Created scan data input port 'scan_in_2' in module 'cv32e40p_core'.
-Info    : Created DFT port. [DFT-130]
-        : Created scan data output port 'scan_out_2' in module 'cv32e40p_core'.
-Info    : Added scan chain. [DFT-151]
-        : scan chain successfully defined.
-@file(04_scan_stitching.tcl) 25: define_scan_chain -name chain3 -sdi scan_in_3 -sdo scan_out_3 -create_ports -shift_enable scan_en
-Info    : Added DFT object. [DFT-100]
-        : Added scan chain 'chain3'.
-Info    : Created DFT port. [DFT-130]
-        : Created scan data input port 'scan_in_3' in module 'cv32e40p_core'.
-Info    : Created DFT port. [DFT-130]
-        : Created scan data output port 'scan_out_3' in module 'cv32e40p_core'.
-Info    : Added scan chain. [DFT-151]
-        : scan chain successfully defined.
-@file(04_scan_stitching.tcl) 28: connect_scan_chains -auto_create_chains
+@file(04_compression_analysis.tcl) 24: connect_scan_chains -auto_create_chains
 Info    : Initiating DFT command. [DFT-145]
         : Started connect_scan_chains.
     Processing techlib slow for muxed_scan scan cells
@@ -730,36 +701,18 @@ Info    : Initiating DFT command. [DFT-145]
 	 active clock edge:  rising
     Processing techlib physical_cells for muxed_scan scan cells
   Starting DFT Scan Configuration for module 'cv32e40p_core' in 'normal' mode, with physical flow OFF 
-  Configuring 4 chains for 2154 scan f/f 
+  Configuring 1 chains for 2154 scan f/f 
       	Domain 'scan_clk' - (rise): 2154, (fall): 0
       	Clock 'scan_clk' (pin 'port:cv32e40p_core/clk_i') - (rise): 2154, (fall): 0
-  Configured 4 chains for Domain: 'scan_clk', edge: 'mixed'
-  	 chain0 (scan_in_0 -> scan_out_0) has 539 registers; Domain:scan_clk, edge: mixed
-  	 chain1 (scan_in_1 -> scan_out_1) has 539 registers; Domain:scan_clk, edge: mixed
-  	 chain2 (scan_in_2 -> scan_out_2) has 538 registers; Domain:scan_clk, edge: mixed
-  	 chain3 (scan_in_3 -> scan_out_3) has 538 registers; Domain:scan_clk, edge: mixed
-  Processing 4 scan chains in 'muxed_scan' style.
+  Configured 1 chains for Domain: 'scan_clk', edge: 'mixed'
+  	 chain0 (scan_in -> scan_out) has 2154 registers; Domain:scan_clk, edge: mixed
+  Processing 1 scan chains in 'muxed_scan' style.
   Default shift enable signal is 'scan_en': 'port:cv32e40p_core/SCAN_ENABLE' active high.
       Disconnecting scan chain 'chain0'.
-            	Disconnecting (SDO) pin scan_out_0.
-      Disconnecting scan chain 'chain1'.
-            	Disconnecting (SDO) pin scan_out_1.
-      Disconnecting scan chain 'chain2'.
-            	Disconnecting (SDO) pin scan_out_2.
-      Disconnecting scan chain 'chain3'.
-            	Disconnecting (SDO) pin scan_out_3.
-    Connecting scan chain 'chain0' with 539 flip-flops. (using 'scan_en' shift enable)
-      	Connecting (SDI) pin port:cv32e40p_core/scan_in_0.
-      	Connecting (SDO) pin port:cv32e40p_core/scan_out_0.
-    Connecting scan chain 'chain1' with 539 flip-flops. (using 'scan_en' shift enable)
-      	Connecting (SDI) pin port:cv32e40p_core/scan_in_1.
-      	Connecting (SDO) pin port:cv32e40p_core/scan_out_1.
-    Connecting scan chain 'chain2' with 538 flip-flops. (using 'scan_en' shift enable)
-      	Connecting (SDI) pin port:cv32e40p_core/scan_in_2.
-      	Connecting (SDO) pin port:cv32e40p_core/scan_out_2.
-    Connecting scan chain 'chain3' with 538 flip-flops. (using 'scan_en' shift enable)
-      	Connecting (SDI) pin port:cv32e40p_core/scan_in_3.
-      	Connecting (SDO) pin port:cv32e40p_core/scan_out_3.
+            	Disconnecting (SDO) pin scan_out.
+    Connecting scan chain 'chain0' with 2154 flip-flops. (using 'scan_en' shift enable)
+      	Connecting (SDI) pin port:cv32e40p_core/scan_in.
+      	Connecting (SDO) pin port:cv32e40p_core/scan_out.
 Mapping DFT logic introduced by scan chain connection...
 Mapping DFT logic done.
 Info    : Reporting runtime for DFT command. [DFT-147]
@@ -776,7 +729,7 @@ Info    : Successfully completed DFT command. [DFT-146]
 |DFT-146|Info|    1|Successfully completed DFT command.|
 |DFT-147|Info|    1|Reporting runtime for DFT command. |
 --------------------------------------------------------
-@file(04_scan_stitching.tcl) 31: check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_post_scan.rpt"
+@file(04_compression_analysis.tcl) 27: check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"
 Info    : Initiating DFT command. [DFT-145]
         : Initiating check_dft_rules command.
   Checking DFT rules for 'cv32e40p_core' module under 'muxed_scan' style
@@ -801,17 +754,154 @@ Info    : Successfully completed DFT command. [DFT-146]
 |DFT-146|Info|    1|Successfully completed DFT command.|
 |DFT-147|Info|    1|Reporting runtime for DFT command. |
 --------------------------------------------------------
-@file(04_scan_stitching.tcl) 32: report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains.rpt"
-@file(04_scan_stitching.tcl) 33: report_scan_setup  > "$STEP_RPT_DIR/${DESIGN}_scan_setup.rpt"
-@file(04_scan_stitching.tcl) 36: set DB_FILE "$DBS_DIR/04_stitched.db"
-@file(04_scan_stitching.tcl) 37: write_db -all_root_attributes -to_file $DB_FILE
-Finished exporting design database to file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/dbs/04_stitched.db' for 'cv32e40p_core' (command execution time mm:ss cpu = 00:01, real = 00:01).
-@file(04_scan_stitching.tcl) 39: puts "INFO: Step 4 completed successfully. Checkpoint saved: $DB_FILE"
-INFO: Step 4 completed successfully. Checkpoint saved: /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/dbs/04_stitched.db
-@file(04_scan_stitching.tcl) 40: exit
+@file(04_compression_analysis.tcl) 28: report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
+@file(04_compression_analysis.tcl) 31: set preview_summary "$STEP_RPT_DIR/${DESIGN}_compression_previews.rpt"
+@file(04_compression_analysis.tcl) 32: set fp [open $preview_summary w]
+@file(04_compression_analysis.tcl) 33: puts $fp "=================================================================="
+@file(04_compression_analysis.tcl) 34: puts $fp " Compression Architecture Previews for 1-Channel Scan"
+@file(04_compression_analysis.tcl) 35: puts $fp " Total Scannable Registers: 2154"
+@file(04_compression_analysis.tcl) 36: puts $fp "=================================================================="
+@file(04_compression_analysis.tcl) 37: close $fp
+@file(04_compression_analysis.tcl) 39: foreach r {50 60 70 80} {
+    set rpt_file "$STEP_RPT_DIR/${DESIGN}_preview_ratio_${r}.rpt"
+    compress_scan_chains -ratio $r -compressor xor -decompressor broadcast -mask wide1 -auto_create -preview > $rpt_file
+    set fp [open $preview_summary a]
+    puts $fp "\n--------------------------------------------------"
+    puts $fp " Preview Report for Ratio: $r"
+    puts $fp "--------------------------------------------------"
+    set ifp [open $rpt_file r]
+    puts $fp [read $ifp]
+    close $ifp
+    close $fp
+}
+Error   : A required object parameter could not be found. [TUI-61] [parse_options]
+        : An object of type 'design' named '>' could not be found.
+        : Check to make sure that the object exists and is of the correct type.  The 'what_is' command can be used to determine the type of an object.
+  compress_scan_chains: inserts scan compression logic into actual (existing) scan chains 
 
-Lic Summary:
-[18:41:22.240347] Cdslmd servers: pine-server
-[18:41:22.764651] Feature usage summary:
-[18:41:22.764651] Genus_Synthesis  
-Normal exit.
+Usage: compress_scan_chains [-ratio <integer>] [-chains <actual_scan_chain>+] [-channel_length <integer>] [-decompressor <string>]
+           [-compressor <string>] [-mask <string>] [-mask_sharing_ratio <integer>] [-auto_create] [-master_control <test_signal>]
+           [-compression_enable <test_signal>] [-spread_enable <test_signal>] [-misr_reset_enable <test_signal>]
+           [-misr_reset_clock <test_signal>] [-misr_clock <pin|hpin|port>] [-misr_shift_enable <test_signal>]
+           [-misr_bypass <test_signal>] [-mask_load <test_signal>] [-mask_enable <test_signal>+] [-mask_clock <pin|hpin|port>]
+           [-mask_or_misr_sdi <pin|hpin|port>] [-mask_or_misr_sdo <pin|hpin|port>] [-shared_output] [-create_mask_or_misr_chain]
+           [-preview] [-allow_shared_clocks] [-inside <inst|hinst>] [-apply_timing_constraints]
+           [-write_timing_constraints <string>] [-timing_mode_names <mode>+] [-power_aware] [-misr_read <test_signal>]
+           [-dont_exploit_inout_scan_io] [-use_all_scan_ios_unidirectionally] [-serial_misr_read] [-misr_obs <test_signal>]
+           [-target_period <integer>] [-jtag_control_instruction <jtag_instruction>] [-allow_multiple_jtag_control]
+           [-share_mask_enable_with_scan_in] [-low_pin_compression] [-low_pin_comp_control <test_signal>]
+           [-shift_enable <test_signal>] [-gate_shared_compression_clock] [-smartscan_ratio <integer>] [-smartscan_serial_only]
+           [-smartscan_enable <test_signal>] [-smartscan_parallel_access <test_signal>] [-smartscan_no_update_stage]
+           [-smartscan_pulse_width_multiplier <integer>] [-smartscan_serial_scan_ins <pin|hpin|port>+] [<design>]
+
+    [-ratio <integer>]:
+        compression ratio used to determine the length of the internal scan channels 
+    [-chains <actual_scan_chain>+]:
+        name(s) of the actual scan chain(s) to be compressed (default: compress all actual scan chains) 
+    [-channel_length <integer>]:
+        maximum length of the internal scan channels 
+    [-decompressor <string>]:
+        type of decompression logic to be built, 'broadcast' or 'xor' (default: broadcast) 
+    [-compressor <string>]:
+        type of compression logic to be built, 'xor', 'smartscan_xor', 'misr' or 'hybrid' (default: xor) 
+    [-mask <string>]:
+        specifies to insert masking logic of type 'wide0', 'wide1', or 'wide2' (default is not to insert masking logic) 
+    [-mask_sharing_ratio <integer>]:
+        number of internal scan channels sharing a mask register 
+    [-auto_create]:
+        automatically creates the necessary compression control signals as top-level ports 
+    [-master_control <test_signal>]:
+        test mode signal used to gate the compression enable and other signals used for compression 
+    [-compression_enable <test_signal>]:
+        test signal used to enable compression 
+    [-spread_enable <test_signal>]:
+        test signal used to select test data from the xor-spreader network (required for '-decompressor xor') 
+    [-misr_reset_enable <test_signal>]:
+        test signal used to reset the MISR registers (required for '-compressor misr') 
+    [-misr_reset_clock <test_signal>]:
+        use this test_signal to asynchronously reset the MISR registers (allows misr_clock to be shared with existing test clock) 
+    [-misr_clock <pin|hpin|port>]:
+        use this clock pin to control the MISR registers (required for '-compressor misr') 
+    [-misr_shift_enable <test_signal>]:
+        test signal used as shift enable for MISR registers 
+    [-misr_bypass <test_signal>]:
+        test signal used to bypass the MISR logic (required for '-compressor hybrid') 
+    [-mask_load <test_signal>]:
+        test signal which enables loading of the mask data into the mask registers 
+    [-mask_enable <test_signal>+]:
+        test signal which controls whether the mask bits should be applied during current scan cycle 
+    [-mask_clock <pin|hpin|port>]:
+        use this clock pin to control the mask registers 
+    [-mask_or_misr_sdi <pin|hpin|port>]:
+        scan-data input pin or port used for the dedicated mask/misr scan chain 
+    [-mask_or_misr_sdo <pin|hpin|port>]:
+        scan-data output pin or port used for the dedicated mask/misr scan chain 
+    [-shared_output]:
+        whether the scan-data output pin/port of the dedicated mask/misr chain is shared with a functional connection 
+    [-create_mask_or_misr_chain]:
+        add mask and misr registers to a separate chain 
+    [-preview]:
+        reports what would be done, but does not modify the netlist 
+    [-allow_shared_clocks]:
+        allows the misr or mask clock to be shared with an existing full-scan test clock 
+    [-inside <inst|hinst>]:
+        instance in which to instantiate the compression logic 
+    [-apply_timing_constraints]:
+        apply the timing constraints for compression on the design 
+    [-write_timing_constraints <string>]:
+        write the timing constraints for compression to a file 
+    [-timing_mode_names <mode>+]:
+        timing mode(s) in which to apply timing constraints in case multi mode synthesis is being done 
+    [-power_aware]:
+        break sub-chains on power domain boundaries 
+    [-misr_read <test_signal>]:
+        test signal to configure the bidir pads in bidirectional compression 
+    [-dont_exploit_inout_scan_io]:
+        do not use bidirectional scan compression 
+    [-use_all_scan_ios_unidirectionally]:
+        do not use bidirectional scan compression 
+    [-serial_misr_read]:
+        include support for reading the MISR bits serially through the scan data pins 
+    [-misr_obs <test_signal>]:
+        test signal used to select Serial MISR Read 
+    [-target_period <integer>]:
+        optimize the compression macro to operate at this target clock period (picoseconds) (defaults to the test_clock period) 
+    [-jtag_control_instruction <jtag_instruction>]:
+        the JTAG instruction which selects the TDR to control the compression macro 
+    [-allow_multiple_jtag_control]:
+        allows the insertion of multiple JTAG controlled compression macros 
+    [-share_mask_enable_with_scan_in]:
+        share the mask enable pin with scan in pin 
+    [-low_pin_compression]:
+        low pin count compression 
+    [-low_pin_comp_control <test_signal>]:
+        low pin count compression control pin 
+    [-shift_enable <test_signal>]:
+        user specified shift enable for low pin count compression (default shift enable is used by default) 
+    [-gate_shared_compression_clock]:
+        gate the existing mask clock loads 
+    [-smartscan_ratio <integer>]:
+        length of the deserializer and serializer registers 
+    [-smartscan_serial_only]:
+        only serial smartscan interface 
+    [-smartscan_enable <test_signal>]:
+        enables smartscan 
+    [-smartscan_parallel_access <test_signal>]:
+        enables parallel access of scan-ins 
+    [-smartscan_no_update_stage]:
+        update registers not to be added 
+    [-smartscan_pulse_width_multiplier <integer>]:
+        multiplier to widen the clock pulse 
+    [-smartscan_serial_scan_ins <pin|hpin|port>+]:
+        scan-in(s) of actual scan chain(s) to be used for smartscan serial access 
+    [<design>]:
+        compress scan chains for this top design 
+#@ End verbose source ./scripts/04_compression_analysis.tcl
+Failed on compress_scan_chains
+Encountered problems processing file: scripts/04_compression_analysis.tcl
+WARNING: This version of the tool is 546 days old.
+@genus:root: 2> git status
+
+Another Ctrl-C within 1 second will terminate the tool.
+CURRENT RESOURCES: RT {elapsed: 78s, ST: 23s, FG: 23s, CPU: 5.3%}, MEM {curr: 1.7G, peak: 1.7G, phys curr: 0.9G, phys peak: 0.9G}, SYS {load: 0.1, cpu: 6, total: 7.3G, free: 1.9G}
+Abnormal exit.
