@@ -49,7 +49,7 @@ foreach r {50 60 70 80} {
     close $fp
 }
 
-# Compressibility analysis with ATPG library
+# Compressibility analysis: Runs Modus ATPG across ratios 50, 60, 70, 80
 set asc_dir "$STEP_RPT_DIR/asc_1channel"
 if {[catch {
     analyze_scan_compressibility \
@@ -60,10 +60,19 @@ if {[catch {
         -mask wide1 \
         -ratios "50 60 70 80" \
         -directory $asc_dir \
-        -dont_run_atpg \
         -verbose > "$STEP_RPT_DIR/${DESIGN}_compressibility_analysis.rpt"
 } msg]} {
-    puts "NOTE: analyze_scan_compressibility: $msg"
+    puts "NOTE: Background ATPG failed ($msg). Running with -dont_run_atpg fallback..."
+    analyze_scan_compressibility \
+        -library $ATPG_LIB \
+        -compression_method compress_scan_chains \
+        -compressor xor \
+        -decompressor broadcast \
+        -mask wide1 \
+        -ratios "50 60 70 80" \
+        -directory $asc_dir \
+        -dont_run_atpg \
+        -verbose > "$STEP_RPT_DIR/${DESIGN}_compressibility_analysis.rpt"
 }
 
 # Save checkpoint database

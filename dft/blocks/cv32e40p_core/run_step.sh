@@ -81,15 +81,15 @@ run_single_step() {
             echo ">>> Step 4 Complete!"
             echo ">>> Checkpoint Saved: dbs/04_stitched.db"
             echo ">>> Reports:          reports/04_scan_chains/"
-            echo ">>> Compression Previews:"
-            for rpt in reports/04_scan_chains/cv32e40p_core_preview_ratio_*.rpt; do
-                if [ -f "$rpt" ]; then
-                    echo "------------------------------------------------------------------"
-                    echo " $(basename "$rpt")"
-                    echo "------------------------------------------------------------------"
-                    cat "$rpt"
-                fi
-            done
+            if [ -f reports/04_scan_chains/cv32e40p_core_compression_previews.rpt ]; then
+                cat reports/04_scan_chains/cv32e40p_core_compression_previews.rpt
+            fi
+            if [ -f reports/04_scan_chains/cv32e40p_core_compressibility_analysis.rpt ]; then
+                echo "=================================================================="
+                echo " ATPG Compressibility Analysis Table"
+                echo "=================================================================="
+                cat reports/04_scan_chains/cv32e40p_core_compressibility_analysis.rpt
+            fi
             ;;
         help|*)
             echo "=================================================================="
