@@ -54,6 +54,22 @@ case "$STEP" in
             head -n 28 reports/02_tdrc/cv32e40p_core_dft_rules_pre_syn.rpt
         fi
         ;;
+    3)
+        echo "=================================================================="
+        echo " Running Step 3: Generic Synthesis & Scan Mapping (syn_map)"
+        echo " Output Log: logs/03_scan_mapping.log"
+        echo "=================================================================="
+        rm -f logs/03_scan_mapping.log* logs/03_scan_mapping.cmd*
+        genus -overwrite -f scripts/03_scan_mapping.tcl -log logs/03_scan_mapping.log
+        echo ""
+        echo ">>> Step 3 Complete!"
+        echo ">>> Checkpoint Saved: dbs/03_mapped.db"
+        echo ">>> Reports:          reports/03_mapping/"
+        echo ">>> Post-Map DRC Summary:"
+        if [ -f reports/03_mapping/cv32e40p_core_dft_rules_post_map.rpt ]; then
+            head -n 28 reports/03_mapping/cv32e40p_core_dft_rules_post_map.rpt
+        fi
+        ;;
     help|*)
         echo "=================================================================="
         echo " Interactive Step Runner for CV32E40P Core"
