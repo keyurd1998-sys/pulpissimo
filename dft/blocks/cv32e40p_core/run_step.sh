@@ -73,10 +73,10 @@ run_single_step() {
         4)
             echo "=================================================================="
             echo " Running Step 4: 1-Channel Scan Stitching & Compression Analysis"
-            echo " Output Log: logs/04_scan_stitching.log"
+            echo " Output Log: logs/04_compression_analysis.log"
             echo "=================================================================="
-            rm -f logs/04_scan_stitching.log* logs/04_scan_stitching.cmd*
-            genus -overwrite -f scripts/04_scan_stitching.tcl -log logs/04_scan_stitching.log
+            rm -f logs/04_compression_analysis.log* logs/04_compression_analysis.cmd*
+            genus -overwrite -f scripts/04_compression_analysis.tcl -log logs/04_compression_analysis.log
             echo ""
             echo ">>> Step 4 Complete!"
             echo ">>> Checkpoint Saved: dbs/04_stitched.db"
@@ -101,7 +101,7 @@ run_single_step() {
             echo "  1    - Step 1: RTL Elaboration & Health Check"
             echo "  2    - Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
             echo "  3    - Step 3: Generic Synthesis & Scan Mapping (syn_map)"
-            echo "  4    - Step 4: Scan Chain Architecture & Stitching"
+            echo "  4    - Step 4: 1-Channel Scan Stitching & Compression Analysis"
             echo "  all  - Run Steps 1 through 4 sequentially in one go"
             echo "=================================================================="
             exit 0

@@ -27,15 +27,15 @@ connect_scan_chains -auto_create_chains
 check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"
 report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
 
-# Compression Analysis: Preview ratios 8, 16, 20, 32
-compress_scan_chains -ratio 8  -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_8.rpt"
-compress_scan_chains -ratio 16 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_16.rpt"
-compress_scan_chains -ratio 20 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_20.rpt"
-compress_scan_chains -ratio 32 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_32.rpt"
+# Compression Analysis: Preview ratios 50, 60, 70, 80
+compress_scan_chains -ratio 50 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_50.rpt"
+compress_scan_chains -ratio 60 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_60.rpt"
+compress_scan_chains -ratio 70 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_70.rpt"
+compress_scan_chains -ratio 80 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_80.rpt"
 
 # Compressibility analysis with ATPG library
 if {[catch {
-    analyze_scan_compressibility -library $ATPG_LIB -ratios {8 16 20 32} > "$STEP_RPT_DIR/${DESIGN}_compressibility_analysis.rpt"
+    analyze_scan_compressibility -library $ATPG_LIB -ratios {50 60 70 80} > "$STEP_RPT_DIR/${DESIGN}_compressibility_analysis.rpt"
 } msg]} {
     puts "NOTE: analyze_scan_compressibility: $msg"
 }
