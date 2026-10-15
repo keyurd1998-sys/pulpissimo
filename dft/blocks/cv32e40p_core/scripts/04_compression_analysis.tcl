@@ -28,14 +28,40 @@ check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"
 report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
 
 # Compression Analysis: Preview ratios 50, 60, 70, 80
-compress_scan_chains -ratio 50 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_50.rpt"
-compress_scan_chains -ratio 60 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_60.rpt"
-compress_scan_chains -ratio 70 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_70.rpt"
-compress_scan_chains -ratio 80 -compressor xor -preview > "$STEP_RPT_DIR/${DESIGN}_preview_ratio_80.rpt"
+set preview_summary "$STEP_RPT_DIR/${DESIGN}_compression_previews.rpt"
+set fp [open $preview_summary w]
+puts $fp "=================================================================="
+puts $fp " Compression Architecture Previews for 1-Channel Scan"
+puts $fp " Total Scannable Registers: 2154"
+puts $fp "=================================================================="
+close $fp
+
+foreach r {50 60 70 80} {
+    set rpt_file "$STEP_RPT_DIR/${DESIGN}_preview_ratio_${r}.rpt"
+    compress_scan_chains -ratio $r -compressor xor -decompressor broadcast -mask wide1 -auto_create -preview > $rpt_file
+    set fp [open $preview_summary a]
+    puts $fp "\n--------------------------------------------------"
+    puts $fp " Preview Report for Ratio: $r"
+    puts $fp "--------------------------------------------------"
+    set ifp [open $rpt_file r]
+    puts $fp [read $ifp]
+    close $ifp
+    close $fp
+}
 
 # Compressibility analysis with ATPG library
+set asc_dir "$STEP_RPT_DIR/asc_1channel"
 if {[catch {
-    analyze_scan_compressibility -library $ATPG_LIB -ratios {50 60 70 80} > "$STEP_RPT_DIR/${DESIGN}_compressibility_analysis.rpt"
+    analyze_scan_compressibility \
+        -library $ATPG_LIB \
+        -compression_method compress_scan_chains \
+        -compressor xor \
+        -decompressor broadcast \
+        -mask wide1 \
+        -ratios "50 60 70 80" \
+        -directory $asc_dir \
+        -dont_run_atpg \
+        -verbose > "$STEP_RPT_DIR/${DESIGN}_compressibility_analysis.rpt"
 } msg]} {
     puts "NOTE: analyze_scan_compressibility: $msg"
 }
