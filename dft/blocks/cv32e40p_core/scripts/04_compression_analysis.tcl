@@ -27,38 +27,34 @@ connect_scan_chains -auto_create_chains
 redirect "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt" check_dft_rules
 redirect "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt" report_scan_chains
 
-# Compression Analysis: Preview ratios 50, 60, 70, 80
-set preview_summary "$STEP_RPT_DIR/${DESIGN}_compression_previews.rpt"
-set fp [open $preview_summary w]
-puts $fp "=================================================================="
-puts $fp " Compression Architecture Previews for 1-Channel Scan"
-puts $fp " Total Scannable Registers: 2154"
-puts $fp "=================================================================="
-close $fp
-
-foreach r {50 60 70 80} {
-    set rpt_file "$STEP_RPT_DIR/${DESIGN}_preview_ratio_${r}.rpt"
-    redirect $rpt_file "compress_scan_chains -ratio $r -compressor xor -decompressor broadcast -mask wide1 -auto_create -preview"
-    set fp [open $preview_summary a]
-    puts $fp "\n--------------------------------------------------"
-    puts $fp " Preview Report for Ratio: $r"
-    puts $fp "--------------------------------------------------"
-    if {[file exists $rpt_file]} {
-        set ifp [open $rpt_file r]
-        puts $fp [read $ifp]
-        close $ifp
-    }
-    close $fp
-}
-
-# Compressibility analysis: Runs Modus ATPG across ratios 50, 60, 70, 80
+# Run Compressibility Analysis with Modus ATPG
 set asc_dir "$STEP_RPT_DIR/asc_1channel"
-set asc_rpt "$STEP_RPT_DIR/${DESIGN}_compressibility_analysis.rpt"
+set asc_rpt "$STEP_RPT_DIR/${DESIGN}_compressibility.rpt"
+
 if {[catch {
-    redirect -tee $asc_rpt "analyze_scan_compressibility -library $ATPG_LIB -compression_method compress_scan_chains -compressor xor -decompressor broadcast -mask wide1 -ratios {50 60 70 80} -directory $asc_dir -verbose"
+    analyze_scan_compressibility \
+        -library $ATPG_LIB \
+        -compression_method compress_scan_chains \
+        -compressor xor \
+        -decompressor broadcast \
+        -mask wide1 \
+        -ratios "50 60 70 80" \
+        -directory $asc_dir \
+        -verbose
+    redirect -tee $asc_rpt "report_scan_compressibility -directory $asc_dir"
 } msg]} {
     puts "NOTE: Background ATPG failed ($msg). Running with -dont_run_atpg fallback..."
-    redirect -tee $asc_rpt "analyze_scan_compressibility -library $ATPG_LIB -compression_method compress_scan_chains -compressor xor -decompressor broadcast -mask wide1 -ratios {50 60 70 80} -directory $asc_dir -dont_run_atpg -verbose"
+    analyze_scan_compressibility \
+        -library $ATPG_LIB \
+        -compression_method compress_scan_chains \
+        -compressor xor \
+        -decompressor broadcast \
+        -mask wide1 \
+        -ratios "50 60 70 80" \
+        -directory $asc_dir \
+        -dont_run_atpg \
+        -verbose
+    redirect -tee $asc_rpt "report_scan_compressibility -directory $asc_dir"
 }
 
 # Save checkpoint database

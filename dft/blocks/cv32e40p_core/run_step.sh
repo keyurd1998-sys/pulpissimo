@@ -81,14 +81,11 @@ run_single_step() {
             echo ">>> Step 4 Complete!"
             echo ">>> Checkpoint Saved: dbs/04_stitched.db"
             echo ">>> Reports:          reports/04_scan_chains/"
-            if [ -f reports/04_scan_chains/cv32e40p_core_compression_previews.rpt ]; then
-                cat reports/04_scan_chains/cv32e40p_core_compression_previews.rpt
-            fi
-            if [ -f reports/04_scan_chains/cv32e40p_core_compressibility_analysis.rpt ]; then
+            if [ -f reports/04_scan_chains/cv32e40p_core_compressibility.rpt ]; then
                 echo "=================================================================="
-                echo " ATPG Compressibility Analysis Table"
+                echo " Scan Compressibility Report (report_scan_compressibility)"
                 echo "=================================================================="
-                cat reports/04_scan_chains/cv32e40p_core_compressibility_analysis.rpt
+                cat reports/04_scan_chains/cv32e40p_core_compressibility.rpt
             fi
             ;;
         help|*)
