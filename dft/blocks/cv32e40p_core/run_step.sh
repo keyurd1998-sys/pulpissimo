@@ -90,7 +90,7 @@ run_single_step() {
             ;;
         5)
             echo "=================================================================="
-            echo " Running Step 5: Final Compression Insertion (Ratio 60) & Export"
+            echo " Running Step 5: Final Compression Insertion (Ratio 60) & DRC Check"
             echo " Output Log: logs/05_insert_compression.log"
             echo "=================================================================="
             rm -f logs/05_insert_compression.log* logs/05_insert_compression.cmd*
@@ -99,8 +99,6 @@ run_single_step() {
             echo ">>> Step 5 Complete!"
             echo ">>> Checkpoint Saved: dbs/05_compressed.db"
             echo ">>> Reports:          reports/05_compression/"
-            echo ">>> Netlists:         netlists/"
-            echo ">>> Modus ATPG Deck:  atpg/"
             if [ -f reports/05_compression/cv32e40p_core_dft_rules.rpt ]; then
                 echo "=================================================================="
                 echo " Post-Compression DFT DRC Summary:"
@@ -119,7 +117,7 @@ run_single_step() {
             echo "  2    - Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
             echo "  3    - Step 3: Generic Synthesis & Scan Mapping (syn_map)"
             echo "  4    - Step 4: 1-Channel Scan Stitching & Compression Analysis"
-            echo "  5    - Step 5: Final Compression Insertion (Ratio 60) & Export"
+            echo "  5    - Step 5: Final Compression Insertion (Ratio 60) & DRC Check"
             echo "  all  - Run Steps 1 through 5 sequentially in one go"
             echo "=================================================================="
             exit 0
