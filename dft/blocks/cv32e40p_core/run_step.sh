@@ -111,11 +111,17 @@ run_single_step() {
             echo ">>> Step 5 Complete!"
             echo ">>> Checkpoint Saved: dbs/05_compression_analysis_pre_tpi.db"
             echo ">>> Reports:          reports/05_compression_analysis_pre_tpi/"
-            if [ -f reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_ratios_70_80.rpt ]; then
+            if [ -f reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_stuck_at.rpt ]; then
                 echo "=================================================================="
-                echo " Pre-TPI Scan Compressibility Report (Ratios 70, 80):"
+                echo " Pre-TPI Stuck-At Compressibility Report (Ratios 70, 80):"
                 echo "=================================================================="
-                cat reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_ratios_70_80.rpt
+                cat reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_stuck_at.rpt
+            fi
+            if [ -f reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_delay.rpt ]; then
+                echo "=================================================================="
+                echo " Pre-TPI Transition Delay Compressibility Report (Ratios 70, 80):"
+                echo "=================================================================="
+                cat reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_delay.rpt
             fi
             ;;
         6)
@@ -153,11 +159,17 @@ run_single_step() {
             echo ">>> Step 7 Complete!"
             echo ">>> Checkpoint Saved: dbs/07_compression_analysis_post_tpi.db"
             echo ">>> Reports:          reports/07_compression_analysis_post_tpi/"
-            if [ -f reports/07_compression_analysis_post_tpi/cv32e40p_core_compressibility_ratios_70_80.rpt ]; then
+            if [ -f reports/07_compression_analysis_post_tpi/cv32e40p_core_compressibility_stuck_at.rpt ]; then
                 echo "=================================================================="
-                echo " Post-TPI Scan Compressibility Report (Ratios 70, 80):"
+                echo " Post-TPI Stuck-At Compressibility Report (Ratios 70, 80):"
                 echo "=================================================================="
-                cat reports/07_compression_analysis_post_tpi/cv32e40p_core_compressibility_ratios_70_80.rpt
+                cat reports/07_compression_analysis_post_tpi/cv32e40p_core_compressibility_stuck_at.rpt
+            fi
+            if [ -f reports/07_compression_analysis_post_tpi/cv32e40p_core_compressibility_delay.rpt ]; then
+                echo "=================================================================="
+                echo " Post-TPI Transition Delay Compressibility Report (Ratios 70, 80):"
+                echo "=================================================================="
+                cat reports/07_compression_analysis_post_tpi/cv32e40p_core_compressibility_delay.rpt
             fi
             ;;
         8)

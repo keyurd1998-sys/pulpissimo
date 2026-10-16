@@ -36,11 +36,14 @@ if {$has_opcg > 0} {
 check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"
 report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
 
-# Run Compressibility Analysis with Modus ATPG for Ratios 70 and 80
-set asc_dir [file normalize "$STEP_RPT_DIR/asc_ratios_70_80"]
-set asc_rpt [file normalize "$STEP_RPT_DIR/${DESIGN}_compressibility_ratios_70_80.rpt"]
-file delete -force $asc_dir
+# ==============================================================================
+# PASS 1: Stuck-At Fault Compression Analysis (Ratios 70 and 80)
+# ==============================================================================
+set asc_sa_dir [file normalize "$STEP_RPT_DIR/asc_stuck_at"]
+set asc_sa_rpt [file normalize "$STEP_RPT_DIR/${DESIGN}_compressibility_stuck_at.rpt"]
+file delete -force $asc_sa_dir
 
+puts "INFO: Running Stuck-At Compression Analysis for Ratios 70 and 80..."
 analyze_scan_compressibility \
     -library $ATPG_LIB \
     -build_model_options "-allowmissingmodules yes" \
@@ -49,14 +52,38 @@ analyze_scan_compressibility \
     -decompressor broadcast \
     -mask wide1 \
     -ratios {70 80} \
-    -directory $asc_dir \
+    -directory $asc_sa_dir \
     -verbose
 
-report_scan_compressibility -directory $asc_dir > $asc_rpt
+report_scan_compressibility -directory $asc_sa_dir > $asc_sa_rpt
+
+# ==============================================================================
+# PASS 2: Transition (Delay) Fault Compression Analysis (Ratios 70 and 80)
+# ==============================================================================
+set asc_delay_dir [file normalize "$STEP_RPT_DIR/asc_delay"]
+set asc_delay_rpt [file normalize "$STEP_RPT_DIR/${DESIGN}_compressibility_delay.rpt"]
+file delete -force $asc_delay_dir
+
+puts "INFO: Running Transition Delay Compression Analysis for Ratios 70 and 80..."
+analyze_scan_compressibility \
+    -library $ATPG_LIB \
+    -build_model_options "-allowmissingmodules yes" \
+    -compression_method compress_scan_chains \
+    -compressor xor \
+    -decompressor broadcast \
+    -mask wide1 \
+    -ratios {70 80} \
+    -delay \
+    -directory $asc_delay_dir \
+    -verbose
+
+report_scan_compressibility -directory $asc_delay_dir > $asc_delay_rpt
 
 # Save checkpoint database
 set DB_FILE [file normalize "$DBS_DIR/05_compression_analysis_pre_tpi.db"]
 write_db -all_root_attributes -to_file $DB_FILE
 
-puts "INFO: Step 5 pre-TPI compression analysis (Ratios 70, 80) completed. Report: $asc_rpt"
+puts "INFO: Step 5 pre-TPI compression analysis completed."
+puts "INFO: Stuck-at Report:   $asc_sa_rpt"
+puts "INFO: Transition Report: $asc_delay_rpt"
 exit
