@@ -38,9 +38,12 @@ define_test_clock -name opcgLoadClock -period 40000 -create_port opcg_load_clk
 
 # Insert Clock Buffer on input port clk_i to create internal clock pin
 insert_buffer -name u_opcg_clk_buf -buffer "BUFX12" -pin [get_db ports clk_i]
-set osc_pin [get_db pins */u_opcg_clk_buf/* -if {.direction == out}]
+set osc_pin [get_pins *u_opcg_clk_buf/* -filter "direction==out"]
 if {[llength $osc_pin] == 0} {
-    set osc_pin [get_db pin:*/u_opcg_clk_buf/Y]
+    set osc_pin [get_db pins *u_opcg_clk_buf/Y]
+}
+if {[llength $osc_pin] == 0} {
+    set osc_pin [get_db pins *u_opcg_clk_buf/Z]
 }
 puts "INFO: Buffer inserted on clk_i. Oscillator pin: $osc_pin"
 
