@@ -23,10 +23,10 @@ check_tools() {
         echo "Example: module load cadence/genus"
         exit 1
     fi
-    if [ "$step" = "6" ] || [ "$step" = "8" ] || [ "$step" = "all" ]; then
+    if [ "$step" = "6" ]; then
         if ! command -v modus &> /dev/null; then
             echo "WARNING: 'modus' binary not found in PATH."
-            echo "Step $step uses Cadence Modus for ATPG analysis."
+            echo "Step 6 uses Cadence Modus for test point analysis."
             echo "Please ensure Modus is available in your PATH or loaded via environment modules."
         fi
     fi
@@ -182,32 +182,19 @@ run_single_step() {
             ;;
         8)
             echo "=================================================================="
-            echo " Running Step 8: Production ATPG (Stuck-At & Transition Delay)"
+            echo " Running Step 8: Export Production ATPG Scripts (Stuck-At & Delay)"
             echo " Output Log: logs/08_production_atpg.log"
             echo "=================================================================="
             rm -f logs/08_production_atpg.log* logs/08_production_atpg.cmd*
             genus -overwrite -f scripts/08_production_atpg.tcl -log logs/08_production_atpg.log
             echo ""
-            echo ">>> Step 8 Complete!"
-            echo ">>> Gate Netlist:     netlists/cv32e40p_core_compressed.v"
-            echo ">>> ATPG Workspaces:  atpg/stuck_at/ and atpg/delay/"
-            echo ">>> Reports:          reports/08_atpg/"
-            if [ -f atpg/stuck_at/cv32e40p_core.summary ]; then
-                echo "=================================================================="
-                echo " Modus Stuck-At ATPG Summary:"
-                echo "=================================================================="
-                cat atpg/stuck_at/cv32e40p_core.summary
-            elif [ -f atpg/stuck_at/summary.rpt ]; then
-                cat atpg/stuck_at/summary.rpt
-            fi
-            if [ -f atpg/delay/cv32e40p_core.summary ]; then
-                echo "=================================================================="
-                echo " Modus Transition Delay ATPG Summary:"
-                echo "=================================================================="
-                cat atpg/delay/cv32e40p_core.summary
-            elif [ -f atpg/delay/summary.rpt ]; then
-                cat atpg/delay/summary.rpt
-            fi
+            echo ">>> Step 8 Complete! ATPG scripts and workspaces exported:"
+            echo ">>> Gate Netlist:       netlists/cv32e40p_core_compressed.v"
+            echo ">>> Stuck-At Script:    atpg/stuck_at/runmodus.atpg.tcl"
+            echo ">>> Delay ATPG Script:  atpg/delay/runmodus.atpg.tcl"
+            echo ">>> To execute Modus ATPG manually:"
+            echo ">>>   cd atpg/stuck_at && modus -file runmodus.atpg.tcl"
+            echo ">>>   cd atpg/delay    && modus -file runmodus.atpg.tcl"
             ;;
         help|*)
             echo "=================================================================="
@@ -223,7 +210,7 @@ run_single_step() {
             echo "  5    - Step 5: Dedicated Boundary Wrapper Insertion (IEEE 1500 Style)"
             echo "  6    - Step 6: ATPG-Guided Test Point Insertion (TPI, Max 100 TPs)"
             echo "  7    - Step 7: Scan Compression (Ratio 70) & Separate Wrapper Chain"
-            echo "  8    - Step 8: Production ATPG Generation & Execution (Stuck-At & Delay)"
+            echo "  8    - Step 8: Export Production ATPG Scripts (Stuck-At & Delay)"
             echo "  all  - Run Steps 1 through 8 sequentially in one go"
             echo "=================================================================="
             exit 0

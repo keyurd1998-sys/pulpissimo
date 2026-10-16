@@ -45,13 +45,10 @@ write_dft_atpg \
     -run_from_directory \
     -force
 
-# Run Modus Stuck-At ATPG
-puts "INFO: Executing Modus Stuck-At ATPG in $SA_DIR..."
-shell modus -file "$SA_DIR/runmodus.atpg.tcl"
-
-# Run Modus Transition Delay ATPG
-puts "INFO: Executing Modus Transition Delay ATPG in $DELAY_DIR..."
-shell modus -file "$DELAY_DIR/runmodus.atpg.tcl"
-
-puts "INFO: Step 8 Production ATPG (Stuck-At & Transition Delay) completed successfully."
+puts "INFO: Modus Stuck-At ATPG script exported to: $SA_DIR/runmodus.atpg.tcl"
+puts "INFO: Modus Transition Delay ATPG script exported to: $DELAY_DIR/runmodus.atpg.tcl"
+puts "INFO: To run ATPG manually with Modus:"
+puts "INFO:   cd $SA_DIR && modus -file runmodus.atpg.tcl"
+puts "INFO:   cd $DELAY_DIR && modus -file runmodus.atpg.tcl"
+puts "INFO: Step 8 ATPG script export completed successfully."
 exit
