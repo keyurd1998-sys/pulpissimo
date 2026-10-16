@@ -76,5 +76,5 @@ puts "INFO: Modus Transition Delay ATPG script exported to: $DELAY_DIR/runmodus.
 puts "INFO: To run ATPG manually with Modus:"
 puts "INFO:   cd $SA_DIR && modus -file runmodus.atpg.tcl"
 puts "INFO:   cd $DELAY_DIR && modus -file runmodus.atpg.tcl"
-puts "INFO: Step 8 ATPG script export completed successfully."
+puts "INFO: Step 8 Timing analysis and ATPG script export completed successfully."
 exit
