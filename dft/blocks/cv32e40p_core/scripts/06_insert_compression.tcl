@@ -1,15 +1,18 @@
 set SCRIPT_DIR [file dirname [file normalize [info script]]]
 source "$SCRIPT_DIR/00_setup_env.tcl"
 
-set STEP_RPT_DIR "$REPORTS_DIR/05_compression"
+set STEP_RPT_DIR [file normalize "$REPORTS_DIR/06_compression"]
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 3 mapped database
-set PREV_DB "$DBS_DIR/03_mapped.db"
+# Restore Step 5 TPI database; fallback to Step 3 mapped database if TPI skipped
+set PREV_DB [file normalize "$DBS_DIR/05_tpi.db"]
 if {![file exists $PREV_DB]} {
-    puts "ERROR: $PREV_DB not found! Run Step 3 first."
-    exit 1
+    set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
+    if {![file exists $PREV_DB]} {
+        puts "ERROR: Neither $DBS_DIR/05_tpi.db nor $DBS_DIR/03_mapped.db found!"
+        exit 1
+    }
 }
 read_db $PREV_DB
 
@@ -36,8 +39,8 @@ check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
 report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains.rpt"
 
 # Save checkpoint database
-set DB_FILE "$DBS_DIR/05_compressed.db"
+set DB_FILE [file normalize "$DBS_DIR/06_compressed.db"]
 write_db -all_root_attributes -to_file $DB_FILE
 
-puts "INFO: Step 5 compression insertion completed. Checkpoint saved: $DB_FILE"
+puts "INFO: Step 6 compression insertion completed. Checkpoint saved: $DB_FILE"
 exit

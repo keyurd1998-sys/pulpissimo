@@ -90,20 +90,44 @@ run_single_step() {
             ;;
         5)
             echo "=================================================================="
-            echo " Running Step 5: Final Compression Insertion (Ratio 60) & DRC Check"
-            echo " Output Log: logs/05_insert_compression.log"
+            echo " Running Step 5: ATPG-Guided Test Point Insertion (TPI)"
+            echo " Output Log: logs/05_test_point_insertion.log"
             echo "=================================================================="
-            rm -f logs/05_insert_compression.log* logs/05_insert_compression.cmd*
-            genus -overwrite -f scripts/05_insert_compression.tcl -log logs/05_insert_compression.log
+            rm -f logs/05_test_point_insertion.log* logs/05_test_point_insertion.cmd*
+            genus -overwrite -f scripts/05_test_point_insertion.tcl -log logs/05_test_point_insertion.log
             echo ""
             echo ">>> Step 5 Complete!"
-            echo ">>> Checkpoint Saved: dbs/05_compressed.db"
-            echo ">>> Reports:          reports/05_compression/"
-            if [ -f reports/05_compression/cv32e40p_core_dft_rules.rpt ]; then
+            echo ">>> Checkpoint Saved: dbs/05_tpi.db"
+            echo ">>> Reports:          reports/05_tpi/"
+            if [ -f reports/05_tpi/cv32e40p_core_test_points.rpt ]; then
+                echo "=================================================================="
+                echo " Analyzed Test Points Report Summary:"
+                echo "=================================================================="
+                cat reports/05_tpi/cv32e40p_core_test_points.rpt
+            fi
+            if [ -f reports/05_tpi/cv32e40p_core_dft_rules.rpt ]; then
+                echo "=================================================================="
+                echo " Post-TPI DFT DRC Summary:"
+                echo "=================================================================="
+                head -n 28 reports/05_tpi/cv32e40p_core_dft_rules.rpt
+            fi
+            ;;
+        6)
+            echo "=================================================================="
+            echo " Running Step 6: Final Compression Insertion (Ratio 60) & DRC Check"
+            echo " Output Log: logs/06_insert_compression.log"
+            echo "=================================================================="
+            rm -f logs/06_insert_compression.log* logs/06_insert_compression.cmd*
+            genus -overwrite -f scripts/06_insert_compression.tcl -log logs/06_insert_compression.log
+            echo ""
+            echo ">>> Step 6 Complete!"
+            echo ">>> Checkpoint Saved: dbs/06_compressed.db"
+            echo ">>> Reports:          reports/06_compression/"
+            if [ -f reports/06_compression/cv32e40p_core_dft_rules.rpt ]; then
                 echo "=================================================================="
                 echo " Post-Compression DFT DRC Summary:"
                 echo "=================================================================="
-                head -n 28 reports/05_compression/cv32e40p_core_dft_rules.rpt
+                head -n 28 reports/06_compression/cv32e40p_core_dft_rules.rpt
             fi
             ;;
         help|*)
@@ -117,8 +141,9 @@ run_single_step() {
             echo "  2    - Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
             echo "  3    - Step 3: Generic Synthesis & Scan Mapping (syn_map)"
             echo "  4    - Step 4: 1-Channel Scan Stitching & Compression Analysis"
-            echo "  5    - Step 5: Final Compression Insertion (Ratio 60) & DRC Check"
-            echo "  all  - Run Steps 1 through 5 sequentially in one go"
+            echo "  5    - Step 5: ATPG-Guided Test Point Insertion (TPI)"
+            echo "  6    - Step 6: Final Compression Insertion (Ratio 60) & DRC Check"
+            echo "  all  - Run Steps 1 through 6 sequentially in one go"
             echo "=================================================================="
             exit 0
             ;;
@@ -131,7 +156,7 @@ fi
 
 for arg in "$@"; do
     if [ "$arg" = "all" ]; then
-        for s in 1 2 3 4 5; do
+        for s in 1 2 3 4 5 6; do
             run_single_step "$s"
         done
     else
