@@ -3,19 +3,19 @@ Copyright 2025 Cadence Design Systems, Inc. All rights reserved worldwide.
 Cadence and the Cadence logo are registered trademarks and Genus is a trademark
 of Cadence Design Systems, Inc. in the United States and other countries.
 
-[19:45:14.455617] Configured Lic search path (25.01-s002): 5280@pine-server
+[20:03:56.455553] Configured Lic search path (25.01-s002): 5280@pine-server
 
 Version: 25.10-p002_1, built Thu Apr 17 03:05:38 PDT 2025
 Options: -overwrite -files scripts/07_insert_compression.tcl -log logs/07_insert_compression.log 
-Date:    Fri Oct 16 19:45:14 2026
+Date:    Fri Oct 16 20:03:56 2026
 Host:    Pine-06 (x86_64 w/Linux 5.14.0-611.30.1.el9_7.x86_64) (6cores*6cpus*1physical cpu*Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz 9216KB) (7671680KB)
-PID:     3653197
+PID:     3661341
 OS:      Red Hat Enterprise Linux 9.7 (Plow)
 
 Checking out license: Genus_Synthesis
-[19:45:14.273458] Periodic Lic check successful
-[19:45:14.797761] Feature usage summary:
-[19:45:14.797762] Genus_Synthesis  
+[20:03:56.266272] Periodic Lic check successful
+[20:03:56.790571] Feature usage summary:
+[20:03:56.790571] Genus_Synthesis  
 
 
 ***********************************************************************************************************
@@ -33,7 +33,7 @@ Finished loading tool scripts (17 seconds elapsed).
 #@ Begin verbose source ./scripts/07_insert_compression.tcl
 @file(07_insert_compression.tcl) 1: set SCRIPT_DIR [file dirname [file normalize [info script]]]
 @file(07_insert_compression.tcl) 2: source "$SCRIPT_DIR/00_setup_env.tcl"
-Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Fri Oct 16 19:45:31 IST 2026)...
+Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Fri Oct 16 20:04:13 IST 2026)...
 #@ Begin verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl
 @file(00_setup_env.tcl) 1: set DESIGN "cv32e40p_core"
 @file(00_setup_env.tcl) 3: set SCRIPTS_DIR  [file dirname [file normalize [info script]]]
@@ -1051,10 +1051,10 @@ Info    : Unusable library cells found at the time of loading a library.  [LBR-4
         : Library: 'physical_cells', Total cells: 144, Unusable cells: 144.
 	List of unusable cells: 'FILL8 FILL64 FILL4 FILL32 FILL2 FILL16 FILL1 RF2R1WX2 RF1R1WX2 TLATSXL TLATSX4 TLATSX2 TLATSX1 TLATRXL TLATRX4 TLATRX2 TLATRX1 TLATNSXL TLATNSX4 TLATNSX2 TLATNSX1 TLATNRXL TLATNRX4 TLATNRX2 TLATNRX1 TTLATXL TTLATX4 TTLATX2 TTLATX1 TBUFIXL TBUFIX8 TBUFIX4 TBUFIX3 TBUFIX2 TBUFIX20 TBUFIX1 TBUFIX16 TBUFIX12 SEDFFHQXL SDFFSRHQXL SDFFSHQXL SDFFRHQXL SDFFNSXL SDFFNSX4 SDFFNSX2 SDFFNSX1 SDFFNRXL SDFFNRX4 SDFFNRX2 SDFFNRX1 SDFFNXL SDFFNX4 SDFFNX2 SDFFNX1 SDFFHQXL JKFFSRXL JKFFSRX4 JKFFSRX2 JKFFSRX1 JKFFSXL JKFFSX4 JKFFSX2 JKFFSX1 JKFFRXL JKFFRX4 JKFFRX2 JKFFRX1 JKFFXL JKFFX4 JKFFX2 JKFFX1 DFFSRHQXL DFFSHQXL DFFSX2 DFFRHQXL DFFNSRX4 DFFNSXL DFFNSX4 DFFNSX2 DFFNSX1 DFFNRXL DFFNRX4 DFFNRX2 DFFNRX1 DFFNXL DFFNX4 DFFNX2 DFFNX1 DFFHQXL CLKINVXL CLKBUFXL CLKBUFX1 BUFXL BUFX1 RFRDX4 RFRDX2 RFRDX1 XOR3X4 XOR3X2 XNOR3X4 XNOR3X2 AFCSHCONX4 AFCSHCONX2 AFCSHCINX4 AFCSHCINX2 AHHCONX4 AHHCONX2 AHHCINX4 AHHCINX2 AFHCONX4 AFHCONX2 AFHCINX4 AFHCINX2 CMPR42X2 CMPR42X1 CMPR32X1 CMPR22X1 BMXX1 BENCX4 BENCX2 BENCX1 PCORNERDG PDIDGZ PDO04CDG PADDO PADDI PFEED01 PFEED1 PFEED10 PFEED2 PFEED20 PFEED35 PFEED5 PFEED50 PVDD1DGZ PVSS1DGZ PDB04DGZ PADDB PADDOZ CDK_S128x16 CDK_S256x16 CDK_R512x16 pll ANTENNA .'
 Checking out license: Modus_DFT_Opt
-[19:45:32.434834] Periodic Lic check successful
-[19:45:32.959137] Feature usage summary:
-[19:45:32.959137] Genus_Synthesis  
-[19:45:32.959138] Modus_DFT_Opt  
+[20:04:15.107203] Periodic Lic check successful
+[20:04:15.107224] Feature usage summary:
+[20:04:15.107224] Genus_Synthesis  
+[20:04:15.107224] Modus_DFT_Opt  
 Info    : An additional product license has been checked out. [TUI-306]
         : The requested license was 'Modus_DFT_Opt' a feature of DFT Modus Opt.
 Info    : Added DFT object. [DFT-100]
@@ -3829,12 +3829,12 @@ Info    : Successfully completed DFT command. [DFT-146]
 |DFT-146|Info|    1|Successfully completed DFT command.|
 |DFT-147|Info|    1|Reporting runtime for DFT command. |
 --------------------------------------------------------
-@file(07_insert_compression.tcl) 48: set has_opcg [llength [get_db opcg_domains *]]
-@file(07_insert_compression.tcl) 49: if {$has_opcg > 0} {
-    connect_scan_chains -chains chain0 -auto_create_chains -include_opcg_segments
+@file(07_insert_compression.tcl) 49: set has_opcg [llength [get_db opcg_domains *]]
+@file(07_insert_compression.tcl) 50: if {$has_opcg > 0} {
+    connect_scan_chains -chains chain0 -auto_create_chains -include_opcg_segments -incremental
     connect_opcg_segments -side_scan_only
 } else {
-    connect_scan_chains -chains chain0 -auto_create_chains
+    connect_scan_chains -chains chain0 -auto_create_chains -incremental
 }
 Info    : Initiating DFT command. [DFT-145]
         : Started connect_scan_chains.
@@ -3931,748 +3931,389 @@ Info    : Initiating DFT command. [DFT-145]
 Propagating clock domain info ...
 Propagating blocking se info ...
 Identifying domain crossing flops and setting dft_custom_se ...
-  Starting DFT Scan Configuration for module 'cv32e40p_core' in 'normal' mode, with physical flow OFF 
-  Configuring 1 chains for 2568 scan f/f 
-      	Domain 'scanClock' - (rise): 2568, (fall): 0
+  Starting DFT Scan Configuration for module 'cv32e40p_core' in 'incremental' mode, with physical flow OFF 
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_mtvec_addr_i[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_id_o[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_id_o[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_id_o[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_id_o[1]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_id_o[0]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[1]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_i[0]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_irq_ack_o/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rvalid_i/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_req_o/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[1]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_rdata_i[0]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_gnt_i/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_instr_addr_o[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[1]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_hart_id_i[0]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_fetch_enable_i/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_halt_addr_i[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_dm_exception_addr_i[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_debug_running_o/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_debug_req_i/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_debug_havereset_o/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_debug_halted_o/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_we_o/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[1]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_wdata_o[0]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rvalid_i/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_req_o/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[1]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_rdata_i[0]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_gnt_i/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_be_o[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_be_o[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_be_o[1]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_be_o[0]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[2]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[1]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_data_addr_o[0]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_core_sleep_o/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[31]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[30]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[29]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[28]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[27]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[26]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[25]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[24]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[23]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[22]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[21]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[20]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[19]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[18]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[17]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[16]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[15]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[14]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[13]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[12]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[11]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[10]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[9]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[8]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[7]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[6]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[5]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[4]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[3]/DFT_ieee1500_flop' already connected in a chain
+      Ignoring scan register 'DFT_ieee1500_cell_boot_addr_i[2]/DFT_ieee1500_flop' already connected in a chain
+  Configuring 1 chains for 2209 scan f/f 
+      	Domain 'scanClock' - (rise): 2209, (fall): 0
       	Domain 'opcgLoadClock' - (rise): 0, (fall): 0
       	Clock 'scanClock' (pin 'port:cv32e40p_core/scan_clk') - (rise): 0, (fall): 0
       	Clock 'opcgLoadClock' (pin 'port:cv32e40p_core/opcg_load_clk') - (rise): 0, (fall): 0
-      	Clock 'DFT_test_clock_DOMAIN_CORE' (pin 'hpin:cv32e40p_core/DFT_DOMAIN_CORE/OPCGCLK') - (rise): 2539, (fall): 0
+      	Clock 'DFT_test_clock_DOMAIN_CORE' (pin 'hpin:cv32e40p_core/DFT_DOMAIN_CORE/OPCGCLK') - (rise): 2180, (fall): 0
   Configured 1 chains for Domain: 'scanClock', edge: 'mixed'
-  	 chain0 (scan_in -> scan_out) has 2568 registers; Domain:scanClock, edge: mixed
+  	 chain0 (scan_in -> scan_out) has 2209 registers; Domain:scanClock, edge: mixed
   Processing 1 scan chains in 'muxed_scan' style.
   Default shift enable signal is 'scan_en': 'port:cv32e40p_core/SCAN_ENABLE' active high.
       Disconnecting scan chain 'chain0'.
             	Disconnecting segment OPCG_DOMAIN_SEG_0.
             	Disconnecting segment OPCG_TRIGGER_SEG_0.
-            	Disconnecting segment DFT_segment_359.
-            	Disconnecting segment DFT_segment_358.
-            	Disconnecting segment DFT_segment_357.
-            	Disconnecting segment DFT_segment_356.
-            	Disconnecting segment DFT_segment_355.
-            	Disconnecting segment DFT_segment_354.
-            	Disconnecting segment DFT_segment_353.
-            	Disconnecting segment DFT_segment_352.
-            	Disconnecting segment DFT_segment_351.
-            	Disconnecting segment DFT_segment_350.
-            	Disconnecting segment DFT_segment_349.
-            	Disconnecting segment DFT_segment_348.
-            	Disconnecting segment DFT_segment_347.
-            	Disconnecting segment DFT_segment_346.
-            	Disconnecting segment DFT_segment_345.
-            	Disconnecting segment DFT_segment_344.
-            	Disconnecting segment DFT_segment_343.
-            	Disconnecting segment DFT_segment_342.
-            	Disconnecting segment DFT_segment_341.
-            	Disconnecting segment DFT_segment_340.
-            	Disconnecting segment DFT_segment_339.
-            	Disconnecting segment DFT_segment_338.
-            	Disconnecting segment DFT_segment_361.
-            	Disconnecting segment DFT_segment_360.
-            	Disconnecting segment DFT_segment_337.
-            	Disconnecting segment DFT_segment_336.
-            	Disconnecting segment DFT_segment_335.
-            	Disconnecting segment DFT_segment_334.
-            	Disconnecting segment DFT_segment_333.
-            	Disconnecting segment DFT_segment_325.
-            	Disconnecting segment DFT_segment_324.
-            	Disconnecting segment DFT_segment_322.
-            	Disconnecting segment DFT_segment_321.
-            	Disconnecting segment DFT_segment_320.
-            	Disconnecting segment DFT_segment_319.
-            	Disconnecting segment DFT_segment_318.
-            	Disconnecting segment DFT_segment_317.
-            	Disconnecting segment DFT_segment_316.
-            	Disconnecting segment DFT_segment_315.
-            	Disconnecting segment DFT_segment_314.
-            	Disconnecting segment DFT_segment_313.
-            	Disconnecting segment DFT_segment_311.
-            	Disconnecting segment DFT_segment_310.
-            	Disconnecting segment DFT_segment_309.
-            	Disconnecting segment DFT_segment_308.
-            	Disconnecting segment DFT_segment_307.
-            	Disconnecting segment DFT_segment_306.
-            	Disconnecting segment DFT_segment_305.
-            	Disconnecting segment DFT_segment_304.
-            	Disconnecting segment DFT_segment_303.
-            	Disconnecting segment DFT_segment_302.
-            	Disconnecting segment DFT_segment_332.
-            	Disconnecting segment DFT_segment_331.
-            	Disconnecting segment DFT_segment_330.
-            	Disconnecting segment DFT_segment_329.
-            	Disconnecting segment DFT_segment_328.
-            	Disconnecting segment DFT_segment_327.
-            	Disconnecting segment DFT_segment_326.
-            	Disconnecting segment DFT_segment_323.
-            	Disconnecting segment DFT_segment_312.
-            	Disconnecting segment DFT_segment_301.
-            	Disconnecting segment DFT_segment_16.
-            	Disconnecting segment DFT_segment_15.
-            	Disconnecting segment DFT_segment_14.
-            	Disconnecting segment DFT_segment_293.
-            	Disconnecting segment DFT_segment_292.
-            	Disconnecting segment DFT_segment_290.
-            	Disconnecting segment DFT_segment_289.
-            	Disconnecting segment DFT_segment_288.
-            	Disconnecting segment DFT_segment_287.
-            	Disconnecting segment DFT_segment_286.
-            	Disconnecting segment DFT_segment_285.
-            	Disconnecting segment DFT_segment_284.
-            	Disconnecting segment DFT_segment_283.
-            	Disconnecting segment DFT_segment_282.
-            	Disconnecting segment DFT_segment_281.
-            	Disconnecting segment DFT_segment_279.
-            	Disconnecting segment DFT_segment_278.
-            	Disconnecting segment DFT_segment_277.
-            	Disconnecting segment DFT_segment_276.
-            	Disconnecting segment DFT_segment_275.
-            	Disconnecting segment DFT_segment_274.
-            	Disconnecting segment DFT_segment_273.
-            	Disconnecting segment DFT_segment_272.
-            	Disconnecting segment DFT_segment_271.
-            	Disconnecting segment DFT_segment_270.
-            	Disconnecting segment DFT_segment_300.
-            	Disconnecting segment DFT_segment_299.
-            	Disconnecting segment DFT_segment_298.
-            	Disconnecting segment DFT_segment_297.
-            	Disconnecting segment DFT_segment_296.
-            	Disconnecting segment DFT_segment_295.
-            	Disconnecting segment DFT_segment_294.
-            	Disconnecting segment DFT_segment_291.
-            	Disconnecting segment DFT_segment_280.
-            	Disconnecting segment DFT_segment_269.
-            	Disconnecting segment DFT_segment_13.
-            	Disconnecting segment DFT_segment_261.
-            	Disconnecting segment DFT_segment_260.
-            	Disconnecting segment DFT_segment_258.
-            	Disconnecting segment DFT_segment_257.
-            	Disconnecting segment DFT_segment_256.
-            	Disconnecting segment DFT_segment_255.
-            	Disconnecting segment DFT_segment_254.
-            	Disconnecting segment DFT_segment_253.
-            	Disconnecting segment DFT_segment_252.
-            	Disconnecting segment DFT_segment_251.
-            	Disconnecting segment DFT_segment_250.
-            	Disconnecting segment DFT_segment_249.
-            	Disconnecting segment DFT_segment_248.
-            	Disconnecting segment DFT_segment_247.
-            	Disconnecting segment DFT_segment_246.
-            	Disconnecting segment DFT_segment_245.
-            	Disconnecting segment DFT_segment_244.
-            	Disconnecting segment DFT_segment_243.
-            	Disconnecting segment DFT_segment_242.
-            	Disconnecting segment DFT_segment_241.
-            	Disconnecting segment DFT_segment_240.
-            	Disconnecting segment DFT_segment_239.
-            	Disconnecting segment DFT_segment_268.
-            	Disconnecting segment DFT_segment_267.
-            	Disconnecting segment DFT_segment_266.
-            	Disconnecting segment DFT_segment_265.
-            	Disconnecting segment DFT_segment_264.
-            	Disconnecting segment DFT_segment_263.
-            	Disconnecting segment DFT_segment_262.
-            	Disconnecting segment DFT_segment_259.
-            	Disconnecting segment DFT_segment_231.
-            	Disconnecting segment DFT_segment_230.
-            	Disconnecting segment DFT_segment_228.
-            	Disconnecting segment DFT_segment_227.
-            	Disconnecting segment DFT_segment_226.
-            	Disconnecting segment DFT_segment_225.
-            	Disconnecting segment DFT_segment_224.
-            	Disconnecting segment DFT_segment_223.
-            	Disconnecting segment DFT_segment_222.
-            	Disconnecting segment DFT_segment_221.
-            	Disconnecting segment DFT_segment_220.
-            	Disconnecting segment DFT_segment_219.
-            	Disconnecting segment DFT_segment_217.
-            	Disconnecting segment DFT_segment_216.
-            	Disconnecting segment DFT_segment_215.
-            	Disconnecting segment DFT_segment_214.
-            	Disconnecting segment DFT_segment_213.
-            	Disconnecting segment DFT_segment_212.
-            	Disconnecting segment DFT_segment_211.
-            	Disconnecting segment DFT_segment_210.
-            	Disconnecting segment DFT_segment_209.
-            	Disconnecting segment DFT_segment_208.
-            	Disconnecting segment DFT_segment_238.
-            	Disconnecting segment DFT_segment_237.
-            	Disconnecting segment DFT_segment_236.
-            	Disconnecting segment DFT_segment_235.
-            	Disconnecting segment DFT_segment_234.
-            	Disconnecting segment DFT_segment_233.
-            	Disconnecting segment DFT_segment_232.
-            	Disconnecting segment DFT_segment_229.
-            	Disconnecting segment DFT_segment_218.
-            	Disconnecting segment DFT_segment_207.
-            	Disconnecting segment DFT_segment_12.
-            	Disconnecting segment DFT_segment_199.
-            	Disconnecting segment DFT_segment_198.
-            	Disconnecting segment DFT_segment_196.
-            	Disconnecting segment DFT_segment_195.
-            	Disconnecting segment DFT_segment_194.
-            	Disconnecting segment DFT_segment_193.
-            	Disconnecting segment DFT_segment_192.
-            	Disconnecting segment DFT_segment_191.
-            	Disconnecting segment DFT_segment_190.
-            	Disconnecting segment DFT_segment_189.
-            	Disconnecting segment DFT_segment_188.
-            	Disconnecting segment DFT_segment_187.
-            	Disconnecting segment DFT_segment_186.
-            	Disconnecting segment DFT_segment_185.
-            	Disconnecting segment DFT_segment_184.
-            	Disconnecting segment DFT_segment_183.
-            	Disconnecting segment DFT_segment_182.
-            	Disconnecting segment DFT_segment_181.
-            	Disconnecting segment DFT_segment_180.
-            	Disconnecting segment DFT_segment_179.
-            	Disconnecting segment DFT_segment_178.
-            	Disconnecting segment DFT_segment_177.
-            	Disconnecting segment DFT_segment_206.
-            	Disconnecting segment DFT_segment_205.
-            	Disconnecting segment DFT_segment_204.
-            	Disconnecting segment DFT_segment_203.
-            	Disconnecting segment DFT_segment_202.
-            	Disconnecting segment DFT_segment_201.
-            	Disconnecting segment DFT_segment_200.
-            	Disconnecting segment DFT_segment_197.
-            	Disconnecting segment DFT_segment_169.
-            	Disconnecting segment DFT_segment_168.
-            	Disconnecting segment DFT_segment_166.
-            	Disconnecting segment DFT_segment_165.
-            	Disconnecting segment DFT_segment_164.
-            	Disconnecting segment DFT_segment_163.
-            	Disconnecting segment DFT_segment_162.
-            	Disconnecting segment DFT_segment_161.
-            	Disconnecting segment DFT_segment_160.
-            	Disconnecting segment DFT_segment_159.
-            	Disconnecting segment DFT_segment_158.
-            	Disconnecting segment DFT_segment_157.
-            	Disconnecting segment DFT_segment_156.
-            	Disconnecting segment DFT_segment_155.
-            	Disconnecting segment DFT_segment_154.
-            	Disconnecting segment DFT_segment_153.
-            	Disconnecting segment DFT_segment_152.
-            	Disconnecting segment DFT_segment_151.
-            	Disconnecting segment DFT_segment_150.
-            	Disconnecting segment DFT_segment_149.
-            	Disconnecting segment DFT_segment_148.
-            	Disconnecting segment DFT_segment_147.
-            	Disconnecting segment DFT_segment_176.
-            	Disconnecting segment DFT_segment_175.
-            	Disconnecting segment DFT_segment_174.
-            	Disconnecting segment DFT_segment_173.
-            	Disconnecting segment DFT_segment_172.
-            	Disconnecting segment DFT_segment_171.
-            	Disconnecting segment DFT_segment_170.
-            	Disconnecting segment DFT_segment_167.
-            	Disconnecting segment DFT_segment_11.
-            	Disconnecting segment DFT_segment_10.
-            	Disconnecting segment DFT_segment_9.
-            	Disconnecting segment DFT_segment_8.
-            	Disconnecting segment DFT_segment_7.
-            	Disconnecting segment DFT_segment_139.
-            	Disconnecting segment DFT_segment_138.
-            	Disconnecting segment DFT_segment_136.
-            	Disconnecting segment DFT_segment_135.
-            	Disconnecting segment DFT_segment_134.
-            	Disconnecting segment DFT_segment_133.
-            	Disconnecting segment DFT_segment_132.
-            	Disconnecting segment DFT_segment_131.
-            	Disconnecting segment DFT_segment_130.
-            	Disconnecting segment DFT_segment_129.
-            	Disconnecting segment DFT_segment_128.
-            	Disconnecting segment DFT_segment_127.
-            	Disconnecting segment DFT_segment_125.
-            	Disconnecting segment DFT_segment_124.
-            	Disconnecting segment DFT_segment_123.
-            	Disconnecting segment DFT_segment_122.
-            	Disconnecting segment DFT_segment_121.
-            	Disconnecting segment DFT_segment_120.
-            	Disconnecting segment DFT_segment_119.
-            	Disconnecting segment DFT_segment_118.
-            	Disconnecting segment DFT_segment_117.
-            	Disconnecting segment DFT_segment_116.
-            	Disconnecting segment DFT_segment_146.
-            	Disconnecting segment DFT_segment_145.
-            	Disconnecting segment DFT_segment_144.
-            	Disconnecting segment DFT_segment_143.
-            	Disconnecting segment DFT_segment_142.
-            	Disconnecting segment DFT_segment_141.
-            	Disconnecting segment DFT_segment_140.
-            	Disconnecting segment DFT_segment_137.
-            	Disconnecting segment DFT_segment_126.
-            	Disconnecting segment DFT_segment_115.
-            	Disconnecting segment DFT_segment_6.
-            	Disconnecting segment DFT_segment_5.
-            	Disconnecting segment DFT_segment_107.
-            	Disconnecting segment DFT_segment_106.
-            	Disconnecting segment DFT_segment_104.
-            	Disconnecting segment DFT_segment_103.
-            	Disconnecting segment DFT_segment_102.
-            	Disconnecting segment DFT_segment_101.
-            	Disconnecting segment DFT_segment_100.
-            	Disconnecting segment DFT_segment_99.
-            	Disconnecting segment DFT_segment_98.
-            	Disconnecting segment DFT_segment_97.
-            	Disconnecting segment DFT_segment_96.
-            	Disconnecting segment DFT_segment_95.
-            	Disconnecting segment DFT_segment_93.
-            	Disconnecting segment DFT_segment_92.
-            	Disconnecting segment DFT_segment_91.
-            	Disconnecting segment DFT_segment_90.
-            	Disconnecting segment DFT_segment_89.
-            	Disconnecting segment DFT_segment_88.
-            	Disconnecting segment DFT_segment_87.
-            	Disconnecting segment DFT_segment_86.
-            	Disconnecting segment DFT_segment_85.
-            	Disconnecting segment DFT_segment_84.
-            	Disconnecting segment DFT_segment_114.
-            	Disconnecting segment DFT_segment_113.
-            	Disconnecting segment DFT_segment_112.
-            	Disconnecting segment DFT_segment_111.
-            	Disconnecting segment DFT_segment_110.
-            	Disconnecting segment DFT_segment_109.
-            	Disconnecting segment DFT_segment_108.
-            	Disconnecting segment DFT_segment_105.
-            	Disconnecting segment DFT_segment_94.
-            	Disconnecting segment DFT_segment_83.
-            	Disconnecting segment DFT_segment_4.
-            	Disconnecting segment DFT_segment_82.
-            	Disconnecting segment DFT_segment_81.
-            	Disconnecting segment DFT_segment_80.
-            	Disconnecting segment DFT_segment_79.
-            	Disconnecting segment DFT_segment_71.
-            	Disconnecting segment DFT_segment_70.
-            	Disconnecting segment DFT_segment_68.
-            	Disconnecting segment DFT_segment_67.
-            	Disconnecting segment DFT_segment_66.
-            	Disconnecting segment DFT_segment_65.
-            	Disconnecting segment DFT_segment_64.
-            	Disconnecting segment DFT_segment_63.
-            	Disconnecting segment DFT_segment_62.
-            	Disconnecting segment DFT_segment_61.
-            	Disconnecting segment DFT_segment_60.
-            	Disconnecting segment DFT_segment_59.
-            	Disconnecting segment DFT_segment_57.
-            	Disconnecting segment DFT_segment_56.
-            	Disconnecting segment DFT_segment_55.
-            	Disconnecting segment DFT_segment_54.
-            	Disconnecting segment DFT_segment_53.
-            	Disconnecting segment DFT_segment_52.
-            	Disconnecting segment DFT_segment_51.
-            	Disconnecting segment DFT_segment_50.
-            	Disconnecting segment DFT_segment_49.
-            	Disconnecting segment DFT_segment_48.
-            	Disconnecting segment DFT_segment_78.
-            	Disconnecting segment DFT_segment_77.
-            	Disconnecting segment DFT_segment_76.
-            	Disconnecting segment DFT_segment_75.
-            	Disconnecting segment DFT_segment_74.
-            	Disconnecting segment DFT_segment_73.
-            	Disconnecting segment DFT_segment_72.
-            	Disconnecting segment DFT_segment_69.
-            	Disconnecting segment DFT_segment_58.
-            	Disconnecting segment DFT_segment_47.
-            	Disconnecting segment DFT_segment_3.
-            	Disconnecting segment DFT_segment_39.
-            	Disconnecting segment DFT_segment_38.
-            	Disconnecting segment DFT_segment_36.
-            	Disconnecting segment DFT_segment_35.
-            	Disconnecting segment DFT_segment_34.
-            	Disconnecting segment DFT_segment_33.
-            	Disconnecting segment DFT_segment_32.
-            	Disconnecting segment DFT_segment_31.
-            	Disconnecting segment DFT_segment_30.
-            	Disconnecting segment DFT_segment_29.
-            	Disconnecting segment DFT_segment_28.
-            	Disconnecting segment DFT_segment_27.
-            	Disconnecting segment DFT_segment_26.
-            	Disconnecting segment DFT_segment_25.
-            	Disconnecting segment DFT_segment_24.
-            	Disconnecting segment DFT_segment_23.
-            	Disconnecting segment DFT_segment_22.
-            	Disconnecting segment DFT_segment_21.
-            	Disconnecting segment DFT_segment_20.
-            	Disconnecting segment DFT_segment_19.
-            	Disconnecting segment DFT_segment_18.
-            	Disconnecting segment DFT_segment_17.
-            	Disconnecting segment DFT_segment_46.
-            	Disconnecting segment DFT_segment_45.
-            	Disconnecting segment DFT_segment_44.
-            	Disconnecting segment DFT_segment_43.
-            	Disconnecting segment DFT_segment_42.
-            	Disconnecting segment DFT_segment_41.
-            	Disconnecting segment DFT_segment_40.
-            	Disconnecting segment DFT_segment_37.
             	Disconnecting (SDO) pin scan_out.
-    Connecting scan chain 'chain0' with 2568 flip-flops. (using 'scan_en' shift enable)
+    Connecting scan chain 'chain0' with 2209 flip-flops. (using 'scan_en' shift enable)
       	Connecting (SDI) pin port:cv32e40p_core/scan_in.
     	Connecting segment OPCG_DOMAIN_SEG_0.
     	Connecting segment OPCG_TRIGGER_SEG_0.
-    	Connecting segment DFT_segment_359.
-    	Connecting segment DFT_segment_358.
-    	Connecting segment DFT_segment_357.
-    	Connecting segment DFT_segment_356.
-    	Connecting segment DFT_segment_355.
-    	Connecting segment DFT_segment_354.
-    	Connecting segment DFT_segment_353.
-    	Connecting segment DFT_segment_352.
-    	Connecting segment DFT_segment_351.
-    	Connecting segment DFT_segment_350.
-    	Connecting segment DFT_segment_349.
-    	Connecting segment DFT_segment_348.
-    	Connecting segment DFT_segment_347.
-    	Connecting segment DFT_segment_346.
-    	Connecting segment DFT_segment_345.
-    	Connecting segment DFT_segment_344.
-    	Connecting segment DFT_segment_343.
-    	Connecting segment DFT_segment_342.
-    	Connecting segment DFT_segment_341.
-    	Connecting segment DFT_segment_340.
-    	Connecting segment DFT_segment_339.
-    	Connecting segment DFT_segment_338.
-    	Connecting segment DFT_segment_361.
-    	Connecting segment DFT_segment_360.
-    	Connecting segment DFT_segment_337.
-    	Connecting segment DFT_segment_336.
-    	Connecting segment DFT_segment_335.
-    	Connecting segment DFT_segment_334.
-    	Connecting segment DFT_segment_333.
-    	Connecting segment DFT_segment_325.
-    	Connecting segment DFT_segment_324.
-    	Connecting segment DFT_segment_322.
-    	Connecting segment DFT_segment_321.
-    	Connecting segment DFT_segment_320.
-    	Connecting segment DFT_segment_319.
-    	Connecting segment DFT_segment_318.
-    	Connecting segment DFT_segment_317.
-    	Connecting segment DFT_segment_316.
-    	Connecting segment DFT_segment_315.
-    	Connecting segment DFT_segment_314.
-    	Connecting segment DFT_segment_313.
-    	Connecting segment DFT_segment_311.
-    	Connecting segment DFT_segment_310.
-    	Connecting segment DFT_segment_309.
-    	Connecting segment DFT_segment_308.
-    	Connecting segment DFT_segment_307.
-    	Connecting segment DFT_segment_306.
-    	Connecting segment DFT_segment_305.
-    	Connecting segment DFT_segment_304.
-    	Connecting segment DFT_segment_303.
-    	Connecting segment DFT_segment_302.
-    	Connecting segment DFT_segment_332.
-    	Connecting segment DFT_segment_331.
-    	Connecting segment DFT_segment_330.
-    	Connecting segment DFT_segment_329.
-    	Connecting segment DFT_segment_328.
-    	Connecting segment DFT_segment_327.
-    	Connecting segment DFT_segment_326.
-    	Connecting segment DFT_segment_323.
-    	Connecting segment DFT_segment_312.
-    	Connecting segment DFT_segment_301.
-    	Connecting segment DFT_segment_16.
-    	Connecting segment DFT_segment_15.
-    	Connecting segment DFT_segment_14.
-    	Connecting segment DFT_segment_293.
-    	Connecting segment DFT_segment_292.
-    	Connecting segment DFT_segment_290.
-    	Connecting segment DFT_segment_289.
-    	Connecting segment DFT_segment_288.
-    	Connecting segment DFT_segment_287.
-    	Connecting segment DFT_segment_286.
-    	Connecting segment DFT_segment_285.
-    	Connecting segment DFT_segment_284.
-    	Connecting segment DFT_segment_283.
-    	Connecting segment DFT_segment_282.
-    	Connecting segment DFT_segment_281.
-    	Connecting segment DFT_segment_279.
-    	Connecting segment DFT_segment_278.
-    	Connecting segment DFT_segment_277.
-    	Connecting segment DFT_segment_276.
-    	Connecting segment DFT_segment_275.
-    	Connecting segment DFT_segment_274.
-    	Connecting segment DFT_segment_273.
-    	Connecting segment DFT_segment_272.
-    	Connecting segment DFT_segment_271.
-    	Connecting segment DFT_segment_270.
-    	Connecting segment DFT_segment_300.
-    	Connecting segment DFT_segment_299.
-    	Connecting segment DFT_segment_298.
-    	Connecting segment DFT_segment_297.
-    	Connecting segment DFT_segment_296.
-    	Connecting segment DFT_segment_295.
-    	Connecting segment DFT_segment_294.
-    	Connecting segment DFT_segment_291.
-    	Connecting segment DFT_segment_280.
-    	Connecting segment DFT_segment_269.
-    	Connecting segment DFT_segment_13.
-    	Connecting segment DFT_segment_261.
-    	Connecting segment DFT_segment_260.
-    	Connecting segment DFT_segment_258.
-    	Connecting segment DFT_segment_257.
-    	Connecting segment DFT_segment_256.
-    	Connecting segment DFT_segment_255.
-    	Connecting segment DFT_segment_254.
-    	Connecting segment DFT_segment_253.
-    	Connecting segment DFT_segment_252.
-    	Connecting segment DFT_segment_251.
-    	Connecting segment DFT_segment_250.
-    	Connecting segment DFT_segment_249.
-    	Connecting segment DFT_segment_248.
-    	Connecting segment DFT_segment_247.
-    	Connecting segment DFT_segment_246.
-    	Connecting segment DFT_segment_245.
-    	Connecting segment DFT_segment_244.
-    	Connecting segment DFT_segment_243.
-    	Connecting segment DFT_segment_242.
-    	Connecting segment DFT_segment_241.
-    	Connecting segment DFT_segment_240.
-    	Connecting segment DFT_segment_239.
-    	Connecting segment DFT_segment_268.
-    	Connecting segment DFT_segment_267.
-    	Connecting segment DFT_segment_266.
-    	Connecting segment DFT_segment_265.
-    	Connecting segment DFT_segment_264.
-    	Connecting segment DFT_segment_263.
-    	Connecting segment DFT_segment_262.
-    	Connecting segment DFT_segment_259.
-    	Connecting segment DFT_segment_231.
-    	Connecting segment DFT_segment_230.
-    	Connecting segment DFT_segment_228.
-    	Connecting segment DFT_segment_227.
-    	Connecting segment DFT_segment_226.
-    	Connecting segment DFT_segment_225.
-    	Connecting segment DFT_segment_224.
-    	Connecting segment DFT_segment_223.
-    	Connecting segment DFT_segment_222.
-    	Connecting segment DFT_segment_221.
-    	Connecting segment DFT_segment_220.
-    	Connecting segment DFT_segment_219.
-    	Connecting segment DFT_segment_217.
-    	Connecting segment DFT_segment_216.
-    	Connecting segment DFT_segment_215.
-    	Connecting segment DFT_segment_214.
-    	Connecting segment DFT_segment_213.
-    	Connecting segment DFT_segment_212.
-    	Connecting segment DFT_segment_211.
-    	Connecting segment DFT_segment_210.
-    	Connecting segment DFT_segment_209.
-    	Connecting segment DFT_segment_208.
-    	Connecting segment DFT_segment_238.
-    	Connecting segment DFT_segment_237.
-    	Connecting segment DFT_segment_236.
-    	Connecting segment DFT_segment_235.
-    	Connecting segment DFT_segment_234.
-    	Connecting segment DFT_segment_233.
-    	Connecting segment DFT_segment_232.
-    	Connecting segment DFT_segment_229.
-    	Connecting segment DFT_segment_218.
-    	Connecting segment DFT_segment_207.
-    	Connecting segment DFT_segment_12.
-    	Connecting segment DFT_segment_199.
-    	Connecting segment DFT_segment_198.
-    	Connecting segment DFT_segment_196.
-    	Connecting segment DFT_segment_195.
-    	Connecting segment DFT_segment_194.
-    	Connecting segment DFT_segment_193.
-    	Connecting segment DFT_segment_192.
-    	Connecting segment DFT_segment_191.
-    	Connecting segment DFT_segment_190.
-    	Connecting segment DFT_segment_189.
-    	Connecting segment DFT_segment_188.
-    	Connecting segment DFT_segment_187.
-    	Connecting segment DFT_segment_186.
-    	Connecting segment DFT_segment_185.
-    	Connecting segment DFT_segment_184.
-    	Connecting segment DFT_segment_183.
-    	Connecting segment DFT_segment_182.
-    	Connecting segment DFT_segment_181.
-    	Connecting segment DFT_segment_180.
-    	Connecting segment DFT_segment_179.
-    	Connecting segment DFT_segment_178.
-    	Connecting segment DFT_segment_177.
-    	Connecting segment DFT_segment_206.
-    	Connecting segment DFT_segment_205.
-    	Connecting segment DFT_segment_204.
-    	Connecting segment DFT_segment_203.
-    	Connecting segment DFT_segment_202.
-    	Connecting segment DFT_segment_201.
-    	Connecting segment DFT_segment_200.
-    	Connecting segment DFT_segment_197.
-    	Connecting segment DFT_segment_169.
-    	Connecting segment DFT_segment_168.
-    	Connecting segment DFT_segment_166.
-    	Connecting segment DFT_segment_165.
-    	Connecting segment DFT_segment_164.
-    	Connecting segment DFT_segment_163.
-    	Connecting segment DFT_segment_162.
-    	Connecting segment DFT_segment_161.
-    	Connecting segment DFT_segment_160.
-    	Connecting segment DFT_segment_159.
-    	Connecting segment DFT_segment_158.
-    	Connecting segment DFT_segment_157.
-    	Connecting segment DFT_segment_156.
-    	Connecting segment DFT_segment_155.
-    	Connecting segment DFT_segment_154.
-    	Connecting segment DFT_segment_153.
-    	Connecting segment DFT_segment_152.
-    	Connecting segment DFT_segment_151.
-    	Connecting segment DFT_segment_150.
-    	Connecting segment DFT_segment_149.
-    	Connecting segment DFT_segment_148.
-    	Connecting segment DFT_segment_147.
-    	Connecting segment DFT_segment_176.
-    	Connecting segment DFT_segment_175.
-    	Connecting segment DFT_segment_174.
-    	Connecting segment DFT_segment_173.
-    	Connecting segment DFT_segment_172.
-    	Connecting segment DFT_segment_171.
-    	Connecting segment DFT_segment_170.
-    	Connecting segment DFT_segment_167.
-    	Connecting segment DFT_segment_11.
-    	Connecting segment DFT_segment_10.
-    	Connecting segment DFT_segment_9.
-    	Connecting segment DFT_segment_8.
-    	Connecting segment DFT_segment_7.
-    	Connecting segment DFT_segment_139.
-    	Connecting segment DFT_segment_138.
-    	Connecting segment DFT_segment_136.
-    	Connecting segment DFT_segment_135.
-    	Connecting segment DFT_segment_134.
-    	Connecting segment DFT_segment_133.
-    	Connecting segment DFT_segment_132.
-    	Connecting segment DFT_segment_131.
-    	Connecting segment DFT_segment_130.
-    	Connecting segment DFT_segment_129.
-    	Connecting segment DFT_segment_128.
-    	Connecting segment DFT_segment_127.
-    	Connecting segment DFT_segment_125.
-    	Connecting segment DFT_segment_124.
-    	Connecting segment DFT_segment_123.
-    	Connecting segment DFT_segment_122.
-    	Connecting segment DFT_segment_121.
-    	Connecting segment DFT_segment_120.
-    	Connecting segment DFT_segment_119.
-    	Connecting segment DFT_segment_118.
-    	Connecting segment DFT_segment_117.
-    	Connecting segment DFT_segment_116.
-    	Connecting segment DFT_segment_146.
-    	Connecting segment DFT_segment_145.
-    	Connecting segment DFT_segment_144.
-    	Connecting segment DFT_segment_143.
-    	Connecting segment DFT_segment_142.
-    	Connecting segment DFT_segment_141.
-    	Connecting segment DFT_segment_140.
-    	Connecting segment DFT_segment_137.
-    	Connecting segment DFT_segment_126.
-    	Connecting segment DFT_segment_115.
-    	Connecting segment DFT_segment_6.
-    	Connecting segment DFT_segment_5.
-    	Connecting segment DFT_segment_107.
-    	Connecting segment DFT_segment_106.
-    	Connecting segment DFT_segment_104.
-    	Connecting segment DFT_segment_103.
-    	Connecting segment DFT_segment_102.
-    	Connecting segment DFT_segment_101.
-    	Connecting segment DFT_segment_100.
-    	Connecting segment DFT_segment_99.
-    	Connecting segment DFT_segment_98.
-    	Connecting segment DFT_segment_97.
-    	Connecting segment DFT_segment_96.
-    	Connecting segment DFT_segment_95.
-    	Connecting segment DFT_segment_93.
-    	Connecting segment DFT_segment_92.
-    	Connecting segment DFT_segment_91.
-    	Connecting segment DFT_segment_90.
-    	Connecting segment DFT_segment_89.
-    	Connecting segment DFT_segment_88.
-    	Connecting segment DFT_segment_87.
-    	Connecting segment DFT_segment_86.
-    	Connecting segment DFT_segment_85.
-    	Connecting segment DFT_segment_84.
-    	Connecting segment DFT_segment_114.
-    	Connecting segment DFT_segment_113.
-    	Connecting segment DFT_segment_112.
-    	Connecting segment DFT_segment_111.
-    	Connecting segment DFT_segment_110.
-    	Connecting segment DFT_segment_109.
-    	Connecting segment DFT_segment_108.
-    	Connecting segment DFT_segment_105.
-    	Connecting segment DFT_segment_94.
-    	Connecting segment DFT_segment_83.
-    	Connecting segment DFT_segment_4.
-    	Connecting segment DFT_segment_82.
-    	Connecting segment DFT_segment_81.
-    	Connecting segment DFT_segment_80.
-    	Connecting segment DFT_segment_79.
-    	Connecting segment DFT_segment_71.
-    	Connecting segment DFT_segment_70.
-    	Connecting segment DFT_segment_68.
-    	Connecting segment DFT_segment_67.
-    	Connecting segment DFT_segment_66.
-    	Connecting segment DFT_segment_65.
-    	Connecting segment DFT_segment_64.
-    	Connecting segment DFT_segment_63.
-    	Connecting segment DFT_segment_62.
-    	Connecting segment DFT_segment_61.
-    	Connecting segment DFT_segment_60.
-    	Connecting segment DFT_segment_59.
-    	Connecting segment DFT_segment_57.
-    	Connecting segment DFT_segment_56.
-    	Connecting segment DFT_segment_55.
-    	Connecting segment DFT_segment_54.
-    	Connecting segment DFT_segment_53.
-    	Connecting segment DFT_segment_52.
-    	Connecting segment DFT_segment_51.
-    	Connecting segment DFT_segment_50.
-    	Connecting segment DFT_segment_49.
-    	Connecting segment DFT_segment_48.
-    	Connecting segment DFT_segment_78.
-    	Connecting segment DFT_segment_77.
-    	Connecting segment DFT_segment_76.
-    	Connecting segment DFT_segment_75.
-    	Connecting segment DFT_segment_74.
-    	Connecting segment DFT_segment_73.
-    	Connecting segment DFT_segment_72.
-    	Connecting segment DFT_segment_69.
-    	Connecting segment DFT_segment_58.
-    	Connecting segment DFT_segment_47.
-    	Connecting segment DFT_segment_3.
-    	Connecting segment DFT_segment_39.
-    	Connecting segment DFT_segment_38.
-    	Connecting segment DFT_segment_36.
-    	Connecting segment DFT_segment_35.
-    	Connecting segment DFT_segment_34.
-    	Connecting segment DFT_segment_33.
-    	Connecting segment DFT_segment_32.
-    	Connecting segment DFT_segment_31.
-    	Connecting segment DFT_segment_30.
-    	Connecting segment DFT_segment_29.
-    	Connecting segment DFT_segment_28.
-    	Connecting segment DFT_segment_27.
-    	Connecting segment DFT_segment_26.
-    	Connecting segment DFT_segment_25.
-    	Connecting segment DFT_segment_24.
-    	Connecting segment DFT_segment_23.
-    	Connecting segment DFT_segment_22.
-    	Connecting segment DFT_segment_21.
-    	Connecting segment DFT_segment_20.
-    	Connecting segment DFT_segment_19.
-    	Connecting segment DFT_segment_18.
-    	Connecting segment DFT_segment_17.
-    	Connecting segment DFT_segment_46.
-    	Connecting segment DFT_segment_45.
-    	Connecting segment DFT_segment_44.
-    	Connecting segment DFT_segment_43.
-    	Connecting segment DFT_segment_42.
-    	Connecting segment DFT_segment_41.
-    	Connecting segment DFT_segment_40.
-    	Connecting segment DFT_segment_37.
       	Connecting (SDO) pin port:cv32e40p_core/scan_out.
 Mapping DFT logic introduced by scan chain connection...
 Mapping DFT logic done.
 Info    : Reporting runtime for DFT command. [DFT-147]
-        : Runtime for connect_scan_chains is 1 second(s).
+        : Runtime for connect_scan_chains is 2 second(s).
 Info    : Successfully completed DFT command. [DFT-146]
         : Successfully completed connect_scan_chains command.
   =================
@@ -4693,9 +4334,9 @@ Info    : Removed DFT object. [DFT-102]
 Info    : Removed object. [TUI-58]
         : Removed test_signal 'test_signal:cv32e40p_core/opcg_gate_pads__z'.
 Mapping DFT logic introduced by connect_opcg_segments ...
-@file(07_insert_compression.tcl) 57: puts "INFO: Inserting Scan Compression on core chain0 (Ratio $COMP_RATIO)..."
+@file(07_insert_compression.tcl) 58: puts "INFO: Inserting Scan Compression on core chain0 (Ratio $COMP_RATIO)..."
 INFO: Inserting Scan Compression on core chain0 (Ratio 70)...
-@file(07_insert_compression.tcl) 58: compress_scan_chains \
+@file(07_insert_compression.tcl) 59: compress_scan_chains \
     -chains [get_db actual_scan_chains chain0] \
     -ratio $COMP_RATIO \
     -compressor xor \
@@ -5011,11 +4652,11 @@ Begin SDR optimization IMPL_BASED_region
 No special hier is found 
 End SDR optimization IMPL_BASED_region 
 Starting timing based select reordering [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.011s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.008s)
 Starting recase case-box optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Completed recase case-box optimization (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting infer macro optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed infer macro optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Completed infer macro optimization (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting decode mux sandwich optimization [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Completed decode mux sandwich optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting decode mux optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
@@ -5029,7 +4670,7 @@ Completed mux input consolidation (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting constant-data mux optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Completed constant-data mux optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting chain-to-tree inequality transform [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed chain-to-tree inequality transform (accepts: 0, rejects: 0, runtime: 0.001s)
+Completed chain-to-tree inequality transform (accepts: 0, rejects: 0, runtime: 0.002s)
 Starting reconvergence optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Completed reconvergence optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting logic restructure optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
@@ -5047,7 +4688,7 @@ Completed optimize datapath elements (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting datapath recasting [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Completed datapath recasting (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting word-level redundancy removal [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.013s)
+Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.012s)
 Starting clip mux common data inputs [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Completed clip mux common data inputs (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting clip the non-user hierarchies [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
@@ -5091,13 +4732,13 @@ Info    : Skipping datapath optimization. [DPOPT-5]
       Removing temporary intermediate hierarchies under XOR_COMPRESSION_70_1_1x1_20100110
 Number of big hc bmuxes after = 0
 Starting bit-level redundancy removal [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.008s)
+Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.009s)
 Starting logic reduction [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Completed logic reduction (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting mux data reorder optimization [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed mux data reorder optimization (accepts: 0, rejects: 0, runtime: 0.001s)
+Completed mux data reorder optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting timing based select reordering [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.010s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.011s)
 
 Stage: post_rtlopt
 ----------------------------------------------------------------
@@ -5116,7 +4757,7 @@ Starting speculation optimization
 Completed speculation optimization (accepts:0)
 Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.009s)
 Starting timing based select reordering [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.009s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.008s)
 
 Stage: post_muxopt
 --------------------------------------------------------
@@ -5238,7 +4879,7 @@ Scan mapping status report
     Scan mapping: bypassed.  You have to either 1) set attribute 'dft_scan_map_mode' to 'tdrc_pass' and run 'check_dft_rules' or 2) set attribute 'dft_scan_map_mode' to 'force_all'.
 
     Scan mapping bypassed because no TDRC data is available: either command 'check_dft_rules' has not been run or TDRC data has been subsequently invalidated.
-/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3653197
+/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3661341
 
 State Retention Synthesis Status
 ================================
@@ -5335,7 +4976,7 @@ Prepending the mask registers to the actual scan chains.
 
 Actual Scan Chain Summary
 -------------------------
-   The number of actual fullscan chains in the design is: 1
+   The number of actual fullscan chains in the design is: 2
    The number of actual fullscan chains in the design which are favorable for compression is: 1
    The number of actual fullscan chains which can be prepended to is: 1
    The number of actual fullscan chains which are not favorable for prepend is: 0
@@ -5343,19 +4984,19 @@ Actual Scan Chain Summary
 Number of Internal Scan Channels
 --------------------------------
    User requested ratio: 70
-   Tool achieved ratio: 69.4
-   The maximum original scan chain length: 2568
+   Tool achieved ratio: 69.0
+   The maximum original scan chain length: 2209
    The number of internal scan channels is: 70
-   The maximum internal scan channel length is: 37
+   The maximum internal scan channel length is: 32
    The maximum length of the mask register channels is: 70
    The total number of mask registers added is: 70
-   The final maximum fullscan chain length (including mask and/or misr registers) is: 2638
-   This is 100.0% of the average fullscan chain length of 2638.0
+   The final maximum fullscan chain length (including mask and/or misr registers) is: 2279
+   This is 172.7% of the average fullscan chain length of 1319.0
 
 Tester Cycle Statistics
 -----------------------
-   The number of tester cycles required to load a scan pattern in compression mode is: 37
-   The number of tester cycles required to load a scan pattern in fullscan mode is: 2638
+   The number of tester cycles required to load a scan pattern in compression mode is: 32
+   The number of tester cycles required to load a scan pattern in fullscan mode is: 2279
    The number of tester cycles required to load a channel mask shift register chain is: 70
 
 Info    : Reporting runtime for DFT command. [DFT-147]
@@ -5372,7 +5013,7 @@ Info    : Successfully completed DFT command. [DFT-146]
 |TUI-296|Info   |    1|The given (sub)design is already uniquified.                                                                     |
 |       |       |     |Try running the 'edit_netlist uniquify' command on the parent hierarchy of this (sub)design, if there exists any.|
 -----------------------------------------------------------------------------------------------------------------------------------------
-@file(07_insert_compression.tcl) 67: check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
+@file(07_insert_compression.tcl) 68: check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
 Info    : Initiating DFT command. [DFT-145]
         : Initiating check_dft_rules command.
   Checking DFT rules for 'cv32e40p_core' module under 'muxed_scan' style
@@ -5389,17 +5030,19 @@ Info    : Reporting runtime for DFT command. [DFT-147]
         : Runtime for check_dft_rules is 0.086000 seconds.
 Info    : Successfully completed DFT command. [DFT-146]
         : Successfully completed check_dft_rules command.
-@file(07_insert_compression.tcl) 68: report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains.rpt"
-@file(07_insert_compression.tcl) 71: set DB_FILE [file normalize "$DBS_DIR/07_compressed.db"]
-@file(07_insert_compression.tcl) 72: write_db -all_root_attributes -to_file $DB_FILE
+@file(07_insert_compression.tcl) 69: report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains.rpt"
+Info    : Scan chain has elements which already have their SE connected. No elements in the scan chain needs SE connection. [DFT-710]
+        : Scan chain wrap_chain shift_enable is reported as NONE.
+@file(07_insert_compression.tcl) 72: set DB_FILE [file normalize "$DBS_DIR/07_compressed.db"]
+@file(07_insert_compression.tcl) 73: write_db -all_root_attributes -to_file $DB_FILE
 Finished exporting design database to file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/dbs/07_compressed.db' for 'cv32e40p_core' (command execution time mm:ss cpu = 00:02, real = 00:02).
-@file(07_insert_compression.tcl) 74: puts "INFO: Step 7 compression insertion (Ratio $COMP_RATIO) completed. Checkpoint saved: $DB_FILE"
+@file(07_insert_compression.tcl) 75: puts "INFO: Step 7 compression insertion (Ratio $COMP_RATIO) completed. Checkpoint saved: $DB_FILE"
 INFO: Step 7 compression insertion (Ratio 70) completed. Checkpoint saved: /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/dbs/07_compressed.db
-@file(07_insert_compression.tcl) 75: exit
+@file(07_insert_compression.tcl) 76: exit
 
 Lic Summary:
-[19:45:47.048296] Cdslmd servers: pine-server
-[19:45:47.572601] Feature usage summary:
-[19:45:47.572601] Genus_Synthesis  
-[19:45:47.572602] Modus_DFT_Opt  
+[20:04:29.302896] Cdslmd servers: pine-server
+[20:04:29.302923] Feature usage summary:
+[20:04:29.302928] Genus_Synthesis  
+[20:04:29.302930] Modus_DFT_Opt  
 Normal exit.
