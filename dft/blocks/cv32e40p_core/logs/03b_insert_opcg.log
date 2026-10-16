@@ -1,0 +1,629 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2025 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[12:58:17.455617] Configured Lic search path (25.01-s002): 5280@pine-server
+
+Version: 25.10-p002_1, built Thu Apr 17 03:05:38 PDT 2025
+Options: -overwrite -files scripts/03b_insert_opcg.tcl -log logs/03b_insert_opcg.log 
+Date:    Fri Oct 16 12:58:17 2026
+Host:    Pine-06 (x86_64 w/Linux 5.14.0-611.30.1.el9_7.x86_64) (6cores*6cpus*1physical cpu*Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz 9216KB) (7671680KB)
+PID:     3458731
+OS:      Red Hat Enterprise Linux 9.7 (Plow)
+
+Checking out license: Genus_Synthesis
+[12:58:17.510963] Periodic Lic check successful
+[12:58:17.510985] Feature usage summary:
+[12:58:17.510986] Genus_Synthesis  
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Finished executable startup (3 seconds elapsed).
+
+Loading tool scripts...
+Finished loading tool scripts (16 seconds elapsed).
+
+#@ Processing -files option
+@genus:root: 1> source scripts/03b_insert_opcg.tcl
+#@ Begin verbose source ./scripts/03b_insert_opcg.tcl
+@file(03b_insert_opcg.tcl) 1: set SCRIPT_DIR [file dirname [file normalize [info script]]]
+@file(03b_insert_opcg.tcl) 2: source "$SCRIPT_DIR/00_setup_env.tcl"
+Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Fri Oct 16 12:58:34 IST 2026)...
+#@ Begin verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl
+@file(00_setup_env.tcl) 1: set DESIGN "cv32e40p_core"
+@file(00_setup_env.tcl) 3: set SCRIPTS_DIR  [file dirname [file normalize [info script]]]
+@file(00_setup_env.tcl) 4: set BLOCK_DIR    [file normalize "$SCRIPTS_DIR/.."]
+@file(00_setup_env.tcl) 5: set DFT_ROOT     [file normalize "$BLOCK_DIR/../.."]
+@file(00_setup_env.tcl) 6: set REPO_ROOT    [file normalize "$DFT_ROOT/.."]
+@file(00_setup_env.tcl) 8: set DBS_DIR      "$BLOCK_DIR/dbs"
+@file(00_setup_env.tcl) 9: set REPORTS_DIR  "$BLOCK_DIR/reports"
+@file(00_setup_env.tcl) 10: set NETLISTS_DIR "$BLOCK_DIR/netlists"
+@file(00_setup_env.tcl) 11: set LOGS_DIR     "$BLOCK_DIR/logs"
+@file(00_setup_env.tcl) 12: set ATPG_DIR     "$BLOCK_DIR/atpg"
+@file(00_setup_env.tcl) 14: if {[info exists ::env(CADENCE_DFT_LIB)]} {
+    set LIB_DIR $::env(CADENCE_DFT_LIB)
+} else {
+    set LIB_DIR "/home/admin/DFT/Library"
+}
+@file(00_setup_env.tcl) 20: set TIMING_LIB "$LIB_DIR/timing/slow.lib"
+@file(00_setup_env.tcl) 21: set LEF_FILE   "$LIB_DIR/lef/all.lef"
+@file(00_setup_env.tcl) 22: set ATPG_LIB [file normalize "$LIB_DIR/atpg/stdcell.v"]
+@file(00_setup_env.tcl) 24: set FLIST    "$BLOCK_DIR/filelists/cv32e40p_core.flist"
+@file(00_setup_env.tcl) 25: set SDC_FILE "$BLOCK_DIR/constraints/cv32e40p_core.sdc"
+@file(00_setup_env.tcl) 27: if {![info exists CV32E40P_DIR]} {
+    set cv_dirs [glob -nocomplain -directory "$REPO_ROOT/.bender/git/checkouts" "cv32e40p*"]
+    if {[llength $cv_dirs] > 0} {
+        set CV32E40P_DIR [lindex $cv_dirs 0]
+    } else {
+        puts "ERROR: Cannot find cv32e40p under $REPO_ROOT/.bender/git/checkouts/!"
+        exit 1
+    }
+}
+#@ End verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl
+@file(03b_insert_opcg.tcl) 4: set STEP_RPT_DIR [file normalize "$REPORTS_DIR/03b_opcg"]
+@file(03b_insert_opcg.tcl) 5: file mkdir $STEP_RPT_DIR
+@file(03b_insert_opcg.tcl) 6: file mkdir $DBS_DIR
+@file(03b_insert_opcg.tcl) 9: set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
+@file(03b_insert_opcg.tcl) 10: if {![file exists $PREV_DB]} {
+    puts "ERROR: $PREV_DB not found! Run Step 3 first."
+    exit 1
+}
+@file(03b_insert_opcg.tcl) 14: read_db $PREV_DB
+Reading database file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/dbs/03_mapped.db'.
+Info    : Missing library level attribute. [LBR-516]
+        : slew_derate_from_library not specified in the library, using .lib default of 1. (File /home/admin/DFT/Library/timing/slow.lib, Line 8)
+Info    : Missing a function attribute in the output pin definition. [LBR-518]
+        : Functionality is missing at pin 'Y' for the cell 'HOLDX1'. (File /home/admin/DFT/Library/timing/slow.lib, Line 32486)
+
+  Message Summary for Library slow.lib:
+  *************************************
+  Missing a function attribute in the output pin definition. [LBR-518]: 1
+  Missing library level attribute. [LBR-516]: 1
+  *************************************
+ 
+            Reading file '/home/admin/DFT/Library/timing/slow.lib'
+Info    : Created nominal operating condition. [LBR-412]
+        : Operating condition '_nominal_' was created for the PVT values (1.000000, 1.080000, 125.000000) in library 'slow.lib'.
+        : The nominal operating condition is represented, either by the nominal PVT values specified in the library source (via nom_process,nom_voltage and nom_temperature respectively), or by the default PVT values (1.0,1.0,1.0).
+Info    : An output library pin lacks a function attribute. [LBR-41]
+        : Output pin 'HOLDX1/Y' has no function.
+        : If the remainder of this library cell's semantic checks are successful, it will be considered as a timing-model (because one of its outputs does not have a valid function.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX2'.  Ignoring the test_cell.
+        : Review the definition of the test_cell's function or its parent library-cell's function.  An inconsistency between the two may exist.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRXL'.  Ignoring the test_cell.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX4' has invalid (or complex) clock function.
+        : The sequential cell cannot be inferred because its clock function is unknown.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX4' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX2' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRXL' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATSRXL' has invalid (or complex) clock function.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX1'.  Ignoring the test_cell.
+Warning : Malformed test_cell. [LBR-64]
+        : Unusable test_cell in 'SDFFNSRX4'.  Ignoring the test_cell.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX1' has invalid (or complex) clock function.
+Warning : Clock function definition makes cell unusable. [LBR-141]
+        : Sequential cell 'TLATNSRX1' has invalid (or complex) clock function.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX2' is assumed to be ' CKN'.
+        : The tool derives the clock polarity from the sequential timing arcs specified through the Liberty 'timing_type' attribute. For the positive-edge triggered cells a positive value is expected for the 'clocked_on' or 'enable' attribute while an inverted value is expected for the negative-edge triggered sequential cells.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRXL' is assumed to be ' CKN'.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX4/Q' is ignored.
+        : Timing sense should never be set with 'rising_edge' or 'falling_edge' timing type.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRXL/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRXL/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX2/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX2/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX1/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRX1/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX1/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRX1/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRXL/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATSRXL/QN' is ignored.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX1' is assumed to be ' CKN'.
+Info    : Found conflicting clock polarity information. [LBR-409]
+        : The clock polarity specified through the Liberty 'clocked_on' attribute in libcell 'SDFFNSRX4' is assumed to be ' CKN'.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX1/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX1/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX1/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX1/QN' is ignored.
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_unconnected_input_port" value 'none' to set the attribute "hdl_unconnected_value".
+        : To revert to old behaviour set the value of the attribute "hdl_use_new_undriven_handling" to 0.
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_undriven_output_port" value 'none' to set the attribute "hdl_unconnected_value".
+Info    : Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value". [ELABUTL-134]
+        : Using attribute "hdl_undriven_signal_value" value 'none' to set the attribute "hdl_unconnected_value".
+
+  According to lef_library, there are total 6 routing layers [ V(3) / H(3) ]
+
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AND2X6' cannot be found. The cell will not be marked as 'avoid'.
+        : Set attribute 'avoid' to true on this cell or set attribute 'lib_lef_consistency_check_enable' to 'true'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AND3X8' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AND4X8' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AO21X1' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AO21X2' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AO21XL' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AO22X1' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AO22X2' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'AO22XL' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'CLKAND2X2' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'CLKAND2X6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'CLKBUFX6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'CLKINVX6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'CLKMX2X12' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'CLKXOR2X1' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'CLKXOR2X4' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'DFFQX1' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'DFFQX2' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'DFFQX4' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'DFFSHQX8' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'DLY1X4' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'DLY2X4' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'DLY3X4' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'EDFFHQX2' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'MDFFHQX8' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'MX2X6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'MX3X1' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'MX3X2' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'MX3X4' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'MXI2X6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'MXI3X1' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'MXI3X4' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'NAND2X6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'NAND3X6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'NAND4X6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'NOR2X6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'NOR4X6' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'OA21X1' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'OA22X1' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Cannot find physical definition. [PHYS-104]
+        : The physical definition of library cell 'OA22X2' cannot be found. The cell will not be marked as 'avoid'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '40' reached for message 'PHYS-104'.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL8 cannot be found in library.
+        : Ensure that the proper library files are available and have been imported.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL64 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL32 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL16 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell RF2R1WX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell RF1R1WX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATSX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATRX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNSX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNRXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNRX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNRX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TLATNRX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TTLATXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TTLATX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TTLATX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TTLATX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIX8 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIX4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIX3 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIX2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIX20 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIX1 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIX16 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell TBUFIX12 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell SEDFFHQXL cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell SDFFSRHQXL cannot be found in library.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '40' reached for message 'PHYS-279'.
+Warning : Relaxing an attribute value in the library. [LBR-39]
+        : Overriding the avoid (ie. dont_use) attribute for library-cell 'HOLDX1'.
+        : Relaxing one of the library's attribute value (for example, a library-cell's dont_use or dont_touch attribute) should be done with caution. This warning means that a dont_use or dont_touch attribute defined for a library cell (in liberty file) is overridden by the user in the run. When you do 'read_cpf -library' in a CPF based flow, apart from loading libraries, this command automatically marks low power standard cells as usable. So that the synthesis can use them. These low power standard cells are usually marked 'dont_use true' in the liberty. That's why when the tool makes them usable (avoid = false), these warnings are flagged.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRX4/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRX4/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'positive_unate' for library pin 'TLATNSRXL/Q' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRXL/QN' is ignored.
+Info    : Ignoring specified timing sense. [LBR-170]
+        : The 'timing_sense' definition 'negative_unate' for library pin 'TLATNSRXL/QN' is ignored.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '40' reached for message 'LBR-170'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHX2' is 'pos_unate', but unateness determined from function is 'non_unate'.
+        : The 'timing_sense' attribute will be respected.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHX2' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'CI' and 'S' in libcell 'ADDFHX2'.
+        : Setting the 'timing_sense' to non_unate.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHX2' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHX2' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDFHX2'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHX2' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHX2' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDFHX2'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHX4' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHX4' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'CI' and 'S' in libcell 'ADDFHX4'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHX4' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHX4' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDFHX4'.
+Info    : Setting the maximum print count of this message to 10 if information_level is less than 9. [LBR-161]
+        : To print all the warning messages, set the information_level to 9.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHX4' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHX4' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDFHX4'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFHXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'CI' and 'S' in libcell 'ADDFHXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFHXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDFHXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFHXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDFHXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'CI' and 'S' in libcell 'ADDFXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'CI' and 'S' in libcell 'ADDFXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDFXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDFXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDFXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDFXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDHX2' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDHX2' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDHX2'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDHX2' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDHX2' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDHX2'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDHXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'S' in libcell 'ADDHXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'S' in libcell 'ADDHXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDHXL' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'S' in libcell 'ADDHXL' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'S' in libcell 'ADDHXL'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'S0' and 'Y' in libcell 'CLKMX2X12' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'S0' and 'Y' in libcell 'CLKMX2X12' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'CLKMX2X12'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'Y' in libcell 'CLKXOR2X1' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'Y' in libcell 'CLKXOR2X1' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'Y' in libcell 'CLKXOR2X1'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'Y' in libcell 'CLKXOR2X1' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'A' and 'Y' in libcell 'CLKXOR2X1' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'Y' in libcell 'CLKXOR2X1'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'Y' in libcell 'CLKXOR2X4' is 'pos_unate', but unateness determined from function is 'non_unate'.
+Info    : Mismatch in unateness between 'timing_sense' attribute and the function. [LBR-155]
+        : 'timing_sense' attribute between pin 'B' and 'Y' in libcell 'CLKXOR2X4' is 'neg_unate', but unateness determined from function is 'non_unate'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'B' and 'Y' in libcell 'CLKXOR2X4'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '40' reached for message 'LBR-155'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'A' and 'Y' in libcell 'CLKXOR2X4'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX2X1'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX2X2'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX2X4'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX2X6'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX2XL'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S1' and 'Y' in libcell 'MX3X1'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX3X1'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S1' and 'Y' in libcell 'MX3X2'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX3X2'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S1' and 'Y' in libcell 'MX3X4'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX3X4'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S1' and 'Y' in libcell 'MX4X4'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MX4X4'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MXI2X1'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MXI2X6'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MXI2XL'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S1' and 'Y' in libcell 'MXI3X1'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S0' and 'Y' in libcell 'MXI3X1'.
+Info    : Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed. [LBR-162]
+        : Non_unate 'timing_sense' inferred between pin 'S1' and 'Y' in libcell 'MXI3X4'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '40' reached for message 'LBR-162'.
+Info    : Unusable library cells found at the time of loading a library.  [LBR-415]
+        : Library: 'slow.lib', Total cells: 477, Unusable cells: 9.
+	List of unusable cells: 'HOLDX1 TLATNSRX4 TLATNSRXL TLATSRX2 TLATSRX4 TLATNSRX2 TLATSRX1 TLATSRXL TLATNSRX1 .'
+        : For  more  information, refer to 'Cells Identified as Unusable' in the 'User Guide'. To know the reason why a cell is considered as unusable, check 'unusable_reason' libcell attribute.
+Info    : Unusable library cells found at the time of loading a library.  [LBR-415]
+        : Library: 'physical_cells', Total cells: 144, Unusable cells: 144.
+	List of unusable cells: 'FILL8 FILL64 FILL4 FILL32 FILL2 FILL16 FILL1 RF2R1WX2 RF1R1WX2 TLATSXL TLATSX4 TLATSX2 TLATSX1 TLATRXL TLATRX4 TLATRX2 TLATRX1 TLATNSXL TLATNSX4 TLATNSX2 TLATNSX1 TLATNRXL TLATNRX4 TLATNRX2 TLATNRX1 TTLATXL TTLATX4 TTLATX2 TTLATX1 TBUFIXL TBUFIX8 TBUFIX4 TBUFIX3 TBUFIX2 TBUFIX20 TBUFIX1 TBUFIX16 TBUFIX12 SEDFFHQXL SDFFSRHQXL SDFFSHQXL SDFFRHQXL SDFFNSXL SDFFNSX4 SDFFNSX2 SDFFNSX1 SDFFNRXL SDFFNRX4 SDFFNRX2 SDFFNRX1 SDFFNXL SDFFNX4 SDFFNX2 SDFFNX1 SDFFHQXL JKFFSRXL JKFFSRX4 JKFFSRX2 JKFFSRX1 JKFFSXL JKFFSX4 JKFFSX2 JKFFSX1 JKFFRXL JKFFRX4 JKFFRX2 JKFFRX1 JKFFXL JKFFX4 JKFFX2 JKFFX1 DFFSRHQXL DFFSHQXL DFFSX2 DFFRHQXL DFFNSRX4 DFFNSXL DFFNSX4 DFFNSX2 DFFNSX1 DFFNRXL DFFNRX4 DFFNRX2 DFFNRX1 DFFNXL DFFNX4 DFFNX2 DFFNX1 DFFHQXL CLKINVXL CLKBUFXL CLKBUFX1 BUFXL BUFX1 RFRDX4 RFRDX2 RFRDX1 XOR3X4 XOR3X2 XNOR3X4 XNOR3X2 AFCSHCONX4 AFCSHCONX2 AFCSHCINX4 AFCSHCINX2 AHHCONX4 AHHCONX2 AHHCINX4 AHHCINX2 AFHCONX4 AFHCONX2 AFHCINX4 AFHCINX2 CMPR42X2 CMPR42X1 CMPR32X1 CMPR22X1 BMXX1 BENCX4 BENCX2 BENCX1 PCORNERDG PDIDGZ PDO04CDG PADDO PADDI PFEED01 PFEED1 PFEED10 PFEED2 PFEED20 PFEED35 PFEED5 PFEED50 PVDD1DGZ PVSS1DGZ PDB04DGZ PADDB PADDOZ CDK_S128x16 CDK_S256x16 CDK_R512x16 pll ANTENNA .'
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'scan_rst'.
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'scan_cg_en'.
+Info    : Added DFT object. [DFT-100]
+        : Added shift enable signal 'scan_en'.
+Info    : Added DFT object. [DFT-100]
+        : Added test clock domain 'scan_clk'.
+Info    : Added DFT object. [DFT-100]
+        : Added test clock 'scan_clk'.
+Info    : Added DFT object. [DFT-100]
+        : Added formal_verification_constraint 'wdl_cons_0'.
+@file(03b_insert_opcg.tcl) 17: set_db lp_insert_clock_gating false
+  Setting attribute of root '/': 'lp_insert_clock_gating' = false
+@file(03b_insert_opcg.tcl) 20: set_db dft_opcg_domain_blocking true
+  Setting attribute of root '/': 'dft_opcg_domain_blocking' = true
+@file(03b_insert_opcg.tcl) 23: define_test_mode -name test_mode -active high -create_port test_mode
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_test_mode'
+        : This command is obsolete and the new command define_test_signal should be used.
+Info    : Created DFT port. [DFT-130]
+        : Created test mode port 'test_mode' in module 'cv32e40p_core'.
+        : A port for DFT purposes was created.
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'test_mode'.
+@file(03b_insert_opcg.tcl) 24: define_test_mode -name opcg_mode -active high -create_port opcg_mode
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_test_mode'
+Info    : Created DFT port. [DFT-130]
+        : Created test mode port 'opcg_mode' in module 'cv32e40p_core'.
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'opcg_mode'.
+@file(03b_insert_opcg.tcl) 26: define_test_clock -name scan_clk -period 20000 -create_port scan_clk
+Info    : Created DFT port. [DFT-130]
+        : Created scan clock port 'scan_clk' in module 'cv32e40p_core'.
+Error   : Found existing test clock (or domain) with same name. [DFT-106] [define_test_clock]
+        : Test clock 'scan_clk' already exists.
+        : You cannot redefine an existing test clock (or domain). To redefine it, first remove the existing test clock (or domain) from the 'dft/test_clock_domains' directory. Then redefine the test clock (or domain).
+#@ End verbose source ./scripts/03b_insert_opcg.tcl
+1
+Encountered problems processing file: scripts/03b_insert_opcg.tcl
+WARNING: This version of the tool is 546 days old.
+
+Another Ctrl-C within 1 second will terminate the tool.
+CURRENT RESOURCES: RT {elapsed: 124s, ST: 23s, FG: 23s, CPU: 5.5%}, MEM {curr: 1.7G, peak: 1.7G, phys curr: 0.9G, phys peak: 0.9G}, SYS {load: 0.2, cpu: 6, total: 7.3G, free: 1.7G}
+Abnormal exit.
