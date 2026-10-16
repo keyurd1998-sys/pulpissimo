@@ -30,20 +30,33 @@ read_db $PREV_DB
 set_db [current_design] .dft_mix_clock_edges_in_scan_chains true
 set_db [current_design] .dft_lockup_element_type preferred_level_sensitive
 
-# Define 1 base scan chain with 1 scan-in and 1 scan-out port
+# 1. Define Core Scan Chain (to be compressed with Ratio $COMP_RATIO)
 define_scan_chain -name chain0 -sdi scan_in -sdo scan_out -create_ports -shift_enable scan_en
 
-# Stitch base scan chain (includes all flops + test point flops + OPCG segments)
-set has_opcg [llength [get_db opcg_domains *]]
-if {$has_opcg > 0} {
-    connect_scan_chains -auto_create_chains -include_opcg_segments
-    connect_opcg_segments -side_scan_only
-} else {
-    connect_scan_chains -auto_create_chains
+# 2. Define Separate Dedicated Wrapper Scan Chain (Uncompressed WSI -> WSO)
+define_scan_chain -name wrap_chain -sdi WSI -sdo WSO -create_ports -shift_enable scan_en
+
+# 3. Stitch chains
+# First, connect wrapper segments into separate wrap_chain
+set wrap_segs [get_db scan_segments -if {.core_wrapper == true}]
+if {[llength $wrap_segs] > 0} {
+    puts "INFO: Connecting [llength $wrap_segs] wrapper segments to wrap_chain (WSI -> WSO)..."
+    connect_scan_chains -chains wrap_chain -elements $wrap_segs
 }
 
-# Insert Scan Compression with Ratio $COMP_RATIO
+# Second, connect core flops, TPI flops, and OPCG segments into chain0
+set has_opcg [llength [get_db opcg_domains *]]
+if {$has_opcg > 0} {
+    connect_scan_chains -chains chain0 -auto_create_chains -include_opcg_segments
+    connect_opcg_segments -side_scan_only
+} else {
+    connect_scan_chains -chains chain0 -auto_create_chains
+}
+
+# 4. Insert Scan Compression ONLY on Core Chain (chain0)
+puts "INFO: Inserting Scan Compression on core chain0 (Ratio $COMP_RATIO)..."
 compress_scan_chains \
+    -chains [get_db actual_scan_chains chain0] \
     -ratio $COMP_RATIO \
     -compressor xor \
     -decompressor broadcast \
