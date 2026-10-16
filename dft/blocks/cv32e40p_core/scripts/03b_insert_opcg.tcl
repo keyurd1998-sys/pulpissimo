@@ -19,12 +19,22 @@ set_db lp_insert_clock_gating false
 # Enable OPCG domain blocking for cross-domain isolation
 set_db dft_opcg_domain_blocking true
 
+# Remove existing test clock from clk_i so clk_i can serve as free-running oscillator source
+set existing_tclks [get_db test_clocks *]
+if {[llength $existing_tclks] > 0} {
+    delete_obj $existing_tclks
+}
+set existing_tdoms [get_db test_clock_domains *]
+if {[llength $existing_tdoms] > 0} {
+    delete_obj $existing_tdoms
+}
+
 # Define test control signals and test clocks for OCC/OPCG
 define_test_mode -name test_mode -active high -create_port test_mode
 define_test_mode -name opcg_mode -active high -create_port opcg_mode
 
-define_test_clock -name scan_clk -period 20000 -create_port scan_clk
-define_test_clock -name opcg_load_clk -period 40000 -create_port opcg_load_clk
+define_test_clock -name scanClock -period 20000 -create_port scan_clk
+define_test_clock -name opcgLoadClock -period 40000 -create_port opcg_load_clk
 
 # Define Oscillator Source on clk_i functional clock path
 define_opcg_osc_source -name OSC_MAIN \
@@ -55,8 +65,8 @@ define_opcg_domain -name DOMAIN_CORE \
 
 # Insert OCC / OPCG Domain Macro Logic
 add_opcg \
-    -opcg_load_clock opcg_load_clk \
-    -scan_clock scan_clk \
+    -opcg_load_clock opcgLoadClock \
+    -scan_clock scanClock \
     -test_enable test_mode \
     -opcg_enable opcg_mode
 
