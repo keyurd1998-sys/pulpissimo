@@ -20,8 +20,14 @@ set_db [current_design] .dft_lockup_element_type preferred_level_sensitive
 # Define 1 base scan chain with 1 scan-in and 1 scan-out port
 define_scan_chain -name chain0 -sdi scan_in -sdo scan_out -create_ports -shift_enable scan_en
 
-# Stitch base scan chain (includes all 2,154 flops + newly added test point flops)
-connect_scan_chains -auto_create_chains
+# Stitch base scan chain (includes all flops + test point flops + OPCG segments)
+set has_opcg [llength [get_db opcg_domains *]]
+if {$has_opcg > 0} {
+    connect_scan_chains -auto_create_chains -include_opcg_segments
+    connect_opcg_segments -side_scan_only
+} else {
+    connect_scan_chains -auto_create_chains
+}
 
 # Base scan chain reports
 check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"

@@ -70,6 +70,30 @@ run_single_step() {
                 head -n 28 reports/03_mapping/cv32e40p_core_dft_rules_post_map.rpt
             fi
             ;;
+        3b|opcg)
+            echo "=================================================================="
+            echo " Running Step 3b: On-Chip Clock Controller (OCC/OPCG) Insertion"
+            echo " Output Log: logs/03b_insert_opcg.log"
+            echo "=================================================================="
+            rm -f logs/03b_insert_opcg.log* logs/03b_insert_opcg.cmd*
+            genus -overwrite -f scripts/03b_insert_opcg.tcl -log logs/03b_insert_opcg.log
+            echo ""
+            echo ">>> Step 3b Complete!"
+            echo ">>> Checkpoint Saved: dbs/03b_opcg.db"
+            echo ">>> Reports:          reports/03b_opcg/"
+            if [ -f reports/03b_opcg/cv32e40p_core_opcg_info.rpt ]; then
+                echo "=================================================================="
+                echo " OPCG Clock Domain Information:"
+                echo "=================================================================="
+                cat reports/03b_opcg/cv32e40p_core_opcg_info.rpt
+            fi
+            if [ -f reports/03b_opcg/cv32e40p_core_dft_rules.rpt ]; then
+                echo "=================================================================="
+                echo " Post-OPCG DFT DRC Summary:"
+                echo "=================================================================="
+                head -n 28 reports/03b_opcg/cv32e40p_core_dft_rules.rpt
+            fi
+            ;;
         4)
             echo "=================================================================="
             echo " Running Step 4: 1-Channel Scan Stitching & Compression Analysis"
@@ -158,6 +182,7 @@ run_single_step() {
             echo "  1    - Step 1: RTL Elaboration & Health Check"
             echo "  2    - Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
             echo "  3    - Step 3: Generic Synthesis & Scan Mapping (syn_map)"
+            echo "  3b   - Step 3b: On-Chip Clock Controller (OCC/OPCG) Insertion"
             echo "  4    - Step 4: 1-Channel Scan Stitching & Compression Analysis (Pre-TPI)"
             echo "  5    - Step 5: ATPG-Guided Test Point Insertion (TPI)"
             echo "  6    - Step 6: Post-TPI Scan Compression Analysis (Ratio 70)"
