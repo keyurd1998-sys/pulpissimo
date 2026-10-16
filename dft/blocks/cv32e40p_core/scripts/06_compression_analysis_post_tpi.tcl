@@ -1,0 +1,53 @@
+set SCRIPT_DIR [file dirname [file normalize [info script]]]
+source "$SCRIPT_DIR/00_setup_env.tcl"
+
+set STEP_RPT_DIR [file normalize "$REPORTS_DIR/06_compression_analysis_post_tpi"]
+file mkdir $STEP_RPT_DIR
+file mkdir $DBS_DIR
+
+# Restore Step 5 TPI database
+set PREV_DB [file normalize "$DBS_DIR/05_tpi.db"]
+if {![file exists $PREV_DB]} {
+    puts "ERROR: $PREV_DB not found! Run Step 5 first."
+    exit 1
+}
+read_db $PREV_DB
+
+# Configure scan chain attributes
+set_db [current_design] .dft_mix_clock_edges_in_scan_chains true
+set_db [current_design] .dft_lockup_element_type preferred_level_sensitive
+
+# Define 1 base scan chain with 1 scan-in and 1 scan-out port
+define_scan_chain -name chain0 -sdi scan_in -sdo scan_out -create_ports -shift_enable scan_en
+
+# Stitch base scan chain (includes all 2,154 flops + newly added test point flops)
+connect_scan_chains -auto_create_chains
+
+# Base scan chain reports
+check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules_base.rpt"
+report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
+
+# Run Compressibility Analysis with Modus ATPG for Ratio 70
+set asc_dir [file normalize "$STEP_RPT_DIR/asc_ratio70"]
+set asc_rpt [file normalize "$STEP_RPT_DIR/${DESIGN}_compressibility_ratio70.rpt"]
+file delete -force $asc_dir
+
+analyze_scan_compressibility \
+    -library $ATPG_LIB \
+    -build_model_options "-allowmissingmodules yes" \
+    -compression_method compress_scan_chains \
+    -compressor xor \
+    -decompressor broadcast \
+    -mask wide1 \
+    -ratios 70 \
+    -directory $asc_dir \
+    -verbose
+
+report_scan_compressibility -directory $asc_dir > $asc_rpt
+
+# Save checkpoint database
+set DB_FILE [file normalize "$DBS_DIR/06_compression_analysis_post_tpi.db"]
+write_db -all_root_attributes -to_file $DB_FILE
+
+puts "INFO: Step 6 post-TPI compression analysis (Ratio 70) completed. Report: $asc_rpt"
+exit
