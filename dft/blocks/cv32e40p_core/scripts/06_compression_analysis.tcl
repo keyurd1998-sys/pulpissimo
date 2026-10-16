@@ -1,7 +1,7 @@
 set SCRIPT_DIR [file dirname [file normalize [info script]]]
 source "$SCRIPT_DIR/00_setup_env.tcl"
 
-set STEP_RPT_DIR [file normalize "$REPORTS_DIR/06_compression_analysis_post_tpi"]
+set STEP_RPT_DIR [file normalize "$REPORTS_DIR/06_compression_analysis"]
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
@@ -52,7 +52,7 @@ analyze_scan_compressibility \
 report_scan_compressibility -directory $asc_dir > $asc_rpt
 
 # Save checkpoint database
-set DB_FILE [file normalize "$DBS_DIR/06_compression_analysis_post_tpi.db"]
+set DB_FILE [file normalize "$DBS_DIR/06_compression_analysis.db"]
 write_db -all_root_attributes -to_file $DB_FILE
 
 puts "INFO: Step 6 post-TPI compression analysis (Ratio 70) completed. Report: $asc_rpt"

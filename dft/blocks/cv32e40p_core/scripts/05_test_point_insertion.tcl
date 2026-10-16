@@ -7,12 +7,12 @@ file mkdir $STEP_RPT_DIR
 file mkdir $TPI_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 3b OPCG database if available; fallback to Step 3 mapped database
-set PREV_DB [file normalize "$DBS_DIR/03b_opcg.db"]
+# Restore Step 4 OPCG database if available; fallback to Step 3 mapped database
+set PREV_DB [file normalize "$DBS_DIR/04_opcg.db"]
 if {![file exists $PREV_DB]} {
     set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
     if {![file exists $PREV_DB]} {
-        puts "ERROR: Neither $DBS_DIR/03b_opcg.db nor $DBS_DIR/03_mapped.db found!"
+        puts "ERROR: Neither $DBS_DIR/04_opcg.db nor $DBS_DIR/03_mapped.db found!"
         exit 1
     }
 }

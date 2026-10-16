@@ -1,7 +1,7 @@
 set SCRIPT_DIR [file dirname [file normalize [info script]]]
 source "$SCRIPT_DIR/00_setup_env.tcl"
 
-set STEP_RPT_DIR [file normalize "$REPORTS_DIR/03b_opcg"]
+set STEP_RPT_DIR [file normalize "$REPORTS_DIR/04_opcg"]
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
@@ -78,8 +78,8 @@ check_dft_rules               > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
 report_opcg_clock_domain_info > "$STEP_RPT_DIR/${DESIGN}_opcg_info.rpt"
 
 # Save checkpoint database
-set DB_FILE [file normalize "$DBS_DIR/03b_opcg.db"]
+set DB_FILE [file normalize "$DBS_DIR/04_opcg.db"]
 write_db -all_root_attributes -to_file $DB_FILE
 
-puts "INFO: Step 3b OCC/OPCG insertion completed. Checkpoint saved: $DB_FILE"
+puts "INFO: Step 4 OCC/OPCG insertion completed. Checkpoint saved: $DB_FILE"
 exit

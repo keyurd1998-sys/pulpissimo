@@ -4,7 +4,7 @@
 # Usage:
 #   ./run_step.sh 1          (Runs Step 1)
 #   ./run_step.sh 1 2 3 4    (Runs Steps 1, 2, 3, 4)
-#   ./run_step.sh all        (Runs Steps 1 through 4 in one go)
+#   ./run_step.sh all        (Runs Steps 1 through 7 in one go)
 # ==============================================================================
 set -euo pipefail
 
@@ -70,46 +70,28 @@ run_single_step() {
                 head -n 28 reports/03_mapping/cv32e40p_core_dft_rules_post_map.rpt
             fi
             ;;
-        3b|opcg)
+        4)
             echo "=================================================================="
-            echo " Running Step 3b: On-Chip Clock Controller (OCC/OPCG) Insertion"
-            echo " Output Log: logs/03b_insert_opcg.log"
+            echo " Running Step 4: On-Chip Clock Controller (OCC/OPCG) Insertion"
+            echo " Output Log: logs/04_insert_opcg.log"
             echo "=================================================================="
-            rm -f logs/03b_insert_opcg.log* logs/03b_insert_opcg.cmd*
-            genus -overwrite -f scripts/03b_insert_opcg.tcl -log logs/03b_insert_opcg.log
+            rm -f logs/04_insert_opcg.log* logs/04_insert_opcg.cmd*
+            genus -overwrite -f scripts/04_insert_opcg.tcl -log logs/04_insert_opcg.log
             echo ""
-            echo ">>> Step 3b Complete!"
-            echo ">>> Checkpoint Saved: dbs/03b_opcg.db"
-            echo ">>> Reports:          reports/03b_opcg/"
-            if [ -f reports/03b_opcg/cv32e40p_core_opcg_info.rpt ]; then
+            echo ">>> Step 4 Complete!"
+            echo ">>> Checkpoint Saved: dbs/04_opcg.db"
+            echo ">>> Reports:          reports/04_opcg/"
+            if [ -f reports/04_opcg/cv32e40p_core_opcg_info.rpt ]; then
                 echo "=================================================================="
                 echo " OPCG Clock Domain Information:"
                 echo "=================================================================="
-                cat reports/03b_opcg/cv32e40p_core_opcg_info.rpt
+                cat reports/04_opcg/cv32e40p_core_opcg_info.rpt
             fi
-            if [ -f reports/03b_opcg/cv32e40p_core_dft_rules.rpt ]; then
+            if [ -f reports/04_opcg/cv32e40p_core_dft_rules.rpt ]; then
                 echo "=================================================================="
                 echo " Post-OPCG DFT DRC Summary:"
                 echo "=================================================================="
-                head -n 28 reports/03b_opcg/cv32e40p_core_dft_rules.rpt
-            fi
-            ;;
-        4)
-            echo "=================================================================="
-            echo " Running Step 4: 1-Channel Scan Stitching & Compression Analysis"
-            echo " Output Log: logs/04_compression_analysis.log"
-            echo "=================================================================="
-            rm -f logs/04_compression_analysis.log* logs/04_compression_analysis.cmd*
-            genus -overwrite -f scripts/04_compression_analysis.tcl -log logs/04_compression_analysis.log
-            echo ""
-            echo ">>> Step 4 Complete!"
-            echo ">>> Checkpoint Saved: dbs/04_compression_analysis.db"
-            echo ">>> Reports:          reports/04_compression_analysis/"
-            if [ -f reports/04_compression_analysis/cv32e40p_core_compressibility.rpt ]; then
-                echo "=================================================================="
-                echo " Scan Compressibility Report (report_scan_compressibility)"
-                echo "=================================================================="
-                cat reports/04_compression_analysis/cv32e40p_core_compressibility.rpt
+                head -n 28 reports/04_opcg/cv32e40p_core_dft_rules.rpt
             fi
             ;;
         5)
@@ -139,19 +121,19 @@ run_single_step() {
         6)
             echo "=================================================================="
             echo " Running Step 6: Post-TPI Scan Compression Analysis (Ratio 70)"
-            echo " Output Log: logs/06_compression_analysis_post_tpi.log"
+            echo " Output Log: logs/06_compression_analysis.log"
             echo "=================================================================="
-            rm -f logs/06_compression_analysis_post_tpi.log* logs/06_compression_analysis_post_tpi.cmd*
-            genus -overwrite -f scripts/06_compression_analysis_post_tpi.tcl -log logs/06_compression_analysis_post_tpi.log
+            rm -f logs/06_compression_analysis.log* logs/06_compression_analysis.cmd*
+            genus -overwrite -f scripts/06_compression_analysis.tcl -log logs/06_compression_analysis.log
             echo ""
             echo ">>> Step 6 Complete!"
-            echo ">>> Checkpoint Saved: dbs/06_compression_analysis_post_tpi.db"
-            echo ">>> Reports:          reports/06_compression_analysis_post_tpi/"
-            if [ -f reports/06_compression_analysis_post_tpi/cv32e40p_core_compressibility_ratio70.rpt ]; then
+            echo ">>> Checkpoint Saved: dbs/06_compression_analysis.db"
+            echo ">>> Reports:          reports/06_compression_analysis/"
+            if [ -f reports/06_compression_analysis/cv32e40p_core_compressibility_ratio70.rpt ]; then
                 echo "=================================================================="
                 echo " Post-TPI Scan Compressibility Report (Ratio 70):"
                 echo "=================================================================="
-                cat reports/06_compression_analysis_post_tpi/cv32e40p_core_compressibility_ratio70.rpt
+                cat reports/06_compression_analysis/cv32e40p_core_compressibility_ratio70.rpt
             fi
             ;;
         7)
@@ -182,8 +164,7 @@ run_single_step() {
             echo "  1    - Step 1: RTL Elaboration & Health Check"
             echo "  2    - Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
             echo "  3    - Step 3: Generic Synthesis & Scan Mapping (syn_map)"
-            echo "  3b   - Step 3b: On-Chip Clock Controller (OCC/OPCG) Insertion"
-            echo "  4    - Step 4: 1-Channel Scan Stitching & Compression Analysis (Pre-TPI)"
+            echo "  4    - Step 4: On-Chip Clock Controller (OCC/OPCG) Insertion"
             echo "  5    - Step 5: ATPG-Guided Test Point Insertion (TPI)"
             echo "  6    - Step 6: Post-TPI Scan Compression Analysis (Ratio 70)"
             echo "  7    - Step 7: Final Compression Insertion & DRC Check"

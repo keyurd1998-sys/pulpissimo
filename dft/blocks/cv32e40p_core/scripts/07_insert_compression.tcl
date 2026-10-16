@@ -12,13 +12,16 @@ if {[info exists ::env(COMPRESSION_RATIO)]} {
     set COMP_RATIO 70
 }
 
-# Restore Step 5 TPI database; fallback to Step 3 mapped database if TPI skipped
+# Restore Step 5 TPI database; fallback to Step 4 OPCG or Step 3 mapped database if TPI skipped
 set PREV_DB [file normalize "$DBS_DIR/05_tpi.db"]
 if {![file exists $PREV_DB]} {
-    set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
+    set PREV_DB [file normalize "$DBS_DIR/04_opcg.db"]
     if {![file exists $PREV_DB]} {
-        puts "ERROR: Neither $DBS_DIR/05_tpi.db nor $DBS_DIR/03_mapped.db found!"
-        exit 1
+        set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
+        if {![file exists $PREV_DB]} {
+            puts "ERROR: Neither $DBS_DIR/05_tpi.db, $DBS_DIR/04_opcg.db, nor $DBS_DIR/03_mapped.db found!"
+            exit 1
+        }
     }
 }
 read_db $PREV_DB
