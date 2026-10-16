@@ -13,11 +13,8 @@ if {![file exists $PREV_DB]} {
 }
 read_db $PREV_DB
 
-# Determine shift enable port
+# Shift enable port created in Step 2
 set se_port [get_db ports SCAN_ENABLE]
-if {[llength $se_port] == 0} {
-    set se_port [get_db ports scan_en]
-}
 
 # Identify all functional ports to wrap (exclude clocks, resets, and all DFT / IEEE 1500 control pins)
 set EXCLUDE_PORTS [list clk_i rst_ni scan_cg_en_i pulp_clock_en_i \

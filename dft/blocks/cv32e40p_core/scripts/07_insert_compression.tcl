@@ -12,17 +12,11 @@ if {[info exists ::env(COMPRESSION_RATIO)]} {
     set COMP_RATIO 70
 }
 
-# Restore Step 6 TPI database; fallback to Step 4 OPCG or Step 3 mapped database if TPI skipped
+# Restore Step 6 TPI database
 set PREV_DB [file normalize "$DBS_DIR/06_tpi.db"]
 if {![file exists $PREV_DB]} {
-    set PREV_DB [file normalize "$DBS_DIR/04_opcg.db"]
-    if {![file exists $PREV_DB]} {
-        set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
-        if {![file exists $PREV_DB]} {
-            puts "ERROR: Neither $DBS_DIR/06_tpi.db, $DBS_DIR/04_opcg.db, nor $DBS_DIR/03_mapped.db found!"
-            exit 1
-        }
-    }
+    puts "ERROR: $PREV_DB not found! Please run Step 6 first."
+    exit 1
 }
 read_db $PREV_DB
 
@@ -46,13 +40,8 @@ if {[llength $wrap_segs] > 0} {
 
 # Second, connect core flops, TPI flops, and OPCG segments into chain0 incrementally
 # -incremental prevents Genus from disconnecting or modifying wrap_chain
-set has_opcg [llength [get_db opcg_domains *]]
-if {$has_opcg > 0} {
-    connect_scan_chains -chains chain0 -auto_create_chains -include_opcg_segments -incremental
-    connect_opcg_segments -side_scan_only
-} else {
-    connect_scan_chains -chains chain0 -auto_create_chains -incremental
-}
+connect_scan_chains -chains chain0 -auto_create_chains -include_opcg_segments -incremental
+connect_opcg_segments -side_scan_only
 
 # 4. Insert Scan Compression ONLY on Core Chain (chain0)
 puts "INFO: Inserting Scan Compression on core chain0 (Ratio $COMP_RATIO)..."

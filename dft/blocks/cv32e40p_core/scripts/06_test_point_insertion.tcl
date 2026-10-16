@@ -7,17 +7,11 @@ file mkdir $STEP_RPT_DIR
 file mkdir $TPI_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 5 wrapper database if available; fallback to Step 4 OPCG or Step 3 mapped database
+# Restore Step 5 wrapper database
 set PREV_DB [file normalize "$DBS_DIR/05_wrapper.db"]
 if {![file exists $PREV_DB]} {
-    set PREV_DB [file normalize "$DBS_DIR/04_opcg.db"]
-    if {![file exists $PREV_DB]} {
-        set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
-        if {![file exists $PREV_DB]} {
-            puts "ERROR: Neither $DBS_DIR/05_wrapper.db, $DBS_DIR/04_opcg.db nor $DBS_DIR/03_mapped.db found!"
-            exit 1
-        }
-    }
+    puts "ERROR: $PREV_DB not found! Please run Step 5 first."
+    exit 1
 }
 read_db $PREV_DB
 
@@ -27,13 +21,8 @@ set_db [current_design] .dft_mix_clock_edges_in_scan_chains true
 set_db [current_design] .dft_lockup_element_type preferred_level_sensitive
 define_scan_chain -name chain0 -sdi scan_in -sdo scan_out -create_ports -shift_enable scan_en
 
-set has_opcg [llength [get_db opcg_domains *]]
-if {$has_opcg > 0} {
-    connect_scan_chains -auto_create_chains -include_opcg_segments
-    connect_opcg_segments -side_scan_only
-} else {
-    connect_scan_chains -auto_create_chains
-}
+connect_scan_chains -auto_create_chains -include_opcg_segments
+connect_opcg_segments -side_scan_only
 
 # Write Modus compression test point analysis setup
 set_db / .dft_generate_atpg_no_testpoint_file auto
@@ -56,16 +45,8 @@ read_db $PREV_DB
 # Define test mode signal on clean netlist
 define_test_mode -name test_mode -active high -create_port test_mode
 
-# Locate Modus test point file
-set TP_FILE "$TPI_DIR/${DESIGN}.compression_testpoints.tpfile"
-if {![file exists $TP_FILE]} {
-    set alt_files [glob -nocomplain "$TPI_DIR/*compression_testpoints*.tpfile" "$TPI_DIR/**/${DESIGN}*.tpfile"]
-    if {[llength $alt_files] > 0} {
-        set TP_FILE [lindex $alt_files 0]
-    }
-}
-
 # Insert analyzed test points
+set TP_FILE "$TPI_DIR/${DESIGN}.compression_testpoints.tpfile"
 if {[file exists $TP_FILE]} {
     puts "INFO: Inserting test points from $TP_FILE"
     add_analyzed_test_points \

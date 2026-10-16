@@ -19,14 +19,6 @@ if {![file exists $PREV_DB]} {
 }
 read_db $PREV_DB
 
-# Verify timing constraints; reload SDC if no clocks exist
-if {[llength [get_db clocks *]] == 0} {
-    set SDC_FILE [file normalize "$SCRIPT_DIR/../constraints/cv32e40p_core.sdc"]
-    if {[file exists $SDC_FILE]} {
-        puts "INFO: Reading SDC constraints from $SDC_FILE..."
-        read_sdc $SDC_FILE
-    }
-}
 
 # Post-DFT Timing & QoR Analysis
 set STEP_TIMING_DIR [file normalize "$REPORTS_DIR/08_timing"]
