@@ -1,7 +1,7 @@
 set SCRIPT_DIR [file dirname [file normalize [info script]]]
 source "$SCRIPT_DIR/00_setup_env.tcl"
 
-set STEP_RPT_DIR [file normalize "$REPORTS_DIR/05_tpi"]
+set STEP_RPT_DIR [file normalize "$REPORTS_DIR/06_tpi"]
 set TPI_DIR      [file normalize "$STEP_RPT_DIR/modus_tpi_work"]
 file mkdir $STEP_RPT_DIR
 file mkdir $TPI_DIR
@@ -38,7 +38,7 @@ write_dft_compression_test_points \
     -directory $TPI_DIR \
     -library $ATPG_LIB \
     -min_slack_for_no_tp_file 100 \
-    -compression_testpoints_options "-maxtestpts 50" \
+    -compression_testpoints_options "-maxtestpts 100" \
     -force
 
 # Run Modus ATPG test point analysis
@@ -80,8 +80,8 @@ check_dft_rules                 > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
 report_dft_analyzed_test_points > "$STEP_RPT_DIR/${DESIGN}_test_points.rpt"
 
 # Save checkpoint database
-set DB_FILE [file normalize "$DBS_DIR/05_tpi.db"]
+set DB_FILE [file normalize "$DBS_DIR/06_tpi.db"]
 write_db -all_root_attributes -to_file $DB_FILE
 
-puts "INFO: Step 5 Test Point Insertion completed. Checkpoint saved: $DB_FILE"
+puts "INFO: Step 6 Test Point Insertion (max 100 TPs) completed. Checkpoint saved: $DB_FILE"
 exit

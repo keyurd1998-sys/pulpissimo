@@ -4,7 +4,7 @@
 # Usage:
 #   ./run_step.sh 1          (Runs Step 1)
 #   ./run_step.sh 1 2 3 4    (Runs Steps 1, 2, 3, 4)
-#   ./run_step.sh all        (Runs Steps 1 through 7 in one go)
+#   ./run_step.sh all        (Runs Steps 1 through 8 in one go)
 # ==============================================================================
 set -euo pipefail
 
@@ -27,7 +27,7 @@ check_tool() {
 run_single_step() {
     local step="$1"
     case "$step" in
-        1|2|3|4|5|6|7)
+        1|2|3|4|5|6|7|8)
             check_tool
             ;;
     esac
@@ -102,62 +102,80 @@ run_single_step() {
             ;;
         5)
             echo "=================================================================="
-            echo " Running Step 5: ATPG-Guided Test Point Insertion (TPI)"
-            echo " Output Log: logs/05_test_point_insertion.log"
+            echo " Running Step 5: Pre-TPI Scan Compression Analysis (Ratios 70, 80)"
+            echo " Output Log: logs/05_compression_analysis_pre_tpi.log"
             echo "=================================================================="
-            rm -f logs/05_test_point_insertion.log* logs/05_test_point_insertion.cmd*
-            genus -overwrite -f scripts/05_test_point_insertion.tcl -log logs/05_test_point_insertion.log
+            rm -f logs/05_compression_analysis_pre_tpi.log* logs/05_compression_analysis_pre_tpi.cmd*
+            genus -overwrite -f scripts/05_compression_analysis_pre_tpi.tcl -log logs/05_compression_analysis_pre_tpi.log
             echo ""
             echo ">>> Step 5 Complete!"
-            echo ">>> Checkpoint Saved: dbs/05_tpi.db"
-            echo ">>> Reports:          reports/05_tpi/"
-            if [ -f reports/05_tpi/cv32e40p_core_test_points.rpt ]; then
+            echo ">>> Checkpoint Saved: dbs/05_compression_analysis_pre_tpi.db"
+            echo ">>> Reports:          reports/05_compression_analysis_pre_tpi/"
+            if [ -f reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_ratios_70_80.rpt ]; then
                 echo "=================================================================="
-                echo " Analyzed Test Points Report Summary:"
+                echo " Pre-TPI Scan Compressibility Report (Ratios 70, 80):"
                 echo "=================================================================="
-                cat reports/05_tpi/cv32e40p_core_test_points.rpt
-            fi
-            if [ -f reports/05_tpi/cv32e40p_core_dft_rules.rpt ]; then
-                echo "=================================================================="
-                echo " Post-TPI DFT DRC Summary:"
-                echo "=================================================================="
-                head -n 28 reports/05_tpi/cv32e40p_core_dft_rules.rpt
+                cat reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_ratios_70_80.rpt
             fi
             ;;
         6)
             echo "=================================================================="
-            echo " Running Step 6: Post-TPI Scan Compression Analysis (Ratio 70)"
-            echo " Output Log: logs/06_compression_analysis.log"
+            echo " Running Step 6: ATPG-Guided Test Point Insertion (TPI, Max 100 TPs)"
+            echo " Output Log: logs/06_test_point_insertion.log"
             echo "=================================================================="
-            rm -f logs/06_compression_analysis.log* logs/06_compression_analysis.cmd*
-            genus -overwrite -f scripts/06_compression_analysis.tcl -log logs/06_compression_analysis.log
+            rm -f logs/06_test_point_insertion.log* logs/06_test_point_insertion.cmd*
+            genus -overwrite -f scripts/06_test_point_insertion.tcl -log logs/06_test_point_insertion.log
             echo ""
             echo ">>> Step 6 Complete!"
-            echo ">>> Checkpoint Saved: dbs/06_compression_analysis.db"
-            echo ">>> Reports:          reports/06_compression_analysis/"
-            if [ -f reports/06_compression_analysis/cv32e40p_core_compressibility_ratio70.rpt ]; then
+            echo ">>> Checkpoint Saved: dbs/06_tpi.db"
+            echo ">>> Reports:          reports/06_tpi/"
+            if [ -f reports/06_tpi/cv32e40p_core_test_points.rpt ]; then
                 echo "=================================================================="
-                echo " Post-TPI Scan Compressibility Report (Ratio 70):"
+                echo " Analyzed Test Points Report Summary:"
                 echo "=================================================================="
-                cat reports/06_compression_analysis/cv32e40p_core_compressibility_ratio70.rpt
+                cat reports/06_tpi/cv32e40p_core_test_points.rpt
+            fi
+            if [ -f reports/06_tpi/cv32e40p_core_dft_rules.rpt ]; then
+                echo "=================================================================="
+                echo " Post-TPI DFT DRC Summary:"
+                echo "=================================================================="
+                head -n 28 reports/06_tpi/cv32e40p_core_dft_rules.rpt
             fi
             ;;
         7)
             echo "=================================================================="
-            echo " Running Step 7: Final Scan Compression Insertion & DRC Check"
-            echo " Output Log: logs/07_insert_compression.log"
+            echo " Running Step 7: Post-TPI Scan Compression Analysis (Ratios 70, 80)"
+            echo " Output Log: logs/07_compression_analysis_post_tpi.log"
             echo "=================================================================="
-            rm -f logs/07_insert_compression.log* logs/07_insert_compression.cmd*
-            genus -overwrite -f scripts/07_insert_compression.tcl -log logs/07_insert_compression.log
+            rm -f logs/07_compression_analysis_post_tpi.log* logs/07_compression_analysis_post_tpi.cmd*
+            genus -overwrite -f scripts/07_compression_analysis_post_tpi.tcl -log logs/07_compression_analysis_post_tpi.log
             echo ""
             echo ">>> Step 7 Complete!"
-            echo ">>> Checkpoint Saved: dbs/07_compressed.db"
-            echo ">>> Reports:          reports/07_compression/"
-            if [ -f reports/07_compression/cv32e40p_core_dft_rules.rpt ]; then
+            echo ">>> Checkpoint Saved: dbs/07_compression_analysis_post_tpi.db"
+            echo ">>> Reports:          reports/07_compression_analysis_post_tpi/"
+            if [ -f reports/07_compression_analysis_post_tpi/cv32e40p_core_compressibility_ratios_70_80.rpt ]; then
+                echo "=================================================================="
+                echo " Post-TPI Scan Compressibility Report (Ratios 70, 80):"
+                echo "=================================================================="
+                cat reports/07_compression_analysis_post_tpi/cv32e40p_core_compressibility_ratios_70_80.rpt
+            fi
+            ;;
+        8)
+            echo "=================================================================="
+            echo " Running Step 8: Final Scan Compression Insertion & DRC Check"
+            echo " Output Log: logs/08_insert_compression.log"
+            echo "=================================================================="
+            rm -f logs/08_insert_compression.log* logs/08_insert_compression.cmd*
+            genus -overwrite -f scripts/08_insert_compression.tcl -log logs/08_insert_compression.log
+            echo ""
+            echo ">>> Step 8 Complete!"
+            echo ">>> Checkpoint Saved: dbs/08_compressed.db"
+            echo ">>> Reports:          reports/08_compression/"
+            if [ -f reports/08_compression/cv32e40p_core_dft_rules.rpt ]; then
                 echo "=================================================================="
                 echo " Post-Compression DFT DRC Summary:"
                 echo "=================================================================="
-                head -n 28 reports/07_compression/cv32e40p_core_dft_rules.rpt
+                head -n 28 reports/08_compression/cv32e40p_core_dft_rules.rpt
             fi
             ;;
         help|*)
@@ -171,10 +189,11 @@ run_single_step() {
             echo "  2    - Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
             echo "  3    - Step 3: Generic Synthesis & Scan Mapping (syn_map)"
             echo "  4    - Step 4: On-Chip Clock Controller (OCC/OPCG) Insertion"
-            echo "  5    - Step 5: ATPG-Guided Test Point Insertion (TPI)"
-            echo "  6    - Step 6: Post-TPI Scan Compression Analysis (Ratio 70)"
-            echo "  7    - Step 7: Final Compression Insertion & DRC Check"
-            echo "  all  - Run Steps 1 through 7 sequentially in one go"
+            echo "  5    - Step 5: Pre-TPI Scan Compression Analysis (Ratios 70, 80)"
+            echo "  6    - Step 6: ATPG-Guided Test Point Insertion (TPI, Max 100 TPs)"
+            echo "  7    - Step 7: Post-TPI Scan Compression Analysis (Ratios 70, 80)"
+            echo "  8    - Step 8: Final Compression Insertion & DRC Check"
+            echo "  all  - Run Steps 1 through 8 sequentially in one go"
             echo "=================================================================="
             exit 0
             ;;
@@ -187,7 +206,7 @@ fi
 
 for arg in "$@"; do
     if [ "$arg" = "all" ]; then
-        for s in 1 2 3 4 5 6 7; do
+        for s in 1 2 3 4 5 6 7 8; do
             run_single_step "$s"
         done
     else

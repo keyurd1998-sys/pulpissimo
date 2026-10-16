@@ -1,7 +1,7 @@
 set SCRIPT_DIR [file dirname [file normalize [info script]]]
 source "$SCRIPT_DIR/00_setup_env.tcl"
 
-set STEP_RPT_DIR [file normalize "$REPORTS_DIR/07_compression"]
+set STEP_RPT_DIR [file normalize "$REPORTS_DIR/08_compression"]
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
@@ -12,14 +12,14 @@ if {[info exists ::env(COMPRESSION_RATIO)]} {
     set COMP_RATIO 70
 }
 
-# Restore Step 5 TPI database; fallback to Step 4 OPCG or Step 3 mapped database if TPI skipped
-set PREV_DB [file normalize "$DBS_DIR/05_tpi.db"]
+# Restore Step 6 TPI database; fallback to Step 4 OPCG or Step 3 mapped database if TPI skipped
+set PREV_DB [file normalize "$DBS_DIR/06_tpi.db"]
 if {![file exists $PREV_DB]} {
     set PREV_DB [file normalize "$DBS_DIR/04_opcg.db"]
     if {![file exists $PREV_DB]} {
         set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
         if {![file exists $PREV_DB]} {
-            puts "ERROR: Neither $DBS_DIR/05_tpi.db, $DBS_DIR/04_opcg.db, nor $DBS_DIR/03_mapped.db found!"
+            puts "ERROR: Neither $DBS_DIR/06_tpi.db, $DBS_DIR/04_opcg.db, nor $DBS_DIR/03_mapped.db found!"
             exit 1
         }
     }
@@ -55,8 +55,8 @@ check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
 report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains.rpt"
 
 # Save checkpoint database
-set DB_FILE [file normalize "$DBS_DIR/07_compressed.db"]
+set DB_FILE [file normalize "$DBS_DIR/08_compressed.db"]
 write_db -all_root_attributes -to_file $DB_FILE
 
-puts "INFO: Step 7 compression insertion (Ratio $COMP_RATIO) completed. Checkpoint saved: $DB_FILE"
+puts "INFO: Step 8 compression insertion (Ratio $COMP_RATIO) completed. Checkpoint saved: $DB_FILE"
 exit
