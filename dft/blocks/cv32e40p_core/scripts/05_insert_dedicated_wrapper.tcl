@@ -42,12 +42,28 @@ foreach p [get_db ports *] {
 puts "INFO: Wrapping [llength $WRAP_PORTS] functional ports with Dedicated Wrapper Cells (DWC)..."
 
 # Insert Dedicated Wrapper Cells (omitting -shared_through forces dedicated cells)
+# -skipped_locations_variable allows Genus to skip floating/unconnected ports (e.g. boot_addr_i[1:0], apu_*) without erroring
+set skipped_ports [list]
 add_core_wrapper_cell \
     -locations $WRAP_PORTS \
     -wsen_in $se_port \
     -wsen_out $se_port \
     -wint WINT \
-    -wext WEXT
+    -wext WEXT \
+    -skipped_locations_variable skipped_ports
+
+if {[info exists skipped_ports] && [llength $skipped_ports] > 0} {
+    puts "INFO: Skipped [llength $skipped_ports] floating/unconnected ports during wrapper insertion."
+    set fp [open "$STEP_RPT_DIR/${DESIGN}_skipped_ports.rpt" w]
+    puts $fp "=================================================================="
+    puts $fp " Skipped Ports During Wrapper Insertion (Floating / Unconnected)"
+    puts $fp " Total Skipped Ports: [llength $skipped_ports]"
+    puts $fp "=================================================================="
+    foreach sp $skipped_ports {
+        puts $fp "  $sp"
+    }
+    close $fp
+}
 
 # Post-wrapper DFT DRC and wrapper reports
 check_dft_rules          > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
