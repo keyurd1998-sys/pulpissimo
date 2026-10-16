@@ -1,0 +1,142 @@
+
+INFO (TDA-005): Command Line Invocation: 
+            build_faultmodel -includedynamic no -workdir /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80 -stdout no  [end TDA_005]
+
+INFO (TDA-014): Cadence(R) Modus(TM) DFT Software Solution, Version 25.10-p027_1, built Mar 13 2025 (linux26_64) [end TDA_014]
+
+INFO (TDA-015): Log File: /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80/testresults/logs/log_build_faultmodel_101526210337-963275000 [end TDA_015]
+
+INFO (TDA-007): Job Information:
+            Date Started: Thursday Oct 15 21:03:37 2026  IST
+            Host machine is Pine-06, x86_64 running Linux 5.14.0-611.30.1.el9_7.x86_64.
+            This job is process number 3071765.
+[end TDA_007]
+
+INFO (TDA-009): Options/Values information.
+            (options marked with '*' have program generated values,
+             options marked with '+' were specified to default.)
+
+            -WORKDIR /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80
+
+            -LOGFILE /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80/testresults/logs/log_build_faultmodel_101526210337-963275000
+            -STDOUT no
+            -includedynamic no
+[end TDA_009]
+INFO (TFW-117): Modus checked out a modus_atpg license.  [end TFW_117] 
+INFO (TFM-099): Build Fault Model started.  [end TFM_099] 
+INFO (TFM-102): Creating faultModel file /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80/tbdata/faultModel.  [end TFM_102] 
+
+Global Ignored Static Fault Count               234
+Global Ignored Dynamic Fault Count                0
+
+
+                            Global Statistics
+
+                    ATCov  ----------------------- Global Faults --------------------------
+                   Global        Total       Tested     Possibly    Redundant     Untested
+
+Total Static         0.00       169090            0            0            0       169090
+Collapsed Static     0.00       102875            0            0            0       102875
+PI Static            0.00          512            0            0            0          512
+PO Static            0.00          344            0            0            0          344
+
+Total Dynamic                        0
+
+Parametric        
+
+IDDq                 0.00       169090            0                                 169090
+
+
+
+INFO (TFM-103): Creating faultStatus file /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80/tbdata/faultStatus.  [end TFM_103] 
+
+                           Testmode Statistics: FULLSCAN
+
+                 ---- ATCov ---- ------------------------ Testmode Faults ----------------------- ------------------------- Global Faults ------------------------
+                 Testmode Global        Total       Tested     Possibly    Redundant     Untested        Total       Tested     Possibly    Redundant     Untested
+
+Total Static         0.00   0.00       169080            0            0            0       169080       169090            0            0            0       169090
+Collapsed Static     0.00   0.00       102869            0            0            0       102869       102875            0            0            0       102875
+PI Static            0.00   0.00          511            0            0            0          511          512            0            0            0          512
+PO Static            0.00   0.00          344            0            0            0          344          344            0            0            0          344
+
+Total Dynamic                               0
+
+Parametric        
+
+IDDq                 0.00   0.00       169090            0                                 169090       169090            0                                 169090
+
+Path                 0.00   0.00            0            0                                      0            0            0                                      0
+
+
+
+                           Testmode Statistics: COMPRESSION
+
+                 ---- ATCov ---- ------------------------ Testmode Faults ----------------------- ------------------------- Global Faults ------------------------
+                 Testmode Global        Total       Tested     Possibly    Redundant     Untested        Total       Tested     Possibly    Redundant     Untested
+
+Total Static         0.00   0.00       169080            0            0            0       169080       169090            0            0            0       169090
+Collapsed Static     0.00   0.00       102869            0            0            0       102869       102875            0            0            0       102875
+PI Static            0.00   0.00          511            0            0            0          511          512            0            0            0          512
+PO Static            0.00   0.00          344            0            0            0          344          344            0            0            0          344
+
+Total Dynamic                               0
+
+Parametric        
+
+IDDq                 0.00   0.00       169090            0                                 169090       169090            0                                 169090
+
+Path                 0.00   0.00            0            0                                      0            0            0                                      0
+
+
+
+INFO (TFM-704): Maximum Global Test Coverage Statistics: 
+
+                  %Active      #Faults      #Active    #Inactive
+Total Static        99.99       169090       169080           10
+Collapsed Static    99.99       102875       102869            6
+PI Static           99.80          512          511            1
+PO Static          100.00          344          344            0
+
+Total Dynamic                        0
+
+Parametric        
+
+There are 2 test mode(s) defined:
+      FULLSCAN
+      COMPRESSION
+
+[end TFM_704]
+INFO (TFM-109): Build Fault Model has completed with highest level severity message of INFO.  [end TFM_109] 
+
+INFO (TDA-001): Maximum Memory used during the run and Cumulative Time in hours:minutes:seconds:
+
+                  Total Memory =           44,911,168  bytes
+
+                      CPU Time =    0:00:00.13
+                  Elapsed Time =    0:00:00.19                    [end TDA_001]
+
+     Date Ended:  Thursday Oct 15 21:03:38 2026  IST
+
+INFO (TFW-119): Modus checked in a modus_atpg license.  [end TFW_119] 
+
+
+
+-------------------------------------------------------------------------------
+*                      Message Summary                                        *
+-------------------------------------------------------------------------------
+ Count  Number             First Instance of Message Text
+------- ------             ------------------------------
+
+  INFO Messages...
+      1 INFO (TFM-099): Build Fault Model started.   
+      1 INFO (TFM-102): Creating faultModel file /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80/tbdata/faultModel.   
+      1 INFO (TFM-103): Creating faultStatus file /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80/tbdata/faultStatus.   
+      1 INFO (TFM-109): Build Fault Model has completed with highest level severity message of INFO.   
+      1 INFO (TFM-704): Maximum Global Test Coverage Statistics: 
+      1 INFO (TFW-117): Modus checked out a modus_atpg license.   
+      1 INFO (TFW-119): Modus checked in a modus_atpg license.   
+
+ For a detailed explanation of a message and a suggested user response execute 'msgHelp <message id>'.  For example: msgHelp TDA-009
+
+-------------------------------------------------------------------------------

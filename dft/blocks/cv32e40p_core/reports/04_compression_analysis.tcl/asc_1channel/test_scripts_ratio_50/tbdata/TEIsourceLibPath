@@ -1,0 +1,3 @@
+SOURCE=/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_50/cv32e40p_core.test_netlist.v
+TECHLIB=/home/admin/DFT/Library/atpg/stdcell.v
+RUNDIR=/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/

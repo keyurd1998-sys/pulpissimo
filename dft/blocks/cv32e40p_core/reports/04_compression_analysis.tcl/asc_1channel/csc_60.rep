@@ -1,0 +1,525 @@
+
+Compressing scan chains...
+Will create a test port for 'compression_enable'
+Will create a test port for 'mask_enable'
+Will create a test port for 'mask_clock'
+WARNING: Using existing directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel' for compress_scan_chains.
+
+            Reading Verilog file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression'
+
+                  INLINE_INFO: Skipping marking small hierarchies inline as the variable 'hdl_dissolve_primitive_instance_hierarchy_threshold' has not been set to a positive value.
+Info    : Elaborating Design. [ELAB-1]
+        : Elaborating top-level block 'XOR_COMPRESSION_60_1_1x1_20100110' from file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.decompressor' in module 'XOR_COMPRESSION_60_1_1x1_20100110' of library 'default' to module 'decomp_60_1_1x1_20100110' of library 'default' (line 8 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 253.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'decomp_60_1_1x1_20100110' from file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.decompressor.dg_0' in module 'decomp_60_1_1x1_20100110' of library 'default' to module 'decomp_60_1_1x1_20100110_gate' of library 'default' (line 1 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 15.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'decomp_60_1_1x1_20100110_gate' from file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor' in module 'XOR_COMPRESSION_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110' of library 'default' (line 87 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 255.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'comp_60_1_1x1_20100110' from file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_0' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 110.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'comp_60_1_1x1_20100110_gate' from file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression'.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_1' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 112.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_2' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 114.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_3' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 116.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_4' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 118.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_5' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 120.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_6' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 122.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_7' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 124.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_8' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 126.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_9' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 128.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_10' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 130.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_11' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 132.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_12' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 134.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_13' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 136.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_14' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 138.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_15' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 140.
+Info    : Instantiating Subdesign. [CDFG-567]
+        : Linking instance 'XOR_COMPRESSION_60_1_1x1_20100110.compressor.g_16' in module 'comp_60_1_1x1_20100110' of library 'default' to module 'comp_60_1_1x1_20100110_gate' of library 'default' (line 80 in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression') in file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/tmpCompression' on line 142.
+Info    : Done Elaborating Design. [ELAB-3]
+        : Done elaborating 'XOR_COMPRESSION_60_1_1x1_20100110'.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'CLKINVX6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'INVX6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'DLY4X4' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'BUFX6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'CLKMX2X3' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'NAND2X6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'NAND2X8' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'AO21X4' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'CLKAND2X6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'AND2X6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'OR2X8' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'CLKAND2X12' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'NOR2X8' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'NOR2X6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'CLKAND2X8' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'SDFFRHQX8' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'OR2X6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'OR3X6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'NAND3X6' have zero area.
+Warning : Netlist has library cells with no physical information in LEF. This may lead to incorrect area calculation. [PHYS-141]
+        : Instances of the library cell 'OA21X4' have zero area.
+  Setting attribute of root '/': 'boundary_opto_internal_assert' = false
+  Setting attribute of module 'decomp_60_1_1x1_20100110_gate': 'boundary_opto' = strict_no
+  Setting attribute of module 'decomp_60_1_1x1_20100110': 'boundary_opto' = strict_no
+  Setting attribute of module 'comp_60_1_1x1_20100110_gate': 'boundary_opto' = strict_no
+  Setting attribute of module 'comp_60_1_1x1_20100110': 'boundary_opto' = strict_no
+Info    : Skipping 'boundary_opto' = false setting since set on an internal created hierarchy. [GLO-52]
+        : The module is 'bmux'.
+  Setting attribute of module 'bmux': 'boundary_opto' = true
+  Setting attribute of module 'decomp_60_1_1x1_20100110_gate': 'boundary_opto' = strict_no
+  Setting attribute of module 'decomp_60_1_1x1_20100110': 'boundary_opto' = strict_no
+  Setting attribute of module 'comp_60_1_1x1_20100110_gate': 'boundary_opto' = strict_no
+  Setting attribute of module 'comp_60_1_1x1_20100110': 'boundary_opto' = strict_no
+Info    : Skipping 'boundary_opto' = false setting since set on an internal created hierarchy. [GLO-52]
+        : The module is 'bmux'.
+  Setting attribute of module 'bmux': 'boundary_opto' = true
+  Setting attribute of root '/': 'boundary_opto_internal_assert' = true
+INFO: Mapping compression macro with a target period of 20000.0 ps
+Current PLE settings:
+
+Aspect ratio        : 1.000
+Shrink factor       : 1.000
+Scale of res/length : 1.000
+Scale of cap/length : 1.000
+Net derating factor : 1.000
+Thermal factor      : 1.000
+Via Resistance      : 4.800 ohm (from lef_library)
+Site size           : 5.700 um (from lef [tech+cell])
+
+                                   Capacitance  
+  Layer                             / Length         Data source:
+Name        Direction Utilization  (pF/micron)       lef_library
+------------------------------------------------
+Metal1          H         0.00        0.000127  
+Metal2          V         1.00        0.000142  
+Metal3          H         1.00        0.000151  
+Metal4          V         1.00        0.000122  
+Metal5          H         1.00        0.000098  
+Metal6          V         1.00        0.000110  
+
+                                    Resistance   
+  Layer                              / Length         Data source:
+Name        Direction Utilization  (ohm/micron)       lef_library
+-------------------------------------------------
+Metal1          H         0.00         0.439130  
+Metal2          V         1.00         0.360714  
+Metal3          H         1.00         0.360714  
+Metal4          V         1.00         0.360714  
+Metal5          H         1.00         0.360714  
+Metal6          V         1.00         0.102273  
+
+                                        Area     
+  Layer                               / Length        Data source:
+Name        Direction Utilization     (micron)        lef_library
+-------------------------------------------------
+Metal1          H         0.00         0.230000  
+Metal2          V         1.00         0.280000  
+Metal3          H         1.00         0.280000  
+Metal4          V         1.00         0.280000  
+Metal5          H         1.00         0.280000  
+Metal6          V         1.00         0.440000  
+
+Begin SDR optimization CTX_region 
+#Special hiers formed inside decomp_60_1_1x1_20100110_gate = 0
+#Special hiers formed inside decomp_60_1_1x1_20100110 = 0
+#Special hiers formed inside comp_60_1_1x1_20100110_gate = 0
+#Special hiers formed inside comp_60_1_1x1_20100110 = 0
+#Special hiers formed inside XOR_COMPRESSION_60_1_1x1_20100110 = 0
+No special hier is found 
+End SDR optimization CTX_region 
+Begin SDR optimization UME_region 
+#Special hiers formed inside decomp_60_1_1x1_20100110_gate = 0
+#Special hiers formed inside decomp_60_1_1x1_20100110 = 0
+#Special hiers formed inside comp_60_1_1x1_20100110_gate = 0
+#Special hiers formed inside comp_60_1_1x1_20100110 = 0
+#Special hiers formed inside XOR_COMPRESSION_60_1_1x1_20100110 = 0
+No special hier is found 
+End SDR optimization UME_region 
+Begin SDR optimization IMPL_BASED_region 
+#Special hiers formed inside decomp_60_1_1x1_20100110_gate = 0
+#Special hiers formed inside decomp_60_1_1x1_20100110 = 0
+#Special hiers formed inside comp_60_1_1x1_20100110_gate = 0
+#Special hiers formed inside comp_60_1_1x1_20100110 = 0
+#Special hiers formed inside XOR_COMPRESSION_60_1_1x1_20100110 = 0
+No special hier is found 
+End SDR optimization IMPL_BASED_region 
+Starting timing based select reordering [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.008s)
+Starting recase case-box optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed recase case-box optimization (accepts: 0, rejects: 0, runtime: 0.001s)
+Starting infer macro optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed infer macro optimization (accepts: 0, rejects: 0, runtime: 0.001s)
+Starting decode mux sandwich optimization [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed decode mux sandwich optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting decode mux optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed decode mux optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting chop wide muxes [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed chop wide muxes (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting common data mux cascade opt [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed common data mux cascade opt (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting mux input consolidation [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed mux input consolidation (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting constant-data mux optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed constant-data mux optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting chain-to-tree inequality transform [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed chain-to-tree inequality transform (accepts: 0, rejects: 0, runtime: 0.001s)
+Starting reconvergence optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed reconvergence optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting logic restructure optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed logic restructure optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting identity transform [v3.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed identity transform (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting reduce operator chain [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed reduce operator chain (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting common data mux cascade opt [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed common data mux cascade opt (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting mux input consolidation [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed mux input consolidation (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting optimize datapath elements [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed optimize datapath elements (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting datapath recasting [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed datapath recasting (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting word-level redundancy removal [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.011s)
+Starting clip mux common data inputs [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed clip mux common data inputs (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting clip the non-user hierarchies [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed clip the non-user hierarchies (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting basic netlist cleanup [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed basic netlist cleanup (accepts: 0, rejects: 0, runtime: 0.000s)
+
+Stage: pre_rtlopt
+-----------------------------------------------------------------
+| Transform                   | Accepts | Rejects | Runtime (s) | 
+-----------------------------------------------------------------
+| hlo_timing_reorder          |       0 |       0 |        0.01 | 
+| hlo_recase_casebox          |       0 |       0 |        0.00 | 
+| hlo_infer_macro             |       0 |       0 |        0.00 | 
+| hlo_decode_mux_sandwich     |       0 |       0 |        0.00 | 
+| hlo_mux_decode              |       0 |       0 |        0.00 | 
+| hlo_chop_mux                |       0 |       0 |        0.00 | 
+| hlo_mux_cascade_opt         |       0 |       0 |        0.00 | 
+| hlo_mux_consolidation       |       0 |       0 |        0.00 | 
+| hlo_constant_mux_opt        |       0 |       0 |        0.00 | 
+| hlo_inequality_transform    |       0 |       0 |        0.00 | 
+| hlo_reconv_opt              |       0 |       0 |        0.00 | 
+| hlo_restructure             |       0 |       0 |        0.00 | 
+| hlo_identity_transform      |       0 |       0 |        0.00 | 
+| hlo_reduce_operator_chain   |       0 |       0 |        0.00 | 
+| hlo_mux_cascade_opt         |       0 |       0 |        0.00 | 
+| hlo_mux_consolidation       |       0 |       0 |        0.00 | 
+| hlo_optimize_datapath       |       0 |       0 |        0.00 | 
+| hlo_datapath_recast         |       0 |       0 |        0.00 | 
+| hlo_redundancy_removal_word |       0 |       0 |        0.01 | 
+| hlo_clip_mux_input          |       0 |       0 |        0.00 | 
+| hlo_clip                    |       0 |       0 |        0.00 | 
+| hlo_cleanup                 |       0 |       0 |        0.00 | 
+-----------------------------------------------------------------
+Number of big hc bmuxes before = 0
+              Info: total 1 bmuxes found, 0 are converted to onehot form, and 1 are kept as binary form
+Info    : Pre-processed datapath logic. [DPOPT-6]
+        : No pre-processing optimizations applied to datapath logic in 'XOR_COMPRESSION_60_1_1x1_20100110'.
+Info    : Skipping datapath optimization. [DPOPT-5]
+        : There is no datapath logic in 'XOR_COMPRESSION_60_1_1x1_20100110'.
+      Removing temporary intermediate hierarchies under XOR_COMPRESSION_60_1_1x1_20100110
+Number of big hc bmuxes after = 0
+Starting bit-level redundancy removal [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.007s)
+Starting logic reduction [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed logic reduction (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting mux data reorder optimization [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed mux data reorder optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting timing based select reordering [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.008s)
+
+Stage: post_rtlopt
+----------------------------------------------------------------
+| Transform                  | Accepts | Rejects | Runtime (s) | 
+----------------------------------------------------------------
+| hlo_redundancy_removal_bit |       0 |       0 |        0.01 | 
+| hlo_logic_reduction        |       0 |       0 |        0.00 | 
+| hlo_mux_reorder            |       0 |       0 |        0.00 | 
+| hlo_timing_reorder         |       0 |       0 |        0.01 | 
+----------------------------------------------------------------
+              Optimizing muxes in design 'comp_60_1_1x1_20100110'.
+              Post blast muxes in design 'comp_60_1_1x1_20100110'.
+Running post blast mux optimization. Please follow up with Cadence support if runtime issues are seen with this optimization.
+Starting mux speculation [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Starting speculation optimization
+Completed speculation optimization (accepts:0)
+Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.009s)
+Starting timing based select reordering [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.009s)
+
+Stage: post_muxopt
+--------------------------------------------------------
+| Transform          | Accepts | Rejects | Runtime (s) | 
+--------------------------------------------------------
+| hlo_speculation    |       0 |       0 |        0.01 | 
+| hlo_timing_reorder |       0 |       0 |        0.01 | 
+--------------------------------------------------------
+==================================
+Stage : to_generic 
+==================================
+  =================
+   Message Summary
+  =================
+-----------------------------------------------------------------------------------------------------------------------------
+|   Id   |  Sev  |Count|                                            Message Text                                            |
+-----------------------------------------------------------------------------------------------------------------------------
+|DPOPT-5 |Info   |    1|Skipping datapath optimization.                                                                     |
+|GLO-52  |Info   |    2|Skipping 'boundary_opto' = false setting since set on an internal created hierarchy.                |
+|        |       |     |User is not allowed and should not need to disable boundary optimization on internal created        |
+|        |       |     | hierarchies.                                                                                       |
+|PHYS-141|Warning|   62|Netlist has library cells with no physical information in LEF. This may lead to incorrect area      |
+|        |       |     | calculation.                                                                                       |
+|        |       |     |To prevent this, add physical information for this library cell to LEF, or set 'use_area_from_lef'  |
+|        |       |     | attribute to false.                                                                                |
+|TUI-42  |Warning|    1|This command option will be obsolete in a next major release.                                       |
+|TUI-296 |Info   |    1|The given (sub)design is already uniquified.                                                        |
+|        |       |     |Try running the 'edit_netlist uniquify' command on the parent hierarchy of this (sub)               |
+|        |       |     | design, if there exists any.                                                                       |
+-----------------------------------------------------------------------------------------------------------------------------
+Mapper: Libraries have:
+	domain _default_: 324 combo usable cells and 126 sequential usable cells
+      Mapping 'XOR_COMPRESSION_60_1_1x1_20100110'...
+        Preparing the circuit
+          Pruning unused logic
+          Analyzing hierarchical boundaries
+          Aggressive hierarchical optimization: disabled
+          Propagating constants
+        Done preparing the circuit
+          Structuring (delay-based) XOR_COMPRESSION_60_1_1x1_20100110...
+          Done structuring (delay-based) XOR_COMPRESSION_60_1_1x1_20100110
+          Structuring (delay-based) logic partition in comp_60_1_1x1_20100110...
+Normal Structuring mode def=mux_ctl_1x
+            Starting redundancy-removal...
+            Finished redundancy-removal...
+          Done structuring (delay-based) logic partition in comp_60_1_1x1_20100110
+        Mapping logic partition in comp_60_1_1x1_20100110...
+          Structuring (delay-based) comp_60_1_1x1_20100110_gate...
+Normal Structuring mode def=comp_60_1_1x1_20100110_gate
+            Starting redundancy-removal...
+            Finished redundancy-removal...
+          Done structuring (delay-based) comp_60_1_1x1_20100110_gate
+        Mapping component comp_60_1_1x1_20100110_gate...
+          Structuring (delay-based) logic partition in comp_60_1_1x1_20100110...
+Normal Structuring mode def=mux_ctl_0x
+            Starting xor partial collapsing mux_ctl_0x
+            Finished xor partial collapsing.
+            Starting redundancy-removal...
+            Finished redundancy-removal...
+          Done structuring (delay-based) logic partition in comp_60_1_1x1_20100110
+        Mapping logic partition in comp_60_1_1x1_20100110...
+          Structuring (delay-based) decomp_60_1_1x1_20100110_gate...
+Normal Structuring mode def=decomp_60_1_1x1_20100110_gate
+            Starting redundancy-removal...
+            Finished redundancy-removal...
+          Done structuring (delay-based) decomp_60_1_1x1_20100110_gate
+        Mapping component decomp_60_1_1x1_20100110_gate...
+          Restructuring (delay-based) decomp_60_1_1x1_20100110_gate...
+Normal Structuring mode def=decomp_60_1_1x1_20100110_gate
+          Done restructuring (delay-based) decomp_60_1_1x1_20100110_gate
+        Optimizing component decomp_60_1_1x1_20100110_gate...
+          Restructuring (delay-based) mux_ctl_0x...
+Normal Structuring mode def=mux_ctl_0x
+          Done restructuring (delay-based) mux_ctl_0x
+        Optimizing component mux_ctl_0x...
+          Restructuring (delay-based) comp_60_1_1x1_20100110_gate...
+Normal Structuring mode def=comp_60_1_1x1_20100110_gate
+          Done restructuring (delay-based) comp_60_1_1x1_20100110_gate
+        Optimizing component comp_60_1_1x1_20100110_gate...
+          Restructuring (delay-based) comp_60_1_1x1_20100110_gate_153...
+Normal Structuring mode def=comp_60_1_1x1_20100110_gate_153
+          Done restructuring (delay-based) comp_60_1_1x1_20100110_gate_153
+        Optimizing component comp_60_1_1x1_20100110_gate_153...
+          Restructuring (delay-based) logic partition in comp_60_1_1x1_20100110...
+Normal Structuring mode def=mux_ctl_1x
+          Done restructuring (delay-based) logic partition in comp_60_1_1x1_20100110
+        Optimizing logic partition in comp_60_1_1x1_20100110...
+ 
+Global mapping status
+=====================
+                                    Worst 
+                           Total  Weighted
+Operation                   Area  Neg Slk Worst Path
+ global_map                 3598        0  N/A
+
+    Cost Group            Target    Slack    Diff.  Constr.
+-----------------------------------------------------------
+       default               600    18291             20000 
+
+ 
+Global incremental optimization status
+======================================
+                                    Worst 
+                           Total  Weighted
+Operation                   Area  Neg Slk Worst Path
+ global_incr                3594        0  N/A
+
+    Cost Group            Target    Slack    Diff.  Constr.
+-----------------------------------------------------------
+       default               400    18291             20000 
+
+
+Scan mapping status report
+==========================
+    Scan mapping: converting flip-flops that pass TDRC.
+    Scan mapping: bypassed.  You have to either 1) set attribute 'dft_scan_map_mode' to 'tdrc_pass' and run 'check_dft_rules' or 2) set attribute 'dft_scan_map_mode' to 'force_all'.
+
+    Scan mapping bypassed because no TDRC data is available: either command 'check_dft_rules' has not been run or TDRC data has been subsequently invalidated.
+/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3068341
+
+State Retention Synthesis Status
+================================
+
+Category                        Flops   Percentage
+--------------------------------------------------
+Total instances                    60        100.0
+Excluded from State Retention      60        100.0
+    - Will not convert             60        100.0
+      - Preserved                   0          0.0
+      - Power intent excluded      60        100.0
+    - Could not convert             0          0.0
+      - Scan type                   0          0.0
+      - No suitable cell            0          0.0
+State Retention instances           0          0.0
+--------------------------------------------------
+
+Info    : Removed object. [TUI-58]
+        : Removed design 'design:XOR_COMPRESSION_60_1_1x1_20100110'.
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_test_mode'
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'DFT_compression_enable'.
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_test_mode'
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'DFT_mask_enable'.
+Info    : Added DFT object. [DFT-100]
+        : Added test clock domain 'DFT_mask_clk'.
+Info    : Rerun check_dft_rules. [DFT-306]
+        : Rerun of check_dft_rules may be needed because a new test clock domain was added.
+Info    : Added DFT object. [DFT-100]
+        : Added test clock 'DFT_mask_clk'.
+Connecting the compression_enable signal test_signal:cv32e40p_core/DFT_compression_enable ...
+Connecting the scan inputs to the compression macro...
+Connecting port:cv32e40p_core/scan_in to {hpin:cv32e40p_core/COMPACTOR/RSI_SI[0]}
+Info    : Removed object. [TUI-58]
+        : Removed inst 'inst:cv32e40p_core/eqn2nl_i0_not'.
+Warning : This command will be obsolete in a next major release. [TUI-37]
+        : command: 'define_test_mode'
+Info    : Added DFT object. [DFT-100]
+        : Added test mode signal 'DFT_tpi_mux__z'.
+Connecting the scan outputs to the compression macro...
+Connecting the internal scan chains to the compression macro...
+Connecting the mask_enable signal test_signal:cv32e40p_core/DFT_mask_enable ...
+Connecting the mask clock port:cv32e40p_core/DFT_mask_clk ...
+Info    : Added DFT object. [DFT-100]
+        : Added scan segment 'DFT_segment_1'.
+Info    : Marking instance as dft_abstract_dont_scan as an abstract segment is being defined on it. [DFT-163]
+        : Setting dft_abstract_dont_scan attribute to true for instance 'COMPACTOR'
+Info    : Added DFT object. [DFT-100]
+        : Added formal_verification_constraint 'abstract_si_DFT_segment_1_user_constraint'.
+
+  Setting attribute of design 'cv32e40p_core': 'dft_mv_clock_invalidates_clock_domain' = false
+Info    : Removed DFT object. [DFT-102]
+        : Removed test clock domain 'DFT_mask_clk'.
+Info    : Removed object. [TUI-58]
+        : Removed test_clock_domain 'test_clock_domain:cv32e40p_core/DFT_mask_clk'.
+Prepending 'chain0' with segment 'scan_segment:cv32e40p_core/DFT_segment_1'
+Info    : Added DFT object. [DFT-100]
+        : Added scan segment 'DFT_segment_1'.
+Info    : Removed DFT object. [DFT-102]
+        : Removed test mode signal 'DFT_tpi_mux__z'.
+Info    : Rerun check_dft_rules. [DFT-306]
+        : Rerun of check_dft_rules may be needed because a test signal was removed.
+Info    : Removed object. [TUI-58]
+        : Removed test_signal 'test_signal:cv32e40p_core/DFT_tpi_mux__z'.
+  Checking DFT rules for 'cv32e40p_core' module under 'muxed_scan' style
+
+Detected 0 DFT rule violation(s)
+    ... see the log file for more details
+  Number of user specified non-Scan registers:   0
+  Number of Abstract Segment non-Scan registers:  60
+      Number of registers that fail DFT rules:   0
+      Number of registers that pass DFT rules: 2214
+  Percentage of total registers that are scannable: 100%
+  Percentage of abstract segment flops that are scannable: 100%
+
+Mapping compression logic ...
+Done mapping compression logic..
+Info    : The given (sub)design is already uniquified. [TUI-296]
+        : module:cv32e40p_core/XOR_COMPRESSION_60_1_1x1_20100110.
+
+Starting DFT Scan Compression for module 'cv32e40p_core' in 'xor' mode.
+Building the compression logic to include 'broadcast' decompression and 'XOR' compression  with wide1 masking.
+Prepending the mask registers to the actual scan chains.
+
+Actual Scan Chain Summary
+-------------------------
+   The number of actual fullscan chains in the design is: 1
+   The number of actual fullscan chains in the design which are favorable for compression is: 1
+   The number of actual fullscan chains which can be prepended to is: 1
+   The number of actual fullscan chains which are not favorable for prepend is: 0
+
+Number of Internal Scan Channels
+--------------------------------
+   User requested ratio: 60
+   Tool achieved ratio: 59.8
+   The maximum original scan chain length: 2154
+   The number of internal scan channels is: 60
+   The maximum internal scan channel length is: 36
+   The maximum length of the mask register channels is: 60
+   The total number of mask registers added is: 60
+   The final maximum fullscan chain length (including mask and/or misr registers) is: 2214
+   This is 100.0% of the average fullscan chain length of 2214.0
+
+Tester Cycle Statistics
+-----------------------
+   The number of tester cycles required to load a scan pattern in compression mode is: 36
+   The number of tester cycles required to load a scan pattern in fullscan mode is: 2214
+   The number of tester cycles required to load a channel mask shift register chain is: 60
+

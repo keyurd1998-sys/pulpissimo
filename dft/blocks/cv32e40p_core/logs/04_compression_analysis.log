@@ -3,19 +3,19 @@ Copyright 2025 Cadence Design Systems, Inc. All rights reserved worldwide.
 Cadence and the Cadence logo are registered trademarks and Genus is a trademark
 of Cadence Design Systems, Inc. in the United States and other countries.
 
-[20:46:31.455553] Configured Lic search path (25.01-s002): 5280@pine-server
+[21:01:29.455545] Configured Lic search path (25.01-s002): 5280@pine-server
 
 Version: 25.10-p002_1, built Thu Apr 17 03:05:38 PDT 2025
 Options: -overwrite -files scripts/04_compression_analysis.tcl -log logs/04_compression_analysis.log 
-Date:    Thu Oct 15 20:46:31 2026
+Date:    Thu Oct 15 21:01:29 2026
 Host:    Pine-06 (x86_64 w/Linux 5.14.0-611.30.1.el9_7.x86_64) (6cores*6cpus*1physical cpu*Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz 9216KB) (7671680KB)
-PID:     3059960
+PID:     3067961
 OS:      Red Hat Enterprise Linux 9.7 (Plow)
 
 Checking out license: Genus_Synthesis
-[20:46:31.511970] Periodic Lic check successful
-[20:46:31.511987] Feature usage summary:
-[20:46:31.511987] Genus_Synthesis  
+[21:01:29.152873] Periodic Lic check successful
+[21:01:29.677169] Feature usage summary:
+[21:01:29.677169] Genus_Synthesis  
 
 
 ***********************************************************************************************************
@@ -33,7 +33,7 @@ Finished loading tool scripts (16 seconds elapsed).
 #@ Begin verbose source ./scripts/04_compression_analysis.tcl
 @file(04_compression_analysis.tcl) 1: set SCRIPT_DIR [file dirname [file normalize [info script]]]
 @file(04_compression_analysis.tcl) 2: source "$SCRIPT_DIR/00_setup_env.tcl"
-Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Thu Oct 15 20:46:47 IST 2026)...
+Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Thu Oct 15 21:01:46 IST 2026)...
 #@ Begin verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl
 @file(00_setup_env.tcl) 1: set DESIGN "cv32e40p_core"
 @file(00_setup_env.tcl) 3: set SCRIPTS_DIR  [file dirname [file normalize [info script]]]
@@ -52,7 +52,7 @@ Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_e
 }
 @file(00_setup_env.tcl) 20: set TIMING_LIB "$LIB_DIR/timing/slow.lib"
 @file(00_setup_env.tcl) 21: set LEF_FILE   "$LIB_DIR/lef/all.lef"
-@file(00_setup_env.tcl) 22: set ATPG_LIB   "$LIB_DIR/atpg/include_libraries.v"
+@file(00_setup_env.tcl) 22: set ATPG_LIB [file normalize "$LIB_DIR/atpg/stdcell.v"]
 @file(00_setup_env.tcl) 24: set FLIST    "$BLOCK_DIR/filelists/cv32e40p_core.flist"
 @file(00_setup_env.tcl) 25: set SDC_FILE "$BLOCK_DIR/constraints/cv32e40p_core.sdc"
 @file(00_setup_env.tcl) 27: if {![info exists CV32E40P_DIR]} {
@@ -757,8 +757,10 @@ Info    : Successfully completed DFT command. [DFT-146]
 @file(04_compression_analysis.tcl) 28: report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains_base.rpt"
 @file(04_compression_analysis.tcl) 31: set asc_dir "$STEP_RPT_DIR/asc_1channel"
 @file(04_compression_analysis.tcl) 32: set asc_rpt "$STEP_RPT_DIR/${DESIGN}_compressibility.rpt"
-@file(04_compression_analysis.tcl) 34: analyze_scan_compressibility \
+@file(04_compression_analysis.tcl) 33: file delete -force $asc_dir
+@file(04_compression_analysis.tcl) 35: analyze_scan_compressibility \
     -library $ATPG_LIB \
+    -build_model_options "-allowmissingmodules yes" \
     -compression_method compress_scan_chains \
     -compressor xor \
     -decompressor broadcast \
@@ -770,13 +772,14 @@ Info    : Successfully completed DFT command. [DFT-146]
 Starting scan compressibility analysis for module 'cv32e40p_core'
 
 Checking out license: Modus_DFT_Opt
-[20:46:50.431571] Periodic Lic check successful
-[20:46:50.431595] Feature usage summary:
-[20:46:50.431595] Genus_Synthesis  
-[20:46:50.431595] Modus_DFT_Opt  
+[21:01:48.253944] Periodic Lic check successful
+[21:01:48.778257] Feature usage summary:
+[21:01:48.778257] Genus_Synthesis  
+[21:01:48.778258] Modus_DFT_Opt  
 Info    : An additional product license has been checked out. [TUI-306]
         : The requested license was 'Modus_DFT_Opt' a feature of DFT Modus Opt.
-using existing work directory: '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel'
+Creating work directory /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel .....
+
 
 Analyzing the design with the following configuration
 -----------------------------------------------------
@@ -788,7 +791,7 @@ Analyzing the design with the following configuration
 
 Info    : A product license has been checked in. [TUI-307]
         : The license name is 'Modus_DFT_Opt' a feature of DFT Modus Opt.
-TMPDIR is being set to /tmp/genus_temp_3059960_2754ab37-da4d-4743-8b0a-cc31cb04cba1_Pine-06_admin_5vsalC/genus_temp_3060340_e65637d4-1a13-4add-8c2f-cfd79286e54d_Pine-06_admin_uXVJzQ
+TMPDIR is being set to /tmp/genus_temp_3067961_038df5f3-3c5c-4553-a79f-c568c50e7373_Pine-06_admin_4S3lmQ/genus_temp_3068341_3a2d375a-f8ae-43bc-bbaf-1e0873bb92ea_Pine-06_admin_g5S7ex
 
 
 ***********************************************************************************************************
@@ -808,7 +811,7 @@ Finished loading tool scripts (15 seconds elapsed).
 #@ Begin verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/asc.tcl
 @file(asc.tcl) 1: ::legacy::set_attr max_print 0 message:PHYS/PHYS-129
   Setting attribute of message 'PHYS-129': 'max_print' = 0
-@file(asc.tcl) 2: analyze_scan_compressibility_actual  -library "/home/admin/DFT/Library/atpg/include_libraries.v" -decompressor broadcast  -compressor xor -scanouts "-1" -mask wide1 -top_module cv32e40p_core -effort default -ratio_list "50 60 70 80" -directory /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel -replace_scan 0  -fix_dft 0 -dont_run_atpg 0 -run_only 0 -double_chain 0 -restitch 0 -non_scan_flop_limit 95 -lib_search_path "" -rc_libs "" -lsf_string none -preview 0 -partition 100  -dbfile /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/original.db  -compression_method compress_scan_chains  -serial_misr 0                 
+@file(asc.tcl) 2: analyze_scan_compressibility_actual  -library "/home/admin/DFT/Library/atpg/stdcell.v" -decompressor broadcast  -compressor xor -scanouts "-1" -mask wide1 -top_module cv32e40p_core -effort default -ratio_list "50 60 70 80" -directory /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel -replace_scan 0  -fix_dft 0 -dont_run_atpg 0 -run_only 0 -double_chain 0 -restitch 0 -non_scan_flop_limit 95 -lib_search_path "" -rc_libs "" -lsf_string none -preview 0 -partition 100  -dbfile /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/original.db  -compression_method compress_scan_chains  -serial_misr 0      -build_model_options "-allowmissingmodules yes"           
 Info    : Initiating DFT command. [DFT-145]
         : Started analyze_scan_compressibility_actual.
 Reading database file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/original.db'.
@@ -1319,9 +1322,9 @@ Info    : Unusable library cells found at the time of loading a library.  [LBR-4
         : Library: 'physical_cells', Total cells: 144, Unusable cells: 144.
 	List of unusable cells: 'FILL8 FILL64 FILL4 FILL32 FILL2 FILL16 FILL1 RF2R1WX2 RF1R1WX2 TLATSXL TLATSX4 TLATSX2 TLATSX1 TLATRXL TLATRX4 TLATRX2 TLATRX1 TLATNSXL TLATNSX4 TLATNSX2 TLATNSX1 TLATNRXL TLATNRX4 TLATNRX2 TLATNRX1 TTLATXL TTLATX4 TTLATX2 TTLATX1 TBUFIXL TBUFIX8 TBUFIX4 TBUFIX3 TBUFIX2 TBUFIX20 TBUFIX1 TBUFIX16 TBUFIX12 SEDFFHQXL SDFFSRHQXL SDFFSHQXL SDFFRHQXL SDFFNSXL SDFFNSX4 SDFFNSX2 SDFFNSX1 SDFFNRXL SDFFNRX4 SDFFNRX2 SDFFNRX1 SDFFNXL SDFFNX4 SDFFNX2 SDFFNX1 SDFFHQXL JKFFSRXL JKFFSRX4 JKFFSRX2 JKFFSRX1 JKFFSXL JKFFSX4 JKFFSX2 JKFFSX1 JKFFRXL JKFFRX4 JKFFRX2 JKFFRX1 JKFFXL JKFFX4 JKFFX2 JKFFX1 DFFSRHQXL DFFSHQXL DFFSX2 DFFRHQXL DFFNSRX4 DFFNSXL DFFNSX4 DFFNSX2 DFFNSX1 DFFNRXL DFFNRX4 DFFNRX2 DFFNRX1 DFFNXL DFFNX4 DFFNX2 DFFNX1 DFFHQXL CLKINVXL CLKBUFXL CLKBUFX1 BUFXL BUFX1 RFRDX4 RFRDX2 RFRDX1 XOR3X4 XOR3X2 XNOR3X4 XNOR3X2 AFCSHCONX4 AFCSHCONX2 AFCSHCINX4 AFCSHCINX2 AHHCONX4 AHHCONX2 AHHCINX4 AHHCINX2 AFHCONX4 AFHCONX2 AFHCINX4 AFHCINX2 CMPR42X2 CMPR42X1 CMPR32X1 CMPR22X1 BMXX1 BENCX4 BENCX2 BENCX1 PCORNERDG PDIDGZ PDO04CDG PADDO PADDI PFEED01 PFEED1 PFEED10 PFEED2 PFEED20 PFEED35 PFEED5 PFEED50 PVDD1DGZ PVSS1DGZ PDB04DGZ PADDB PADDOZ CDK_S128x16 CDK_S256x16 CDK_R512x16 pll ANTENNA .'
 Checking out license: Modus_DFT_Opt
-[20:47:12.014177] Periodic Lic check successful
-[20:47:12.014187] Feature usage summary:
-[20:47:12.014187] Modus_DFT_Opt  
+[21:02:10.407987] Periodic Lic check successful
+[21:02:10.407994] Feature usage summary:
+[21:02:10.407994] Modus_DFT_Opt  
 Info    : An additional product license has been checked out. [TUI-306]
         : The requested license was 'Modus_DFT_Opt' a feature of DFT Modus Opt.
 Info    : Added DFT object. [DFT-100]
@@ -1376,7 +1379,6 @@ ENABLED NEW REPORT GATE CMD
 
 Warning : This command option will be obsolete in a next major release. [TUI-42]
         : The option '-effort' is obsolete. Use '-atpg_options' option to specify '-effort' option.
-WARNING: Using existing directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_fullscan' for write_dft_atpg.
 ----------------------------------------------------------------------------
 Modus scripts for ATPG have been written 
  for fullscan mode to directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_fullscan'.
@@ -1595,9 +1597,9 @@ End SDR optimization IMPL_BASED_region
 Starting timing based select reordering [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.011s)
 Starting recase case-box optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
-Completed recase case-box optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Completed recase case-box optimization (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting infer macro optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
-Completed infer macro optimization (accepts: 0, rejects: 0, runtime: 0.001s)
+Completed infer macro optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting decode mux sandwich optimization [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed decode mux sandwich optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting decode mux optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
@@ -1609,15 +1611,15 @@ Completed common data mux cascade opt (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting mux input consolidation [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed mux input consolidation (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting constant-data mux optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
-Completed constant-data mux optimization (accepts: 0, rejects: 0, runtime: 0.001s)
+Completed constant-data mux optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting chain-to-tree inequality transform [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed chain-to-tree inequality transform (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting reconvergence optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed reconvergence optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting logic restructure optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
-Completed logic restructure optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Completed logic restructure optimization (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting identity transform [v3.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
-Completed identity transform (accepts: 0, rejects: 0, runtime: 0.001s)
+Completed identity transform (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting reduce operator chain [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed reduce operator chain (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting common data mux cascade opt [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
@@ -1627,13 +1629,13 @@ Completed mux input consolidation (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting optimize datapath elements [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed optimize datapath elements (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting datapath recasting [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
-Completed datapath recasting (accepts: 0, rejects: 0, runtime: 0.001s)
+Completed datapath recasting (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting word-level redundancy removal [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Info    : Setting up the version of high level Redundancy Removal Optimizations. [HLO_RR-1]
         : hlo_rr=2: enables RRv2 with filter, on by default.
 Info    : Setting up the version of high level Redundancy Removal Optimizations. [HLO_RR-1]
         : hlo_rr=2: Value cannot be changed anymore.
-Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.013s)
+Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.012s)
 Starting clip mux common data inputs [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed clip mux common data inputs (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting clip the non-user hierarchies [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
@@ -1681,9 +1683,9 @@ Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.009s)
 Starting logic reduction [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed logic reduction (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting mux data reorder optimization [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
-Completed mux data reorder optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Completed mux data reorder optimization (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting timing based select reordering [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.010s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.012s)
 
 Stage: post_rtlopt
 ----------------------------------------------------------------
@@ -1700,7 +1702,7 @@ Running post blast mux optimization. Please follow up with Cadence support if ru
 Starting mux speculation [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Starting speculation optimization
 Completed speculation optimization (accepts:0)
-Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.014s)
+Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.011s)
 Starting timing based select reordering [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_80_1_1x1_20100110, recur: true)
 Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.010s)
 
@@ -2104,7 +2106,7 @@ Scan mapping status report
     Scan mapping: bypassed.  You have to either 1) set attribute 'dft_scan_map_mode' to 'tdrc_pass' and run 'check_dft_rules' or 2) set attribute 'dft_scan_map_mode' to 'force_all'.
 
     Scan mapping bypassed because no TDRC data is available: either command 'check_dft_rules' has not been run or TDRC data has been subsequently invalidated.
-/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3060340
+/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3068341
 
 State Retention Synthesis Status
 ================================
@@ -2230,7 +2232,6 @@ ENABLED NEW REPORT GATE CMD
         Tool achieved ratio: 79.7
 Warning : This command option will be obsolete in a next major release. [TUI-42]
         : The option '-effort' is obsolete. Use '-atpg_options' option to specify '-effort' option.
-WARNING: Using existing directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80' for write_dft_atpg.
 ----------------------------------------------------------------------------
 Modus scripts for ATPG have been written 
  for compression mode with fullscan top-off to directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80'.
@@ -2540,7 +2541,7 @@ Info    : Skipping datapath optimization. [DPOPT-5]
       Removing temporary intermediate hierarchies under XOR_COMPRESSION_70_1_1x1_20100110
 Number of big hc bmuxes after = 0
 Starting bit-level redundancy removal [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.007s)
+Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.008s)
 Starting logic reduction [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Completed logic reduction (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting mux data reorder optimization [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
@@ -2563,9 +2564,9 @@ Running post blast mux optimization. Please follow up with Cadence support if ru
 Starting mux speculation [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
 Starting speculation optimization
 Completed speculation optimization (accepts:0)
-Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.011s)
+Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.010s)
 Starting timing based select reordering [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_70_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.009s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.008s)
 
 Stage: post_muxopt
 --------------------------------------------------------
@@ -2697,7 +2698,7 @@ Scan mapping status report
     Scan mapping: bypassed.  You have to either 1) set attribute 'dft_scan_map_mode' to 'tdrc_pass' and run 'check_dft_rules' or 2) set attribute 'dft_scan_map_mode' to 'force_all'.
 
     Scan mapping bypassed because no TDRC data is available: either command 'check_dft_rules' has not been run or TDRC data has been subsequently invalidated.
-/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3060340
+/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3068341
 
 State Retention Synthesis Status
 ================================
@@ -2819,7 +2820,6 @@ ENABLED NEW REPORT GATE CMD
         Tool achieved ratio: 69.4
 Warning : This command option will be obsolete in a next major release. [TUI-42]
         : The option '-effort' is obsolete. Use '-atpg_options' option to specify '-effort' option.
-WARNING: Using existing directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_70' for write_dft_atpg.
 ----------------------------------------------------------------------------
 Modus scripts for ATPG have been written 
  for compression mode with fullscan top-off to directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_70'.
@@ -3045,9 +3045,9 @@ End SDR optimization IMPL_BASED_region
 Starting timing based select reordering [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
 Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.008s)
 Starting recase case-box optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
-Completed recase case-box optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Completed recase case-box optimization (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting infer macro optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
-Completed infer macro optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Completed infer macro optimization (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting decode mux sandwich optimization [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
 Completed decode mux sandwich optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting decode mux optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
@@ -3065,7 +3065,7 @@ Completed chain-to-tree inequality transform (accepts: 0, rejects: 0, runtime: 0
 Starting reconvergence optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
 Completed reconvergence optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting logic restructure optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
-Completed logic restructure optimization (accepts: 0, rejects: 0, runtime: 0.001s)
+Completed logic restructure optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting identity transform [v3.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
 Completed identity transform (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting reduce operator chain [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
@@ -3079,9 +3079,9 @@ Completed optimize datapath elements (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting datapath recasting [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
 Completed datapath recasting (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting word-level redundancy removal [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
-Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.012s)
+Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.011s)
 Starting clip mux common data inputs [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
-Completed clip mux common data inputs (accepts: 0, rejects: 0, runtime: 0.001s)
+Completed clip mux common data inputs (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting clip the non-user hierarchies [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
 Completed clip the non-user hierarchies (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting basic netlist cleanup [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
@@ -3123,7 +3123,7 @@ Info    : Skipping datapath optimization. [DPOPT-5]
       Removing temporary intermediate hierarchies under XOR_COMPRESSION_60_1_1x1_20100110
 Number of big hc bmuxes after = 0
 Starting bit-level redundancy removal [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
-Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.008s)
+Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.007s)
 Starting logic reduction [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
 Completed logic reduction (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting mux data reorder optimization [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
@@ -3148,7 +3148,7 @@ Starting speculation optimization
 Completed speculation optimization (accepts:0)
 Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.009s)
 Starting timing based select reordering [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_60_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.008s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.009s)
 
 Stage: post_muxopt
 --------------------------------------------------------
@@ -3267,7 +3267,7 @@ Scan mapping status report
     Scan mapping: bypassed.  You have to either 1) set attribute 'dft_scan_map_mode' to 'tdrc_pass' and run 'check_dft_rules' or 2) set attribute 'dft_scan_map_mode' to 'force_all'.
 
     Scan mapping bypassed because no TDRC data is available: either command 'check_dft_rules' has not been run or TDRC data has been subsequently invalidated.
-/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3060340
+/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/.st_launch_Pine-06_3068341
 
 State Retention Synthesis Status
 ================================
@@ -3389,7 +3389,6 @@ ENABLED NEW REPORT GATE CMD
         Tool achieved ratio: 59.8
 Warning : This command option will be obsolete in a next major release. [TUI-42]
         : The option '-effort' is obsolete. Use '-atpg_options' option to specify '-effort' option.
-WARNING: Using existing directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_60' for write_dft_atpg.
 ----------------------------------------------------------------------------
 Modus scripts for ATPG have been written 
  for compression mode with fullscan top-off to directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_60'.
@@ -3613,7 +3612,7 @@ Begin SDR optimization IMPL_BASED_region
 No special hier is found 
 End SDR optimization IMPL_BASED_region 
 Starting timing based select reordering [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.007s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.006s)
 Starting recase case-box optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
 Completed recase case-box optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting infer macro optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
@@ -3635,7 +3634,7 @@ Completed chain-to-tree inequality transform (accepts: 0, rejects: 0, runtime: 0
 Starting reconvergence optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
 Completed reconvergence optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting logic restructure optimization [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
-Completed logic restructure optimization (accepts: 0, rejects: 0, runtime: 0.000s)
+Completed logic restructure optimization (accepts: 0, rejects: 0, runtime: 0.001s)
 Starting identity transform [v3.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
 Completed identity transform (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting reduce operator chain [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
@@ -3649,7 +3648,7 @@ Completed optimize datapath elements (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting datapath recasting [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
 Completed datapath recasting (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting word-level redundancy removal [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
-Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.011s)
+Completed word-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.012s)
 Starting clip mux common data inputs [v1.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
 Completed clip mux common data inputs (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting clip the non-user hierarchies [v2.0] (stage: pre_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
@@ -3693,19 +3692,19 @@ Info    : Skipping datapath optimization. [DPOPT-5]
       Removing temporary intermediate hierarchies under XOR_COMPRESSION_49_1_1x1_20100110
 Number of big hc bmuxes after = 0
 Starting bit-level redundancy removal [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
-Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.006s)
+Completed bit-level redundancy removal (accepts: 0, rejects: 0, runtime: 0.005s)
 Starting logic reduction [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
 Completed logic reduction (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting mux data reorder optimization [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
 Completed mux data reorder optimization (accepts: 0, rejects: 0, runtime: 0.000s)
 Starting timing based select reordering [v1.0] (stage: post_rtlopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.007s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.008s)
 
 Stage: post_rtlopt
 ----------------------------------------------------------------
 | Transform                  | Accepts | Rejects | Runtime (s) | 
 ----------------------------------------------------------------
-| hlo_redundancy_removal_bit |       0 |       0 |        0.01 | 
+| hlo_redundancy_removal_bit |       0 |       0 |        0.00 | 
 | hlo_logic_reduction        |       0 |       0 |        0.00 | 
 | hlo_mux_reorder            |       0 |       0 |        0.00 | 
 | hlo_timing_reorder         |       0 |       0 |        0.01 | 
@@ -3716,16 +3715,16 @@ Running post blast mux optimization. Please follow up with Cadence support if ru
 Starting mux speculation [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
 Starting speculation optimization
 Completed speculation optimization (accepts:0)
-Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.008s)
+Completed mux speculation (accepts: 0, rejects: 0, runtime: 0.006s)
 Starting timing based select reordering [v1.0] (stage: post_muxopt, startdef: XOR_COMPRESSION_49_1_1x1_20100110, recur: true)
-Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.005s)
+Completed timing based select reordering (accepts: 0, rejects: 0, runtime: 0.007s)
 
 Stage: post_muxopt
 --------------------------------------------------------
 | Transform          | Accepts | Rejects | Runtime (s) | 
 --------------------------------------------------------
 | hlo_speculation    |       0 |       0 |        0.01 | 
-| hlo_timing_reorder |       0 |       0 |        0.00 | 
+| hlo_timing_reorder |       0 |       0 |        0.01 | 
 --------------------------------------------------------
 ==================================
 Stage : to_generic 
@@ -3958,7 +3957,6 @@ ENABLED NEW REPORT GATE CMD
         Tool achieved ratio: 48.9
 Warning : This command option will be obsolete in a next major release. [TUI-42]
         : The option '-effort' is obsolete. Use '-atpg_options' option to specify '-effort' option.
-WARNING: Using existing directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_50' for write_dft_atpg.
 ----------------------------------------------------------------------------
 Modus scripts for ATPG have been written 
  for compression mode with fullscan top-off to directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_50'.
@@ -3977,25 +3975,160 @@ To simulate the ATPG generated test vectors in FULLSCAN (top-off) mode:
 Running Modus ATPG
 ---------------------------
 	Running /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_fullscan/runmodus.atpg.tcl .....
-#@ End verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/asc.tcl
-1
-Encountered problems processing file: /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/asc.tcl
+	Running /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_80/runmodus.atpg.tcl .....
+
+[21:16:32.402554] Periodic Lic check successful
+[21:16:32.402569] Feature usage summary:
+[21:16:32.402569] Genus_Synthesis  
+[21:16:55.458714] Periodic Lic check successful
+[21:16:55.458715] Feature usage summary:
+	Running /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_70/runmodus.atpg.tcl .....
+
+[21:46:59.173992] Periodic Lic check successful
+[21:46:59.173993] Feature usage summary:
+	Running /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_60/runmodus.atpg.tcl .....
+
+[22:02:01.075275] Periodic Lic check successful
+[22:02:01.075281] Feature usage summary:
+	Running /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_50/runmodus.atpg.tcl .....
+
+[22:32:04.305025] Periodic Lic check successful
+[22:32:04.829315] Feature usage summary:
+      completed /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel/test_scripts_ratio_50/runmodus.atpg.tcl
+
+Info    : Reporting runtime for DFT command. [DFT-147]
+        : Runtime for analyze_scan_compressibility_actual is 39 second(s).
+Info    : Successfully completed DFT command. [DFT-146]
+        : Successfully completed analyze_scan_compressibility_actual.
+  =================
+   Message Summary
+  =================
+-----------------------------------------------------------------------------------------------------------------------------
+|  Id   |  Sev  |Count|                                            Message Text                                             |
+-----------------------------------------------------------------------------------------------------------------------------
+|DFT-146|Info   |    1|Successfully completed DFT command.                                                                  |
+|DFT-147|Info   |    1|Reporting runtime for DFT command.                                                                   |
+|DFT-151|Info   |    3|Added scan chain.                                                                                    |
+|DPOPT-6|Info   |    2|Pre-processed datapath logic.                                                                        |
+|ELAB-1 |Info   |    2|Elaborating Design.                                                                                  |
+|ELAB-3 |Info   |    2|Done Elaborating Design.                                                                             |
+|MESG-11|Warning|    8|Maximum message print count reached.                                                                 |
+|TUI-37 |Warning|    7|This command will be obsolete in a next major release.                                               |
+|       |       |     |This command is obsolete and the new command define_test_signal should be used.                      |
+|TUI-42 |Warning|    1|This command option will be obsolete in a next major release.                                        |
+|TUI-58 |Info   |   12|Removed object.                                                                                      |
+|TUI-296|Info   |    1|The given (sub)design is already uniquified.                                                         |
+|       |       |     |Try running the 'edit_netlist uniquify' command on the parent hierarchy of this (sub)                |
+|       |       |     | design, if there exists any.                                                                        |
+-----------------------------------------------------------------------------------------------------------------------------
 
 Lic Summary:
-[20:47:51.483747] Cdslmd servers: pine-server
-[20:47:51.483768] Feature usage summary:
-[20:47:51.483769] Modus_DFT_Opt  
-Abnormal exit.
+[22:36:18.245242] Cdslmd servers: pine-server
+[22:36:18.769538] Feature usage summary:
+[22:36:18.769538] Modus_DFT_Opt  
+Normal exit.
 Checking out license: Modus_DFT_Opt
+[22:36:20.027083] Periodic Lic check successful
+[22:36:20.551394] Feature usage summary:
+[22:36:20.551395] Genus_Synthesis  
+[22:36:20.551395] Modus_DFT_Opt  
 Info    : An additional product license has been checked out. [TUI-306]
         : The requested license was 'Modus_DFT_Opt' a feature of DFT Modus Opt.
-Error. Command has not completed successfully
-       Check the previous messages for any error
-#@ End verbose source ./scripts/04_compression_analysis.tcl
-Failed on analyze_scan_compressibility
-Encountered problems processing file: scripts/04_compression_analysis.tcl
-WARNING: This version of the tool is 546 days old.
 
-Another Ctrl-C within 1 second will terminate the tool.
-CURRENT RESOURCES: RT {elapsed: 159s, ST: 24s, FG: 24s, CPU: 5.3%}, MEM {curr: 1.7G, peak: 1.7G, phys curr: 0.9G, phys peak: 1.9G}, SYS {load: 0.3, cpu: 6, total: 7.3G, free: 1.6G}
-Abnormal exit.
+----------------------------------------
+ Results of analyze_scan_compressibility
+----------------------------------------
+	Design       - cv32e40p_core
+	Decompressor - broadcast
+	Compressor   - xor
+	Mask         - wide1
+
+Achieved compression table with fullscan top-off vectors
+--------------------------------------------------------
+IC    TATR   TDVR    ATCov.   CL       PAT-comp  PAT-fs    Cycles        Runtime    Gatecount    Area
+-----------------------------------------------------------------------------------------------------
+fs    1.0    1.0     99.95%   2154     -         491       1063880       00:00:20   -            -
+50    1.4    1.4     99.98%   44       799       320       748406        00:18:02   282          43.243    
+60    1.3    1.3     99.98%   36       880       352       819963        00:17:12   346          43.243    
+70    1.2    1.2     99.98%   31       799       382       883136        00:24:20   402          43.243    
+80    1.1    1.1     99.98%   27       706       419       963724        00:30:35   459          43.243    
+
+Achieved compression table without fullscan top-off vectors
+-----------------------------------------------------------
+IC    TATR   TDVR    ATCov.   CL       PAT-comp  PAT-fs    Cycles    Gatecount    Area
+--------------------------------------------------------------------------------------
+fs    1.0    1.0     99.95%   2154     -         491       1063880       -       -    
+50    26.8   26.8    91.57%   44       799       -         39668         282     43.243     
+60    29.0   29.0    91.60%   36       880       -         36679         346     43.243     
+70    36.1   36.1    88.06%   31       799       -         29452         402     43.243     
+80    45.5   45.5    84.18%   27       706       -         23363         459     43.243     
+
+Total ATPG runtime: 01:30:29 (hrs:min:sec).
+
+IC        - Inserted compression
+TATR      - Test application time reduction
+TDVR      - Test data volume reduction
+ATCov.    - ATPG test mode coverage
+CL        - Channel length
+PAT-comp  - Number of compression test patterns
+PAT-fs    - Number of fullscan test patterns
+Runtime   - ATPG runtime
+fs        - Uncompressed (Fullscan) run
+
+Completed scan compressibility analysis for module 'cv32e40p_core'
+@file(04_compression_analysis.tcl) 46: report_scan_compressibility -directory $asc_dir > $asc_rpt
+Analyzing from work directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/04_scan_chains/asc_1channel' .....
+
+----------------------------------------
+ Results of analyze_scan_compressibility
+----------------------------------------
+	Design       - cv32e40p_core
+	Decompressor - broadcast
+	Compressor   - xor
+	Mask         - wide1
+
+Achieved compression table with fullscan top-off vectors
+--------------------------------------------------------
+IC    TATR   TDVR    ATCov.   CL       PAT-comp  PAT-fs    Cycles        Runtime    Gatecount    Area
+-----------------------------------------------------------------------------------------------------
+fs    1.0    1.0     99.95%   2154     -         491       1063880       00:00:20   -            -
+50    1.4    1.4     99.98%   44       799       320       748406        00:18:02   282          43.243    
+60    1.3    1.3     99.98%   36       880       352       819963        00:17:12   346          43.243    
+70    1.2    1.2     99.98%   31       799       382       883136        00:24:20   402          43.243    
+80    1.1    1.1     99.98%   27       706       419       963724        00:30:35   459          43.243    
+
+Achieved compression table without fullscan top-off vectors
+-----------------------------------------------------------
+IC    TATR   TDVR    ATCov.   CL       PAT-comp  PAT-fs    Cycles    Gatecount    Area
+--------------------------------------------------------------------------------------
+fs    1.0    1.0     99.95%   2154     -         491       1063880       -       -    
+50    26.8   26.8    91.57%   44       799       -         39668         282     43.243     
+60    29.0   29.0    91.60%   36       880       -         36679         346     43.243     
+70    36.1   36.1    88.06%   31       799       -         29452         402     43.243     
+80    45.5   45.5    84.18%   27       706       -         23363         459     43.243     
+
+Total ATPG runtime: 01:30:29 (hrs:min:sec).
+
+IC        - Inserted compression
+TATR      - Test application time reduction
+TDVR      - Test data volume reduction
+ATCov.    - ATPG test mode coverage
+CL        - Channel length
+PAT-comp  - Number of compression test patterns
+PAT-fs    - Number of fullscan test patterns
+Runtime   - ATPG runtime
+fs        - Uncompressed (Fullscan) run
+
+@file(04_compression_analysis.tcl) 49: set DB_FILE "$DBS_DIR/04_stitched.db"
+@file(04_compression_analysis.tcl) 50: write_db -all_root_attributes -to_file $DB_FILE
+Finished exporting design database to file '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/dbs/04_stitched.db' for 'cv32e40p_core' (command execution time mm:ss cpu = 00:01, real = 00:01).
+@file(04_compression_analysis.tcl) 52: puts "INFO: Step 4 compression analysis completed. Checkpoint saved: $DB_FILE"
+INFO: Step 4 compression analysis completed. Checkpoint saved: /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/dbs/04_stitched.db
+@file(04_compression_analysis.tcl) 53: exit
+
+Lic Summary:
+[22:36:21.440448] Cdslmd servers: pine-server
+[22:36:21.964761] Feature usage summary:
+[22:36:21.964762] Genus_Synthesis  
+[22:36:21.964762] Modus_DFT_Opt  
+Normal exit.
