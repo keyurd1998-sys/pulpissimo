@@ -5,43 +5,13 @@ set STEP_RPT_DIR [file normalize "$REPORTS_DIR/05_wrapper"]
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 4 OPCG database; fallback to Step 3 mapped database
+# Restore Step 4 OPCG database
 set PREV_DB [file normalize "$DBS_DIR/04_opcg.db"]
 if {![file exists $PREV_DB]} {
-    set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
-    if {![file exists $PREV_DB]} {
-        puts "ERROR: Neither $DBS_DIR/04_opcg.db nor $DBS_DIR/03_mapped.db found!"
-        exit 1
-    }
+    puts "ERROR: $DBS_DIR/04_opcg.db not found! Please run Step 4 first."
+    exit 1
 }
 read_db $PREV_DB
-
-# Ensure IEEE 1500 Wrapper Instruction Register (WIR) exists
-set wir_inst [get_db hinsts *wir_instance*]
-if {[llength $wir_inst] == 0} {
-    puts "INFO: wir_instance not found in restored database. Defining and inserting IEEE 1500 WIR..."
-    # 1. Wrapper Serial Control (WSC) interface ports
-    define_test_signal -function serial_wrck   -name WRCK      -create_port SERIAL_WRCK
-    define_test_signal -function shift_wr      -name ShiftWR   -create_port ShiftWR
-    define_test_signal -function update_wr     -name UpdateWR  -create_port UpdateWR
-    define_test_signal -function select_wir    -name WIR_SEL   -create_port WIR_SEL
-    define_test_signal -function wrapper_reset -name WRSTN     -create_port WRSTN -active low -lec_value 0
-    define_test_signal -function serial_sdi    -name WSI       -create_port WSI
-    define_test_signal -function serial_sdo    -name WSO       -create_port WSO
-    define_test_signal -function wir_test      -name WIR_TEST  -create_port WIR_TEST -lec_value 0
-
-    # 2. IEEE 1500 Decoded Instructions (WIR internal mode signals)
-    define_test_signal -function wint          -name WINT      -wir_signal
-    define_test_signal -function wext          -name WEXT      -wir_signal
-    define_test_signal -function select_serial -name SERIAL    -wir_signal
-    define_test_signal -function select_bypass -name BYPASS    -wir_signal
-
-    # 3. Insert WIR module
-    add_wir_signal_bits -preview
-    add_wir_signal_bits
-} else {
-    puts "INFO: Existing IEEE 1500 WIR instance detected: [get_db $wir_inst .name]"
-}
 
 # Determine shift enable port
 set se_port [get_db ports SCAN_ENABLE]
@@ -66,8 +36,7 @@ foreach p [get_db ports *] {
 
 puts "INFO: Wrapping [llength $WRAP_PORTS] functional ports with Dedicated Wrapper Cells (DWC)..."
 
-# Insert Dedicated Wrapper Cells connected directly to WIR internal mode controls (wir_instance/WINT and wir_instance/WEXT)
-# -skipped_locations_variable allows Genus to skip floating/unconnected ports (e.g. boot_addr_i[1:0], apu_*) without erroring
+# Insert Dedicated Wrapper Cells connected to WIR internal mode controls (wir_instance/WINT and wir_instance/WEXT)
 set skipped_ports [list]
 add_core_wrapper_cell \
     -locations $WRAP_PORTS \
@@ -76,19 +45,6 @@ add_core_wrapper_cell \
     -wint wir_instance/WINT \
     -wext wir_instance/WEXT \
     -skipped_locations_variable skipped_ports
-
-if {[info exists skipped_ports] && [llength $skipped_ports] > 0} {
-    puts "INFO: Skipped [llength $skipped_ports] floating/unconnected ports during wrapper insertion."
-    set fp [open "$STEP_RPT_DIR/${DESIGN}_skipped_ports.rpt" w]
-    puts $fp "=================================================================="
-    puts $fp " Skipped Ports During Wrapper Insertion (Floating / Unconnected)"
-    puts $fp " Total Skipped Ports: [llength $skipped_ports]"
-    puts $fp "=================================================================="
-    foreach sp $skipped_ports {
-        puts $fp "  $sp"
-    }
-    close $fp
-}
 
 # Post-wrapper DFT DRC and wrapper reports
 check_dft_rules                  > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
