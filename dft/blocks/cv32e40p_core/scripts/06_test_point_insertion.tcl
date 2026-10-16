@@ -37,6 +37,7 @@ set_db / .dft_generate_atpg_no_testpoint_file auto
 write_dft_compression_test_points \
     -directory $TPI_DIR \
     -library $ATPG_LIB \
+    -build_model_options "-allowmissingmodules yes" \
     -min_slack_for_no_tp_file 100 \
     -compression_testpoints_options "-maxtestpts 100" \
     -force
@@ -68,7 +69,6 @@ if {[file exists $TP_FILE]} {
         -input_test_point_file $TP_FILE \
         -share_observe_flop 4 \
         -test_control test_mode \
-        -test_clock_pin [get_db ports clk_i] \
         -min_slack 100 \
         -verbose
 } else {
