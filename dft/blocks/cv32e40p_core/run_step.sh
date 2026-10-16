@@ -38,7 +38,7 @@ run_step() {
         5) script="05_insert_dedicated_wrapper.tcl"; desc="Dedicated Wrapper Insertion" ;;
         6) script="06_test_point_insertion.tcl";    desc="Test Point Insertion" ;;
         7) script="07_insert_compression.tcl";      desc="Scan Compression Insertion" ;;
-        8) script="08_production_atpg.tcl";         desc="Export Production ATPG Scripts" ;;
+        8) script="08_production_atpg.tcl";         desc="Timing Analysis & ATPG Script Export" ;;
         *)
             echo "ERROR: Invalid step '$step'. Valid steps are 1 through 8, or 'all'."
             exit 1

@@ -19,6 +19,32 @@ if {![file exists $PREV_DB]} {
 }
 read_db $PREV_DB
 
+# Verify timing constraints; reload SDC if no clocks exist
+if {[llength [get_db clocks *]] == 0} {
+    set SDC_FILE [file normalize "$SCRIPT_DIR/../constraints/cv32e40p_core.sdc"]
+    if {[file exists $SDC_FILE]} {
+        puts "INFO: Reading SDC constraints from $SDC_FILE..."
+        read_sdc $SDC_FILE
+    }
+}
+
+# Post-DFT Timing & QoR Analysis
+set STEP_TIMING_DIR [file normalize "$REPORTS_DIR/08_timing"]
+file mkdir $STEP_TIMING_DIR
+
+puts "INFO: Running timing analysis on final compressed design..."
+check_timing_intent                > "$STEP_TIMING_DIR/${DESIGN}_check_timing_intent.rpt"
+report_timing -summary             > "$STEP_TIMING_DIR/${DESIGN}_timing_summary.rpt"
+report_timing -max_paths 20        > "$STEP_TIMING_DIR/${DESIGN}_timing_setup_paths.rpt"
+report_timing -early -max_paths 20 > "$STEP_TIMING_DIR/${DESIGN}_timing_hold_paths.rpt"
+report_qor                         > "$STEP_TIMING_DIR/${DESIGN}_qor.rpt"
+report_timing -unconstrained       > "$STEP_TIMING_DIR/${DESIGN}_unconstrained.rpt"
+
+puts "=================================================================="
+puts " Post-DFT QoR & Timing Summary:"
+puts "=================================================================="
+report_qor
+
 # Export final compressed gate-level Verilog netlist
 set FINAL_NETLIST [file normalize "$NETLISTS_DIR/${DESIGN}_compressed.v"]
 write_hdl > $FINAL_NETLIST

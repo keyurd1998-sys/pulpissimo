@@ -44,13 +44,14 @@ if {[llength $wrap_segs] > 0} {
     connect_scan_chains -chains wrap_chain -elements $wrap_segs
 }
 
-# Second, connect core flops, TPI flops, and OPCG segments into chain0
+# Second, connect core flops, TPI flops, and OPCG segments into chain0 incrementally
+# -incremental prevents Genus from disconnecting or modifying wrap_chain
 set has_opcg [llength [get_db opcg_domains *]]
 if {$has_opcg > 0} {
-    connect_scan_chains -chains chain0 -auto_create_chains -include_opcg_segments
+    connect_scan_chains -chains chain0 -auto_create_chains -include_opcg_segments -incremental
     connect_opcg_segments -side_scan_only
 } else {
-    connect_scan_chains -chains chain0 -auto_create_chains
+    connect_scan_chains -chains chain0 -auto_create_chains -incremental
 }
 
 # 4. Insert Scan Compression ONLY on Core Chain (chain0)
