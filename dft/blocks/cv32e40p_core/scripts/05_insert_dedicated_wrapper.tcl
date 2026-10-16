@@ -26,15 +26,23 @@ if {[llength $se_port] == 0} {
     set se_port [get_db ports scan_en]
 }
 
-# Identify all functional ports to wrap (exclude clocks, resets, and DFT control pins)
-set EXCLUDE_PORTS [list clk_i rst_ni scan_cg_en_i pulp_clock_en_i \
-                        test_mode opcg_mode scan_clk opcg_load_clk \
-                        scan_en SCAN_ENABLE opcg_trigger WINT WEXT]
+# Identify all functional ports to wrap (exclude clocks, resets, DFT control pins, and test data pins)
+set EXCLUDE_PATTERNS [list clk_i rst_ni scan_cg_en_i pulp_clock_en_i \
+                           test_mode opcg_mode scan_clk opcg_load_clk \
+                           scan_en* SCAN_ENABLE* opcg_trigger* WINT* WEXT* \
+                           scan_in* scan_out* WSI* WSO* WPI* WPO*]
 
 set WRAP_PORTS [list]
 foreach p [get_db ports *] {
     set pname [get_db $p .base_name]
-    if {[lsearch -exact $EXCLUDE_PORTS $pname] == -1} {
+    set is_excluded 0
+    foreach pat $EXCLUDE_PATTERNS {
+        if {[string match $pat $pname]} {
+            set is_excluded 1
+            break
+        }
+    }
+    if {!$is_excluded} {
         lappend WRAP_PORTS $p
     }
 }

@@ -4,7 +4,7 @@
 # Usage:
 #   ./run_step.sh 1          (Runs Step 1)
 #   ./run_step.sh 1 2 3 4    (Runs Steps 1, 2, 3, 4)
-#   ./run_step.sh all        (Runs Steps 1 through 7 in one go)
+#   ./run_step.sh all        (Runs Steps 1 through 8 in one go)
 # ==============================================================================
 set -euo pipefail
 
@@ -15,20 +15,28 @@ export CADENCE_DFT_LIB="/home/admin/DFT/Library"
 
 mkdir -p logs reports dbs netlists atpg
 
-check_tool() {
+check_tools() {
+    local step="$1"
     if ! command -v genus &> /dev/null; then
         echo "ERROR: 'genus' binary not found in PATH."
         echo "Please load your Cadence Genus environment before running."
         echo "Example: module load cadence/genus"
         exit 1
     fi
+    if [ "$step" = "6" ] || [ "$step" = "8" ] || [ "$step" = "all" ]; then
+        if ! command -v modus &> /dev/null; then
+            echo "WARNING: 'modus' binary not found in PATH."
+            echo "Step $step uses Cadence Modus for ATPG analysis."
+            echo "Please ensure Modus is available in your PATH or loaded via environment modules."
+        fi
+    fi
 }
 
 run_single_step() {
     local step="$1"
     case "$step" in
-        1|2|3|4|5|6|7)
-            check_tool
+        1|2|3|4|5|6|7|8)
+            check_tools "$step"
             ;;
     esac
     case "$step" in
@@ -102,26 +110,26 @@ run_single_step() {
             ;;
         5)
             echo "=================================================================="
-            echo " Running Step 5: Pre-TPI Scan Compression Analysis (Ratios 70, 80)"
-            echo " Output Log: logs/05_compression_analysis_pre_tpi.log"
+            echo " Running Step 5: Dedicated Boundary Wrapper Insertion (IEEE 1500 Style)"
+            echo " Output Log: logs/05_insert_dedicated_wrapper.log"
             echo "=================================================================="
-            rm -f logs/05_compression_analysis_pre_tpi.log* logs/05_compression_analysis_pre_tpi.cmd*
-            genus -overwrite -f scripts/05_compression_analysis_pre_tpi.tcl -log logs/05_compression_analysis_pre_tpi.log
+            rm -f logs/05_insert_dedicated_wrapper.log* logs/05_insert_dedicated_wrapper.cmd*
+            genus -overwrite -f scripts/05_insert_dedicated_wrapper.tcl -log logs/05_insert_dedicated_wrapper.log
             echo ""
             echo ">>> Step 5 Complete!"
-            echo ">>> Checkpoint Saved: dbs/05_compression_analysis_pre_tpi.db"
-            echo ">>> Reports:          reports/05_compression_analysis_pre_tpi/"
-            if [ -f reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_stuck_at.rpt ]; then
+            echo ">>> Checkpoint Saved: dbs/05_wrapper.db"
+            echo ">>> Reports:          reports/05_wrapper/"
+            if [ -f reports/05_wrapper/cv32e40p_core_wrapper_cells.rpt ]; then
                 echo "=================================================================="
-                echo " Pre-TPI Stuck-At Compressibility Report (Ratios 70, 80):"
+                echo " Dedicated Wrapper Cells Summary:"
                 echo "=================================================================="
-                cat reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_stuck_at.rpt
+                cat reports/05_wrapper/cv32e40p_core_wrapper_cells.rpt
             fi
-            if [ -f reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_delay.rpt ]; then
+            if [ -f reports/05_wrapper/cv32e40p_core_dft_rules.rpt ]; then
                 echo "=================================================================="
-                echo " Pre-TPI Transition Delay Compressibility Report (Ratios 70, 80):"
+                echo " Post-Wrapper DFT DRC Summary:"
                 echo "=================================================================="
-                cat reports/05_compression_analysis_pre_tpi/cv32e40p_core_compressibility_delay.rpt
+                head -n 28 reports/05_wrapper/cv32e40p_core_dft_rules.rpt
             fi
             ;;
         6)
@@ -150,7 +158,7 @@ run_single_step() {
             ;;
         7)
             echo "=================================================================="
-            echo " Running Step 7: Final Scan Compression Insertion & DRC Check"
+            echo " Running Step 7: Scan Compression (Ratio 70) & Separate Wrapper Chain"
             echo " Output Log: logs/07_insert_compression.log"
             echo "=================================================================="
             rm -f logs/07_insert_compression.log* logs/07_insert_compression.cmd*
@@ -167,9 +175,38 @@ run_single_step() {
             fi
             if [ -f reports/07_compression/cv32e40p_core_scan_chains.rpt ]; then
                 echo "=================================================================="
-                echo " Scan Chains Summary:"
+                echo " Scan Chains Summary (Core Chain + Uncompressed Wrapper Chain):"
                 echo "=================================================================="
-                head -n 25 reports/07_compression/cv32e40p_core_scan_chains.rpt
+                head -n 35 reports/07_compression/cv32e40p_core_scan_chains.rpt
+            fi
+            ;;
+        8)
+            echo "=================================================================="
+            echo " Running Step 8: Production ATPG (Stuck-At & Transition Delay)"
+            echo " Output Log: logs/08_production_atpg.log"
+            echo "=================================================================="
+            rm -f logs/08_production_atpg.log* logs/08_production_atpg.cmd*
+            genus -overwrite -f scripts/08_production_atpg.tcl -log logs/08_production_atpg.log
+            echo ""
+            echo ">>> Step 8 Complete!"
+            echo ">>> Gate Netlist:     netlists/cv32e40p_core_compressed.v"
+            echo ">>> ATPG Workspaces:  atpg/stuck_at/ and atpg/delay/"
+            echo ">>> Reports:          reports/08_atpg/"
+            if [ -f atpg/stuck_at/cv32e40p_core.summary ]; then
+                echo "=================================================================="
+                echo " Modus Stuck-At ATPG Summary:"
+                echo "=================================================================="
+                cat atpg/stuck_at/cv32e40p_core.summary
+            elif [ -f atpg/stuck_at/summary.rpt ]; then
+                cat atpg/stuck_at/summary.rpt
+            fi
+            if [ -f atpg/delay/cv32e40p_core.summary ]; then
+                echo "=================================================================="
+                echo " Modus Transition Delay ATPG Summary:"
+                echo "=================================================================="
+                cat atpg/delay/cv32e40p_core.summary
+            elif [ -f atpg/delay/summary.rpt ]; then
+                cat atpg/delay/summary.rpt
             fi
             ;;
         help|*)
@@ -183,10 +220,11 @@ run_single_step() {
             echo "  2    - Step 2: DFT Signal Setup & Pre-DFT DRC (TDRC)"
             echo "  3    - Step 3: Generic Synthesis & Scan Mapping (syn_map)"
             echo "  4    - Step 4: On-Chip Clock Controller (OCC/OPCG) Insertion"
-            echo "  5    - Step 5: Pre-TPI Scan Compression Analysis (Ratios 70, 80)"
+            echo "  5    - Step 5: Dedicated Boundary Wrapper Insertion (IEEE 1500 Style)"
             echo "  6    - Step 6: ATPG-Guided Test Point Insertion (TPI, Max 100 TPs)"
-            echo "  7    - Step 7: Final Scan Compression Insertion & DRC Check"
-            echo "  all  - Run Steps 1 through 7 sequentially in one go"
+            echo "  7    - Step 7: Scan Compression (Ratio 70) & Separate Wrapper Chain"
+            echo "  8    - Step 8: Production ATPG Generation & Execution (Stuck-At & Delay)"
+            echo "  all  - Run Steps 1 through 8 sequentially in one go"
             echo "=================================================================="
             exit 0
             ;;
@@ -199,7 +237,7 @@ fi
 
 for arg in "$@"; do
     if [ "$arg" = "all" ]; then
-        for s in 1 2 3 4 5 6 7; do
+        for s in 1 2 3 4 5 6 7 8; do
             run_single_step "$s"
         done
     else
