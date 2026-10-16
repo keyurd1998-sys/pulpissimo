@@ -5,13 +5,7 @@ set STEP_RPT_DIR [file normalize "$REPORTS_DIR/05_wrapper"]
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 4 OPCG database
-set PREV_DB [file normalize "$DBS_DIR/04_opcg.db"]
-if {![file exists $PREV_DB]} {
-    puts "ERROR: $DBS_DIR/04_opcg.db not found! Please run Step 4 first."
-    exit 1
-}
-read_db $PREV_DB
+read_db "$DBS_DIR/04_opcg.db"
 
 # Shift enable port created in Step 2
 set se_port [get_db ports SCAN_ENABLE]

@@ -5,13 +5,7 @@ set STEP_RPT_DIR [file normalize "$REPORTS_DIR/04_opcg"]
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 3 clean mapped database
-set PREV_DB [file normalize "$DBS_DIR/03_mapped.db"]
-if {![file exists $PREV_DB]} {
-    puts "ERROR: $PREV_DB not found! Run Step 3 first."
-    exit 1
-}
-read_db $PREV_DB
+read_db "$DBS_DIR/03_mapped.db"
 
 # Disable automatic clock gating inside test logic during mapped insertion
 set_db lp_insert_clock_gating false

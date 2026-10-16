@@ -11,13 +11,7 @@ file mkdir $DELAY_DIR
 file mkdir $NETLISTS_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 7 compressed database
-set PREV_DB [file normalize "$DBS_DIR/07_compressed.db"]
-if {![file exists $PREV_DB]} {
-    puts "ERROR: Database $PREV_DB not found! Please run Step 7 first."
-    exit 1
-}
-read_db $PREV_DB
+read_db "$DBS_DIR/07_compressed.db"
 
 
 # Post-DFT Timing & QoR Analysis

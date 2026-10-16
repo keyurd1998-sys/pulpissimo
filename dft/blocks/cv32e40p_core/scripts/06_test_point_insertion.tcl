@@ -7,13 +7,7 @@ file mkdir $STEP_RPT_DIR
 file mkdir $TPI_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 5 wrapper database
-set PREV_DB [file normalize "$DBS_DIR/05_wrapper.db"]
-if {![file exists $PREV_DB]} {
-    puts "ERROR: $PREV_DB not found! Please run Step 5 first."
-    exit 1
-}
-read_db $PREV_DB
+read_db "$DBS_DIR/05_wrapper.db"
 
 # PASS 1: Build temporary scan chains for Modus ATPG analysis
 define_test_mode -name test_mode -active high -create_port test_mode

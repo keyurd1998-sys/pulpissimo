@@ -5,13 +5,7 @@ set STEP_RPT_DIR "$REPORTS_DIR/02_tdrc"
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 1 elaborated database
-set PREV_DB "$DBS_DIR/01_elaborated.db"
-if {![file exists $PREV_DB]} {
-    puts "ERROR: $PREV_DB not found! Run Step 1 first."
-    exit 1
-}
-read_db $PREV_DB
+read_db "$DBS_DIR/01_elaborated.db"
 
 # Read functional timing constraints
 read_sdc $SDC_FILE

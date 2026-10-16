@@ -5,13 +5,7 @@ set STEP_RPT_DIR "$REPORTS_DIR/03_mapping"
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
-# Restore Step 2 TDRC database
-set PREV_DB "$DBS_DIR/02_tdrc.db"
-if {![file exists $PREV_DB]} {
-    puts "ERROR: $PREV_DB not found! Run Step 2 first."
-    exit 1
-}
-read_db $PREV_DB
+read_db "$DBS_DIR/02_tdrc.db"
 
 # Generic synthesis
 syn_generic

@@ -12,13 +12,7 @@ if {[info exists ::env(COMPRESSION_RATIO)]} {
     set COMP_RATIO 70
 }
 
-# Restore Step 6 TPI database
-set PREV_DB [file normalize "$DBS_DIR/06_tpi.db"]
-if {![file exists $PREV_DB]} {
-    puts "ERROR: $PREV_DB not found! Please run Step 6 first."
-    exit 1
-}
-read_db $PREV_DB
+read_db "$DBS_DIR/06_tpi.db"
 
 # Configure scan chain attributes
 set_db [current_design] .dft_mix_clock_edges_in_scan_chains true
