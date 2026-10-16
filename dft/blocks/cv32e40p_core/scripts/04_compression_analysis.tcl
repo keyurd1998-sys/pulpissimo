@@ -1,7 +1,7 @@
 set SCRIPT_DIR [file dirname [file normalize [info script]]]
 source "$SCRIPT_DIR/00_setup_env.tcl"
 
-set STEP_RPT_DIR "$REPORTS_DIR/04_scan_chains"
+set STEP_RPT_DIR "$REPORTS_DIR/04_compression_analysis"
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
@@ -46,7 +46,7 @@ analyze_scan_compressibility \
 report_scan_compressibility -directory $asc_dir > $asc_rpt
 
 # Save checkpoint database
-set DB_FILE "$DBS_DIR/04_stitched.db"
+set DB_FILE "$DBS_DIR/04_compression_analysis.db"
 write_db -all_root_attributes -to_file $DB_FILE
 
 puts "INFO: Step 4 compression analysis completed. Checkpoint saved: $DB_FILE"
