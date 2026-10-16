@@ -33,12 +33,11 @@ set STEP_TIMING_DIR [file normalize "$REPORTS_DIR/08_timing"]
 file mkdir $STEP_TIMING_DIR
 
 puts "INFO: Running timing analysis on final compressed design..."
-check_timing_intent                > "$STEP_TIMING_DIR/${DESIGN}_check_timing_intent.rpt"
-report_timing -summary             > "$STEP_TIMING_DIR/${DESIGN}_timing_summary.rpt"
-report_timing -max_paths 20        > "$STEP_TIMING_DIR/${DESIGN}_timing_setup_paths.rpt"
-report_timing -early -max_paths 20 > "$STEP_TIMING_DIR/${DESIGN}_timing_hold_paths.rpt"
-report_qor                         > "$STEP_TIMING_DIR/${DESIGN}_qor.rpt"
-report_timing -unconstrained       > "$STEP_TIMING_DIR/${DESIGN}_unconstrained.rpt"
+check_timing_intent          > "$STEP_TIMING_DIR/${DESIGN}_check_timing_intent.rpt"
+report_timing -path_type summary > "$STEP_TIMING_DIR/${DESIGN}_timing_summary.rpt"
+report_timing -max_paths 20  > "$STEP_TIMING_DIR/${DESIGN}_timing_paths.rpt"
+report_timing -unconstrained > "$STEP_TIMING_DIR/${DESIGN}_unconstrained.rpt"
+report_qor                   > "$STEP_TIMING_DIR/${DESIGN}_qor.rpt"
 
 puts "=================================================================="
 puts " Post-DFT QoR & Timing Summary:"
