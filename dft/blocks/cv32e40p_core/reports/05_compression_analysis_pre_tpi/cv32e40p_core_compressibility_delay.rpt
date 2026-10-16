@@ -1,0 +1,39 @@
+Analyzing from work directory '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/reports/05_compression_analysis_pre_tpi/asc_delay' .....
+
+----------------------------------------
+ Results of analyze_scan_compressibility
+----------------------------------------
+	Design       - cv32e40p_core
+	Decompressor - broadcast
+	Compressor   - xor
+	Mask         - wide1
+
+Achieved compression table with fullscan top-off vectors
+--------------------------------------------------------
+IC    TATR   TDVR    ATCov.   CL       PAT-comp  PAT-fs    Cycles        Runtime    Gatecount    Area
+-----------------------------------------------------------------------------------------------------
+fs    1.0    1.0     93.68%   2183     -         986       2160751       00:07:32   -            -
+70    1.0    1.0     93.81%   32       1413      915       2119309       00:31:22   395          43.243    
+80    1.1    1.1     93.70%   28       1464      860       1999932       00:36:09   452          43.243    
+
+Achieved compression table without fullscan top-off vectors
+-----------------------------------------------------------
+IC    TATR   TDVR    ATCov.   CL       PAT-comp  PAT-fs    Cycles    Gatecount    Area
+--------------------------------------------------------------------------------------
+fs    1.0    1.0     93.68%   2183     -         986       2160751       -       -    
+70    40.9   40.9    64.92%   32       1413      -         52814         395     43.243     
+80    44.2   44.2    68.36%   28       1464      -         48907         452     43.243     
+
+Total ATPG runtime: 01:15:03 (hrs:min:sec).
+
+IC        - Inserted compression
+TATR      - Test application time reduction
+TDVR      - Test data volume reduction
+ATCov.    - ATPG test mode coverage
+CL        - Channel length
+PAT-comp  - Number of compression test patterns
+PAT-fs    - Number of fullscan test patterns
+Runtime   - ATPG runtime
+fs        - Uncompressed (Fullscan) run
+
+
