@@ -15,16 +15,22 @@ export CADENCE_DFT_LIB="/home/admin/DFT/Library"
 
 mkdir -p logs reports dbs netlists atpg
 
-# Check Genus availability
-if ! command -v genus &> /dev/null; then
-    echo "ERROR: 'genus' binary not found in PATH."
-    echo "Please load your Cadence Genus environment before running."
-    echo "Example: module load cadence/genus"
-    exit 1
-fi
+check_tool() {
+    if ! command -v genus &> /dev/null; then
+        echo "ERROR: 'genus' binary not found in PATH."
+        echo "Please load your Cadence Genus environment before running."
+        echo "Example: module load cadence/genus"
+        exit 1
+    fi
+}
 
 run_single_step() {
     local step="$1"
+    case "$step" in
+        1|2|3|4|5|6|7)
+            check_tool
+            ;;
+    esac
     case "$step" in
         1)
             echo "=================================================================="
