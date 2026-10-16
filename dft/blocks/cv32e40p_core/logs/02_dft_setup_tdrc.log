@@ -3,19 +3,19 @@ Copyright 2025 Cadence Design Systems, Inc. All rights reserved worldwide.
 Cadence and the Cadence logo are registered trademarks and Genus is a trademark
 of Cadence Design Systems, Inc. in the United States and other countries.
 
-[18:17:56.455649] Configured Lic search path (25.01-s002): 5280@pine-server
+[19:19:39.455681] Configured Lic search path (25.01-s002): 5280@pine-server
 
 Version: 25.10-p002_1, built Thu Apr 17 03:05:38 PDT 2025
 Options: -overwrite -files scripts/02_dft_setup_tdrc.tcl -log logs/02_dft_setup_tdrc.log 
-Date:    Thu Oct 15 18:17:56 2026
+Date:    Fri Oct 16 19:19:39 2026
 Host:    Pine-06 (x86_64 w/Linux 5.14.0-611.30.1.el9_7.x86_64) (6cores*6cpus*1physical cpu*Intel(R) Core(TM) i5-9400 CPU @ 2.90GHz 9216KB) (7671680KB)
-PID:     2995024
+PID:     3633918
 OS:      Red Hat Enterprise Linux 9.7 (Plow)
 
 Checking out license: Genus_Synthesis
-[18:17:56.512530] Periodic Lic check successful
-[18:17:56.512552] Feature usage summary:
-[18:17:56.512553] Genus_Synthesis  
+[19:19:39.134009] Periodic Lic check successful
+[19:19:39.658307] Feature usage summary:
+[19:19:39.658307] Genus_Synthesis  
 
 
 ***********************************************************************************************************
@@ -33,7 +33,7 @@ Finished loading tool scripts (16 seconds elapsed).
 #@ Begin verbose source ./scripts/02_dft_setup_tdrc.tcl
 @file(02_dft_setup_tdrc.tcl) 1: set SCRIPT_DIR [file dirname [file normalize [info script]]]
 @file(02_dft_setup_tdrc.tcl) 2: source "$SCRIPT_DIR/00_setup_env.tcl"
-Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Thu Oct 15 18:18:12 IST 2026)...
+Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl' (Fri Oct 16 19:19:56 IST 2026)...
 #@ Begin verbose source /home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_env.tcl
 @file(00_setup_env.tcl) 1: set DESIGN "cv32e40p_core"
 @file(00_setup_env.tcl) 3: set SCRIPTS_DIR  [file dirname [file normalize [info script]]]
@@ -52,7 +52,7 @@ Sourcing '/home/admin/DFT/pulpissimo/dft/blocks/cv32e40p_core/scripts/00_setup_e
 }
 @file(00_setup_env.tcl) 20: set TIMING_LIB "$LIB_DIR/timing/slow.lib"
 @file(00_setup_env.tcl) 21: set LEF_FILE   "$LIB_DIR/lef/all.lef"
-@file(00_setup_env.tcl) 22: set ATPG_LIB   "$LIB_DIR/atpg/include_libraries.v"
+@file(00_setup_env.tcl) 22: set ATPG_LIB [file normalize "$LIB_DIR/atpg/stdcell.v"]
 @file(00_setup_env.tcl) 24: set FLIST    "$BLOCK_DIR/filelists/cv32e40p_core.flist"
 @file(00_setup_env.tcl) 25: set SDC_FILE "$BLOCK_DIR/constraints/cv32e40p_core.sdc"
 @file(00_setup_env.tcl) 27: if {![info exists CV32E40P_DIR]} {
@@ -387,7 +387,7 @@ Statistics for commands executed by read_sdc:
  "all_inputs"               - successful      1 , failed      0 (runtime  0.00)
  "all_outputs"              - successful      1 , failed      0 (runtime  0.00)
  "create_clock"             - successful      1 , failed      0 (runtime  0.04)
- "get_ports"                - successful     24 , failed      0 (runtime  0.01)
+ "get_ports"                - successful     24 , failed      0 (runtime  0.02)
  "remove_from_collection"   - successful      3 , failed      0 (runtime  0.00)
  "set_input_delay"          - successful      9 , failed      0 (runtime  0.01)
  "set_output_delay"         - successful     10 , failed      0 (runtime  0.00)
@@ -436,64 +436,54 @@ Info    : Added DFT object. [DFT-100]
   =================
    Message Summary
   =================
------------------------------------------------------------------------------------------------------------------------------
-|    Id     |  Sev  |Count|                                          Message Text                                           |
------------------------------------------------------------------------------------------------------------------------------
-|DFT-100    |Info   |    5|Added DFT object.                                                                                |
-|DFT-130    |Info   |    1|Created DFT port.                                                                                |
-|           |       |     |A port for DFT purposes was created.                                                             |
-|ELABUTL-134|Info   |    3|Using the (old) attribute value(s)                                                               |
-|           |       |     | for driving unconnected input/ undriven signal or output to set the value of new variable       |
-|           |       |     | "hdl_unconnected_value".                                                                        |
-|           |       |     |To revert to old behaviour set the value of the attribute 'hdl_use_new_undriven_handling' to 0.  |
-|LBR-39     |Warning|    1|Relaxing an attribute value in the library.                                                      |
-|           |       |     |Relaxing one of the library's attribute value                                                    |
-|           |       |     | (for example, a library-cell's dont_use or dont_touch attribute)                                |
-|           |       |     | should be done with caution. This warning means that a dont_use or dont_touch attribute defined |
-|           |       |     | for a library cell (in liberty file)                                                            |
-|           |       |     | is overridden by the user in the run. When you do 'read_cpf -library' in a CPF based flow, apart|
-|           |       |     | from loading libraries, this command automatically marks low power standard cells as usable. So |
-|           |       |     | that the synthesis can use them. These low power standard cells are usually marked 'dont_use    |
-|           |       |     | true' in the liberty. That's why when the tool makes them usable (avoid = false)                |
-|           |       |     | , these warnings are flagged.                                                                   |
-|LBR-41     |Info   |    1|An output library pin lacks a function attribute.                                                |
-|           |       |     |If the remainder of this library cell's semantic checks are successful, it will be considered as |
-|           |       |     | a timing-model (because one of its outputs does not have a valid function.                      |
-|LBR-64     |Warning|    4|Malformed test_cell.                                                                             |
-|           |       |     |Review the definition of the test_cell's function or its parent library-cell's function.  An     |
-|           |       |     | inconsistency between the two may exist.                                                        |
-|LBR-141    |Warning|   16|Clock function definition makes cell unusable.                                                   |
-|           |       |     |The sequential cell cannot be inferred because its clock function is unknown.                    |
-|LBR-155    |Info   |   20|Mismatch in unateness between 'timing_sense' attribute and the function.                         |
-|           |       |     |The 'timing_sense' attribute will be respected.                                                  |
-|LBR-161    |Info   |    1|Setting the maximum print count of this message to 10 if information_level is less than 9.       |
-|LBR-162    |Info   |   20|Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed.                          |
-|           |       |     |Setting the 'timing_sense' to non_unate.                                                         |
-|LBR-170    |Info   |   20|Ignoring specified timing sense.                                                                 |
-|           |       |     |Timing sense should never be set with 'rising_edge' or 'falling_edge' timing type.               |
-|LBR-409    |Info   |    4|Found conflicting clock polarity information.                                                    |
-|           |       |     |The tool derives the clock polarity from the sequential timing arcs specified through the Liberty|
-|           |       |     | 'timing_type' attribute. For the positive-edge triggered cells a positive value is expected for |
-|           |       |     | the 'clocked_on' or 'enable' attribute while an inverted value is expected for the negative-edge|
-|           |       |     | triggered sequential cells.                                                                     |
-|LBR-412    |Info   |    1|Created nominal operating condition.                                                             |
-|           |       |     |The nominal operating condition is represented, either by the nominal PVT values specified in the|
-|           |       |     | library source (via nom_process,nom_voltage and nom_temperature respectively)                   |
-|           |       |     | , or by the default PVT values (1.0,1.0,1.0).                                                   |
-|LBR-415    |Info   |    4|Unusable library cells found at the time of loading a library.                                   |
-|           |       |     |For  more  information, refer to 'Cells Identified as Unusable' in the 'User Guide'. To know the |
-|           |       |     | reason why a cell is considered as unusable, check 'unusable_reason' libcell attribute.         |
-|LBR-516    |Info   |    1|Missing library level attribute.                                                                 |
-|LBR-518    |Info   |    1|Missing a function attribute in the output pin definition.                                       |
-|MESG-11    |Warning|    5|Maximum message print count reached.                                                             |
-|PHYS-104   |Warning|   20|Cannot find physical definition.                                                                 |
-|           |       |     |Set attribute 'avoid' to true on this cell or set attribute 'lib_lef_consistency_check_enable' to|
-|           |       |     | 'true'.                                                                                         |
-|PHYS-279   |Warning|   20|Physical cell not defined in library.                                                            |
-|           |       |     |Ensure that the proper library files are available and have been imported.                       |
-|TUI-37     |Warning|    2|This command will be obsolete in a next major release.                                           |
-|           |       |     |This command is obsolete and the new command define_test_signal should be used.                  |
------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|    Id     |  Sev  |Count|                                                                        Message Text                                                                         |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|DFT-100    |Info   |    5|Added DFT object.                                                                                                                                            |
+|DFT-130    |Info   |    1|Created DFT port.                                                                                                                                            |
+|           |       |     |A port for DFT purposes was created.                                                                                                                         |
+|ELABUTL-134|Info   |    3|Using the (old) attribute value(s) for driving unconnected input/ undriven signal or output to set the value of new variable "hdl_unconnected_value".        |
+|           |       |     |To revert to old behaviour set the value of the attribute 'hdl_use_new_undriven_handling' to 0.                                                              |
+|LBR-39     |Warning|    1|Relaxing an attribute value in the library.                                                                                                                  |
+|           |       |     |Relaxing one of the library's attribute value (for example, a library-cell's dont_use or dont_touch attribute)                                               |
+|           |       |     | should be done with caution. This warning means that a dont_use or dont_touch attribute defined for a library cell (in liberty file)                        |
+|           |       |     | is overridden by the user in the run. When you do 'read_cpf -library' in a CPF based flow, apart from loading libraries, this command automatically marks   |
+|           |       |     | low power standard cells as usable. So that the synthesis can use them. These low power standard cells are usually marked 'dont_use true' in the liberty.   |
+|           |       |     | That's why when the tool makes them usable (avoid = false), these warnings are flagged.                                                                     |
+|LBR-41     |Info   |    1|An output library pin lacks a function attribute.                                                                                                            |
+|           |       |     |If the remainder of this library cell's semantic checks are successful, it will be considered as a timing-model                                              |
+|           |       |     | (because one of its outputs does not have a valid function.                                                                                                 |
+|LBR-64     |Warning|    4|Malformed test_cell.                                                                                                                                         |
+|           |       |     |Review the definition of the test_cell's function or its parent library-cell's function.  An inconsistency between the two may exist.                        |
+|LBR-141    |Warning|   16|Clock function definition makes cell unusable.                                                                                                               |
+|           |       |     |The sequential cell cannot be inferred because its clock function is unknown.                                                                                |
+|LBR-155    |Info   |   20|Mismatch in unateness between 'timing_sense' attribute and the function.                                                                                     |
+|           |       |     |The 'timing_sense' attribute will be respected.                                                                                                              |
+|LBR-161    |Info   |    1|Setting the maximum print count of this message to 10 if information_level is less than 9.                                                                   |
+|LBR-162    |Info   |   20|Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed.                                                                                      |
+|           |       |     |Setting the 'timing_sense' to non_unate.                                                                                                                     |
+|LBR-170    |Info   |   20|Ignoring specified timing sense.                                                                                                                             |
+|           |       |     |Timing sense should never be set with 'rising_edge' or 'falling_edge' timing type.                                                                           |
+|LBR-409    |Info   |    4|Found conflicting clock polarity information.                                                                                                                |
+|           |       |     |The tool derives the clock polarity from the sequential timing arcs specified through the Liberty 'timing_type' attribute. For the positive-edge triggered   |
+|           |       |     | cells a positive value is expected for the 'clocked_on' or 'enable' attribute while an inverted value is expected for the negative-edge triggered sequential|
+|           |       |     | cells.                                                                                                                                                      |
+|LBR-412    |Info   |    1|Created nominal operating condition.                                                                                                                         |
+|           |       |     |The nominal operating condition is represented, either by the nominal PVT values specified in the library source                                             |
+|           |       |     | (via nom_process,nom_voltage and nom_temperature respectively), or by the default PVT values (1.0,1.0,1.0).                                                 |
+|LBR-415    |Info   |    4|Unusable library cells found at the time of loading a library.                                                                                               |
+|           |       |     |For  more  information, refer to 'Cells Identified as Unusable' in the 'User Guide'. To know the reason why a cell is considered as unusable, check          |
+|           |       |     | 'unusable_reason' libcell attribute.                                                                                                                        |
+|LBR-516    |Info   |    1|Missing library level attribute.                                                                                                                             |
+|LBR-518    |Info   |    1|Missing a function attribute in the output pin definition.                                                                                                   |
+|MESG-11    |Warning|    5|Maximum message print count reached.                                                                                                                         |
+|PHYS-104   |Warning|   20|Cannot find physical definition.                                                                                                                             |
+|           |       |     |Set attribute 'avoid' to true on this cell or set attribute 'lib_lef_consistency_check_enable' to 'true'.                                                    |
+|PHYS-279   |Warning|   20|Physical cell not defined in library.                                                                                                                        |
+|           |       |     |Ensure that the proper library files are available and have been imported.                                                                                   |
+|TUI-37     |Warning|    2|This command will be obsolete in a next major release.                                                                                                       |
+|           |       |     |This command is obsolete and the new command define_test_signal should be used.                                                                              |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Info    : Initiating DFT command. [DFT-145]
         : Initiating check_dft_rules command.
   Checking DFT rules for 'cv32e40p_core' module under 'muxed_scan' style
@@ -505,7 +495,7 @@ Detected 0 DFT rule violation(s)
       Number of registers that pass DFT rules: 2612
   Percentage of total registers that are scannable: 100%
 Info    : Reporting runtime for DFT command. [DFT-147]
-        : Runtime for check_dft_rules is 0.135000 seconds.
+        : Runtime for check_dft_rules is 0.134000 seconds.
 Info    : Successfully completed DFT command. [DFT-146]
         : Successfully completed check_dft_rules command.
   =================
@@ -527,7 +517,7 @@ INFO: Step 2 completed successfully. Checkpoint saved: /home/admin/DFT/pulpissim
 @file(02_dft_setup_tdrc.tcl) 41: exit
 
 Lic Summary:
-[18:18:18.027483] Cdslmd servers: pine-server
-[18:18:18.027491] Feature usage summary:
-[18:18:18.027491] Genus_Synthesis  
+[19:20:01.226521] Cdslmd servers: pine-server
+[19:20:01.226539] Feature usage summary:
+[19:20:01.226539] Genus_Synthesis  
 Normal exit.

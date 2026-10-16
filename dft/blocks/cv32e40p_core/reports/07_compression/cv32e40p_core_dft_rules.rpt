@@ -30,12 +30,12 @@ Abstract Segment Test Mode Violations:
 Total number of Test Clock Domains: 2
   DFT Test Clock Domain: scanClock
 	Test Clock 'scanClock' (Positive edge) has  29 registers
-	Test Clock 'DFT_test_clock_DOMAIN_CORE' (Positive edge) has 2180 registers
+	Test Clock 'DFT_test_clock_DOMAIN_CORE' (Positive edge) has 2539 registers
 	Test Clock 'DFT_mask_clk' (Positive edge) has  70 registers
   DFT Test Clock Domain: opcgLoadClock
 Number of user specified non-Scan registers:   0
 Number of Abstract Segment non-Scan registers: 101
     Number of registers that fail DFT rules:   0
-    Number of registers that pass DFT rules: 2279
+    Number of registers that pass DFT rules: 2638
 Percentage of total registers that are scannable: 100%
 Percentage of abstract segment flops that are scannable: 100%

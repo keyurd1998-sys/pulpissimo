@@ -1,3 +1,5 @@
+assign pin=WINT 	test_function= -TI; 	// wint
+assign pin=WEXT 	test_function= -TI; 	// wext
 assign pin=rst_ni 	test_function= +SC; 	# test_mode
 assign pin=scan_cg_en_i 	test_function= +TI; 	# test_mode
 assign pin=test_mode 	test_function= +TI; 	# test_mode
