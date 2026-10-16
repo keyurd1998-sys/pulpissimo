@@ -36,12 +36,18 @@ define_test_mode -name opcg_mode -active high -create_port opcg_mode
 define_test_clock -name scanClock -period 20000 -create_port scan_clk
 define_test_clock -name opcgLoadClock -period 40000 -create_port opcg_load_clk
 
-# Define Oscillator Source on clk_i functional clock path
+# Insert Clock Buffer on input port clk_i to create internal clock pin
+set buf_cell "BUFX12"
+set buf_out_pin [get_db [get_db lib_pins -of_objects [get_db lib_cells $buf_cell] -filter "direction==out"] .name]
+insert_buffer -name u_opcg_clk_buf -buffer $buf_cell -pin [get_db ports clk_i]
+set osc_pin [get_db pins */u_opcg_clk_buf/$buf_out_pin]
+
+# Define Oscillator Source on buffer output pin
 define_opcg_osc_source -name OSC_MAIN \
     -ref_clock_pin [get_db ports clk_i] \
     -min_input_period 4000 -max_input_period 25000 \
     -min_output_period 2000 -max_output_period 5000 \
-    [get_db ports clk_i]
+    $osc_pin
 
 # Define Domain Macro Parameters (mandatory -min_target_period for mapped design)
 define_opcg_domain_macro_parameters -name DOM_PARAMS_CORE \
@@ -55,12 +61,12 @@ define_opcg_trigger -name TRIGGER_CORE \
     -active high \
     -create_port opcg_trigger
 
-# Define OPCG Clock Domain at clk_i root
+# Define OPCG Clock Domain spliced at buffer output pin
 define_opcg_domain -name DOMAIN_CORE \
     -osc_source OSC_MAIN \
     -domain_macro_parameter DOM_PARAMS_CORE \
     -opcg_trigger TRIGGER_CORE \
-    -location [get_db ports clk_i] \
+    -location $osc_pin \
     -min_domain_period 4000
 
 # Insert OCC / OPCG Domain Macro Logic
