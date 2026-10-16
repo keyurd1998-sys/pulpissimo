@@ -1,7 +1,7 @@
 set SCRIPT_DIR [file dirname [file normalize [info script]]]
 source "$SCRIPT_DIR/00_setup_env.tcl"
 
-set STEP_RPT_DIR [file normalize "$REPORTS_DIR/08_compression"]
+set STEP_RPT_DIR [file normalize "$REPORTS_DIR/07_compression"]
 file mkdir $STEP_RPT_DIR
 file mkdir $DBS_DIR
 
@@ -55,8 +55,8 @@ check_dft_rules    > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
 report_scan_chains > "$STEP_RPT_DIR/${DESIGN}_scan_chains.rpt"
 
 # Save checkpoint database
-set DB_FILE [file normalize "$DBS_DIR/08_compressed.db"]
+set DB_FILE [file normalize "$DBS_DIR/07_compressed.db"]
 write_db -all_root_attributes -to_file $DB_FILE
 
-puts "INFO: Step 8 compression insertion (Ratio $COMP_RATIO) completed. Checkpoint saved: $DB_FILE"
+puts "INFO: Step 7 compression insertion (Ratio $COMP_RATIO) completed. Checkpoint saved: $DB_FILE"
 exit
