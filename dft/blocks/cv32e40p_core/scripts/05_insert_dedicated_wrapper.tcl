@@ -16,9 +16,32 @@ if {![file exists $PREV_DB]} {
 }
 read_db $PREV_DB
 
-# Define Wrapper Test Control Signals (creates WINT and WEXT mode control ports)
-define_test_signal -function wint -name WINT -create_port WINT
-define_test_signal -function wext -name WEXT -create_port WEXT
+# Ensure IEEE 1500 Wrapper Instruction Register (WIR) exists
+set wir_inst [get_db hinsts *wir_instance*]
+if {[llength $wir_inst] == 0} {
+    puts "INFO: wir_instance not found in restored database. Defining and inserting IEEE 1500 WIR..."
+    # 1. Wrapper Serial Control (WSC) interface ports
+    define_test_signal -function serial_wrck   -name WRCK      -create_port SERIAL_WRCK
+    define_test_signal -function shift_wr      -name ShiftWR   -create_port ShiftWR
+    define_test_signal -function update_wr     -name UpdateWR  -create_port UpdateWR
+    define_test_signal -function select_wir    -name WIR_SEL   -create_port WIR_SEL
+    define_test_signal -function wrapper_reset -name WRSTN     -create_port WRSTN -active low -lec_value 0
+    define_test_signal -function serial_sdi    -name WSI       -create_port WSI
+    define_test_signal -function serial_sdo    -name WSO       -create_port WSO
+    define_test_signal -function wir_test      -name WIR_TEST  -create_port WIR_TEST -lec_value 0
+
+    # 2. IEEE 1500 Decoded Instructions (WIR internal mode signals)
+    define_test_signal -function wint          -name WINT      -wir_signal
+    define_test_signal -function wext          -name WEXT      -wir_signal
+    define_test_signal -function select_serial -name SERIAL    -wir_signal
+    define_test_signal -function select_bypass -name BYPASS    -wir_signal
+
+    # 3. Insert WIR module
+    add_wir_signal_bits -preview
+    add_wir_signal_bits
+} else {
+    puts "INFO: Existing IEEE 1500 WIR instance detected: [get_db $wir_inst .name]"
+}
 
 # Determine shift enable port
 set se_port [get_db ports SCAN_ENABLE]
@@ -26,10 +49,12 @@ if {[llength $se_port] == 0} {
     set se_port [get_db ports scan_en]
 }
 
-# Identify all functional ports to wrap (exclude existing clocks, resets, and DFT control pins)
+# Identify all functional ports to wrap (exclude clocks, resets, and all DFT / IEEE 1500 control pins)
 set EXCLUDE_PORTS [list clk_i rst_ni scan_cg_en_i pulp_clock_en_i \
                         test_mode opcg_mode scan_clk opcg_load_clk \
-                        scan_en SCAN_ENABLE opcg_trigger WINT WEXT]
+                        scan_en SCAN_ENABLE opcg_trigger \
+                        SERIAL_WRCK ShiftWR UpdateWR WIR_SEL WRSTN WSI WSO WIR_TEST \
+                        WINT WEXT SERIAL BYPASS]
 
 set WRAP_PORTS [list]
 foreach p [get_db ports *] {
@@ -41,15 +66,15 @@ foreach p [get_db ports *] {
 
 puts "INFO: Wrapping [llength $WRAP_PORTS] functional ports with Dedicated Wrapper Cells (DWC)..."
 
-# Insert Dedicated Wrapper Cells (omitting -shared_through forces dedicated cells)
+# Insert Dedicated Wrapper Cells connected directly to WIR internal mode controls (wir_instance/WINT and wir_instance/WEXT)
 # -skipped_locations_variable allows Genus to skip floating/unconnected ports (e.g. boot_addr_i[1:0], apu_*) without erroring
 set skipped_ports [list]
 add_core_wrapper_cell \
     -locations $WRAP_PORTS \
     -wsen_in $se_port \
     -wsen_out $se_port \
-    -wint WINT \
-    -wext WEXT \
+    -wint wir_instance/WINT \
+    -wext wir_instance/WEXT \
     -skipped_locations_variable skipped_ports
 
 if {[info exists skipped_ports] && [llength $skipped_ports] > 0} {
@@ -66,8 +91,9 @@ if {[info exists skipped_ports] && [llength $skipped_ports] > 0} {
 }
 
 # Post-wrapper DFT DRC and wrapper reports
-check_dft_rules          > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
-report_core_wrapper_cell > "$STEP_RPT_DIR/${DESIGN}_wrapper_cells.rpt"
+check_dft_rules                  > "$STEP_RPT_DIR/${DESIGN}_dft_rules.rpt"
+report_core_wrapper_cell         > "$STEP_RPT_DIR/${DESIGN}_wrapper_cells.rpt"
+report_core_wrapper_cell -report_flops > "$STEP_RPT_DIR/${DESIGN}_wrapper_cells_detailed.rpt"
 
 # Save checkpoint database
 set DB_FILE [file normalize "$DBS_DIR/05_wrapper.db"]

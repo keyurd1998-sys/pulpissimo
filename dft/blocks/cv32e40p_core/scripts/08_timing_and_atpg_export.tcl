@@ -49,12 +49,13 @@ set FINAL_NETLIST [file normalize "$NETLISTS_DIR/${DESIGN}_compressed.v"]
 write_hdl > $FINAL_NETLIST
 puts "INFO: Exported compressed netlist: $FINAL_NETLIST"
 
-# Export Stuck-At ATPG workspace for Modus
+# Export Stuck-At ATPG workspace for Modus (including IEEE 1500 serial testmodes)
 puts "INFO: Generating Modus Stuck-At ATPG scripts..."
 write_dft_atpg \
     -directory $SA_DIR \
     -library $ATPG_LIB \
     -compression \
+    -serial \
     -build_model_options "-allowmissingmodules yes" \
     -run_from_directory \
     -force

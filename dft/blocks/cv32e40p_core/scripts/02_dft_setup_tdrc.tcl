@@ -29,6 +29,30 @@ define_test_mode -name scan_rst -active high -scan_shift -shared_input [get_port
 define_test_mode -name scan_cg_en -active high -shared_input [get_ports scan_cg_en_i]
 define_test_signal -function shift_enable -name scan_en -active high -ideal -create_port SCAN_ENABLE
 
+# ==============================================================================
+# IEEE 1500 Standard Test Wrapper Architecture Setup
+# ==============================================================================
+# 1. Wrapper Serial Control (WSC) interface ports (external IEEE 1500 pins)
+define_test_signal -function serial_wrck   -name WRCK      -create_port SERIAL_WRCK
+define_test_signal -function shift_wr      -name ShiftWR   -create_port ShiftWR
+define_test_signal -function update_wr     -name UpdateWR  -create_port UpdateWR
+define_test_signal -function select_wir    -name WIR_SEL   -create_port WIR_SEL
+define_test_signal -function wrapper_reset -name WRSTN     -create_port WRSTN -active low -lec_value 0
+define_test_signal -function serial_sdi    -name WSI       -create_port WSI
+define_test_signal -function serial_sdo    -name WSO       -create_port WSO
+define_test_signal -function wir_test      -name WIR_TEST  -create_port WIR_TEST -lec_value 0
+
+# 2. IEEE 1500 Decoded Instructions (WIR internal mode signals)
+define_test_signal -function wint          -name WINT      -wir_signal
+define_test_signal -function wext          -name WEXT      -wir_signal
+define_test_signal -function select_serial -name SERIAL    -wir_signal
+define_test_signal -function select_bypass -name BYPASS    -wir_signal
+
+# 3. Insert Wrapper Instruction Register (WIR) module with shift & update slices
+puts "INFO: Inserting IEEE 1500 Wrapper Instruction Register (WIR)..."
+add_wir_signal_bits -preview
+add_wir_signal_bits
+
 # Run Pre-DFT Testability Design Rule Check (TDRC)
 check_dft_rules       > "$STEP_RPT_DIR/${DESIGN}_dft_rules_pre_syn.rpt"
 report_dft_violations > "$STEP_RPT_DIR/${DESIGN}_dft_violations_pre_syn.rpt"
