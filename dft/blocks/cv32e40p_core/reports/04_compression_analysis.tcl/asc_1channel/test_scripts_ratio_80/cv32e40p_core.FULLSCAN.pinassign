@@ -1,9 +1,0 @@
-assign pin=DFT_compression_enable 	test_function= -SE; 	# compression_enable
-assign pin=DFT_mask_enable 	test_function= -SE; 	# mask_enable
-assign pin=rst_ni 	test_function= +SC; 	# test_mode
-assign pin=scan_cg_en_i 	test_function= +TI; 	# test_mode
-assign pin=SCAN_ENABLE 	test_function= +SE; 	# shift_enable
-assign pin=clk_i 	test_function= -ES; 	
-assign pin=DFT_mask_clk 	test_function= -ES; 	# mask_clock
-assign pin=scan_in 	test_function= SI0;
-assign pin=scan_out 	test_function= SO0;

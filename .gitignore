@@ -18,6 +18,9 @@ dft/results/modus_atpg/testresults/
 dft/blocks/*/dbs/
 dft/blocks/*/atpg/tbdata/
 dft/blocks/*/atpg/testresults/
+dft/blocks/*/reports/**/asc_*/
+dft/blocks/*/reports/**/tbdata/
+dft/blocks/*/reports/**/testresults/
 fv/
 
 # Ignore numbered backup logs and command logs so only single *.log files are tracked

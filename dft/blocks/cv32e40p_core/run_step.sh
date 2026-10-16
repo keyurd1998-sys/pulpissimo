@@ -79,13 +79,13 @@ run_single_step() {
             genus -overwrite -f scripts/04_compression_analysis.tcl -log logs/04_compression_analysis.log
             echo ""
             echo ">>> Step 4 Complete!"
-            echo ">>> Checkpoint Saved: dbs/04_stitched.db"
-            echo ">>> Reports:          reports/04_scan_chains/"
-            if [ -f reports/04_scan_chains/cv32e40p_core_compressibility.rpt ]; then
+            echo ">>> Checkpoint Saved: dbs/04_compression_analysis.db"
+            echo ">>> Reports:          reports/04_compression_analysis/"
+            if [ -f reports/04_compression_analysis/cv32e40p_core_compressibility.rpt ]; then
                 echo "=================================================================="
                 echo " Scan Compressibility Report (report_scan_compressibility)"
                 echo "=================================================================="
-                cat reports/04_scan_chains/cv32e40p_core_compressibility.rpt
+                cat reports/04_compression_analysis/cv32e40p_core_compressibility.rpt
             fi
             ;;
         help|*)
